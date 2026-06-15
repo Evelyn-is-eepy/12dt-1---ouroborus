@@ -1,0 +1,20 @@
+[gd_scene format=3 uid="uid://cakevyfy88nj4"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_utrgy"]
+size = Vector2(14, 14)
+
+[node name="Node2D" type="Node2D" unique_id=516555222 groups=["crown"]]
+
+[node name="ColorRect" type="ColorRect" parent="." unique_id=774968058]
+offset_left = -7.0
+offset_top = -7.0
+offset_right = 7.0
+offset_bottom = 7.0
+color = Color(1, 1, 0, 1)
+
+[node name="Area2D" type="Area2D" parent="." unique_id=1683902435]
+collision_layer = 2
+collision_mask = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D" unique_id=1780704220 groups=["crown"]]
+shape = SubResource("RectangleShape2D_utrgy")

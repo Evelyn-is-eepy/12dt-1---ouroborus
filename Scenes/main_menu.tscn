@@ -1,0 +1,81 @@
+[gd_scene format=3 uid="uid://girapa11yojs"]
+
+[ext_resource type="Script" uid="uid://b1v7upr85l0vc" path="res://Scripts/main_menu.gd" id="1_n45e2"]
+[ext_resource type="Texture2D" uid="uid://upwhlasrwigj" path="res://Assets/title0000.png" id="2_1ehe0"]
+[ext_resource type="StyleBox" uid="uid://bdkp0m4r10rau" path="res://Assets/menu_button_style.tres" id="2_ce3w2"]
+[ext_resource type="PackedScene" uid="uid://di4m2j6og3u4e" path="res://Scenes/transition_effect.tscn" id="2_cp0ys"]
+[ext_resource type="Theme" uid="uid://bttvneaybjt4" path="res://Assets/menu_box_theme.tres" id="2_opfnp"]
+[ext_resource type="Texture2D" uid="uid://dcqibhq1asd61" path="res://Assets/title0001.png" id="3_ce3w2"]
+[ext_resource type="Environment" uid="uid://c8qpv2wh6f7ts" path="res://Assets/world_environment.tres" id="6_opfnp"]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_n45e2"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("2_1ehe0")
+}, {
+"duration": 1.0,
+"texture": ExtResource("3_ce3w2")
+}],
+"loop": true,
+"name": &"default",
+"speed": 1.0
+}]
+
+[node name="Control" type="Control" unique_id=1996042237]
+texture_filter = 3
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_n45e2")
+transition_effect_scene = ExtResource("2_cp0ys")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="." unique_id=1991629143]
+custom_minimum_size = Vector2(150, 100)
+layout_mode = 0
+offset_left = 141.0
+offset_top = 122.0
+offset_right = 291.0
+offset_bottom = 222.0
+scale = Vector2(1.0165267, 1.1262261)
+theme = ExtResource("2_opfnp")
+
+[node name="Button" type="Button" parent="VBoxContainer" unique_id=1091924058]
+layout_mode = 2
+theme_override_styles/normal = ExtResource("2_ce3w2")
+text = "LEVELS"
+
+[node name="Button3" type="Button" parent="VBoxContainer" unique_id=469766087]
+layout_mode = 2
+theme_override_styles/normal = ExtResource("2_ce3w2")
+text = "Credits"
+
+[node name="Button2" type="Button" parent="VBoxContainer" unique_id=416808829]
+layout_mode = 2
+theme_override_styles/normal = ExtResource("2_ce3w2")
+text = "QUIT"
+
+[node name="ColorRect" type="ColorRect" parent="." unique_id=1067440009]
+z_index = -1
+layout_mode = 0
+offset_left = -18.0
+offset_top = -21.0
+offset_right = 453.0
+offset_bottom = 292.0
+mouse_filter = 2
+color = Color(0.039215688, 0.007843138, 0.08235294, 1)
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=69032050]
+position = Vector2(216, 77)
+sprite_frames = SubResource("SpriteFrames_n45e2")
+autoplay = "default"
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="." unique_id=39204067]
+environment = ExtResource("6_opfnp")
+
+[connection signal="pressed" from="VBoxContainer/Button" to="." method="_on_button_pressed"]
+[connection signal="pressed" from="VBoxContainer/Button3" to="." method="_on_button_3_pressed"]
+[connection signal="pressed" from="VBoxContainer/Button2" to="." method="_on_button_2_pressed"]

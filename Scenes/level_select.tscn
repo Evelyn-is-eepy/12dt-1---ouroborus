@@ -1,0 +1,49 @@
+[gd_scene format=3 uid="uid://cm7djbkit0d3q"]
+
+[ext_resource type="Script" uid="uid://dla6bmp16jn01" path="res://Scripts/level_select.gd" id="1_nkys2"]
+[ext_resource type="PackedScene" uid="uid://dvpewgqwryefh" path="res://Scenes/level_select_button.tscn" id="2_2sqnl"]
+[ext_resource type="Theme" uid="uid://bttvneaybjt4" path="res://Assets/menu_box_theme.tres" id="2_lx4vd"]
+[ext_resource type="Environment" uid="uid://c8qpv2wh6f7ts" path="res://Assets/world_environment.tres" id="4_2sqnl"]
+[ext_resource type="StyleBox" uid="uid://bdkp0m4r10rau" path="res://Assets/menu_button_style.tres" id="4_72w8f"]
+
+[node name="Control" type="Control" unique_id=1628815200 node_paths=PackedStringArray("button_container")]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("2_lx4vd")
+script = ExtResource("1_nkys2")
+button_container = NodePath("VBoxContainer/GridContainer")
+button_scene = ExtResource("2_2sqnl")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="." unique_id=1104466571]
+layout_mode = 0
+offset_left = 65.0
+offset_top = 8.0
+offset_right = 348.0
+offset_bottom = 212.0
+
+[node name="Label" type="Label" parent="VBoxContainer" unique_id=1176851920]
+layout_mode = 2
+text = "LEVELS"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="GridContainer" type="GridContainer" parent="VBoxContainer" unique_id=2118543526]
+custom_minimum_size = Vector2(250, 150)
+layout_direction = 2
+layout_mode = 2
+theme = ExtResource("2_lx4vd")
+columns = 4
+
+[node name="Button" type="Button" parent="VBoxContainer" unique_id=1384131766]
+layout_mode = 2
+theme_override_styles/normal = ExtResource("4_72w8f")
+text = "Back"
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="." unique_id=1316698951]
+environment = ExtResource("4_2sqnl")
+
+[connection signal="pressed" from="VBoxContainer/Button" to="." method="_on_button_pressed"]

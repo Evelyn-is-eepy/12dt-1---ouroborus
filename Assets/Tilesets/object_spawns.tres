@@ -1,0 +1,29 @@
+[gd_resource type="TileSet" format=3 uid="uid://h8v5owr3q6dx"]
+
+[ext_resource type="Texture2D" uid="uid://pyj7ghvjha11" path="res://Assets/spawn tiles.png" id="1_a0ijl"]
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_wqkje"]
+texture = ExtResource("1_a0ijl")
+0:0/0 = 0
+0:0/0/custom_data_0 = true
+1:0/0 = 0
+1:0/0/custom_data_1 = true
+0:1/0 = 0
+0:1/0/custom_data_2 = true
+1:1/0 = 0
+1:1/0/custom_data_3 = true
+3:0/0 = 0
+3:0/0/custom_data_4 = true
+
+[resource]
+custom_data_layer_0/name = "box"
+custom_data_layer_0/type = 1
+custom_data_layer_1/name = "head"
+custom_data_layer_1/type = 1
+custom_data_layer_2/name = "switch_cyan"
+custom_data_layer_2/type = 1
+custom_data_layer_3/name = "switch_magenta"
+custom_data_layer_3/type = 1
+custom_data_layer_4/name = "crown"
+custom_data_layer_4/type = 1
+sources/0 = SubResource("TileSetAtlasSource_wqkje")

@@ -1,0 +1,10 @@
+[gd_resource type="ShaderMaterial" format=3 uid="uid://bbr1rham2yl3k"]
+
+[ext_resource type="Shader" uid="uid://dw06yhfs4v6fo" path="res://Assets/transition_shader.gdshader" id="1_52oxh"]
+[ext_resource type="Texture2D" uid="uid://cx6w757sl3tqa" path="res://Assets/screentransitiontexture.png" id="2_ukn16"]
+
+[resource]
+shader = ExtResource("1_52oxh")
+shader_parameter/transition_effect = ExtResource("2_ukn16")
+shader_parameter/progress = 0.0
+shader_parameter/invert = false
