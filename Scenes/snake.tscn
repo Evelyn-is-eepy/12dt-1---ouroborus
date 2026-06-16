@@ -326,13 +326,14 @@ size = Vector2(8, 8)
 
 [node name="Node2D" type="Node2D" unique_id=989255042]
 
-[node name="Head" type="Node2D" parent="." unique_id=760044799 node_paths=PackedStringArray("facing_ray", "movable_objects_ray", "tail_hitbox", "body_tilemap", "confetti", "blood", "head_sprite", "face_sprite", "personal_crown")]
+[node name="Head" type="Node2D" parent="." unique_id=760044799 node_paths=PackedStringArray("facing_ray", "movable_objects_ray", "tail_hitbox", "body_tilemap", "body_line", "confetti", "blood", "head_sprite", "face_sprite", "personal_crown")]
 z_index = 1
 script = ExtResource("1_16tbv")
 facing_ray = NodePath("WallRay")
 movable_objects_ray = NodePath("MovableObjectRay")
 tail_hitbox = NodePath("../TailArea")
 body_tilemap = NodePath("../Body")
+body_line = NodePath("../Line2D")
 confetti = NodePath("GPUParticles2D")
 blood = NodePath("GPUParticles2D2")
 head_sprite = NodePath("AnimatedSprite2D")
@@ -355,7 +356,7 @@ animation = &"up"
 
 [node name="AnimatedSprite2D2" type="AnimatedSprite2D" parent="Head" unique_id=955344301]
 sprite_frames = SubResource("SpriteFrames_7okff")
-animation = &"happy_right"
+animation = &"normal_up"
 
 [node name="Area2D" type="Area2D" parent="Head" unique_id=109781030]
 collision_layer = 2
@@ -388,7 +389,15 @@ offset_right = 4.0
 offset_bottom = -4.0
 color = Color(1, 1, 0, 1)
 
+[node name="Line2D" type="Line2D" parent="." unique_id=1201707115]
+points = PackedVector2Array(8, 8)
+width = 8.0
+joint_mode = 2
+begin_cap_mode = 2
+end_cap_mode = 2
+
 [node name="Body" type="TileMapLayer" parent="." unique_id=831044662 groups=["snake_body"]]
+visible = false
 position = Vector2(-8, -8)
 tile_set = SubResource("TileSet_lmvgn")
 
