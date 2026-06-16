@@ -10,11 +10,10 @@ var moving = false
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	$AnimatedSprite2D.play('default')
-	pass # Replace with function body.
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta: float) -> void:
+func _process(_delta: float) -> void:
 	pass
 
 func is_blocked_in_direction(direction) -> bool:
@@ -34,7 +33,7 @@ func is_blocked_in_direction(direction) -> bool:
 		return false
 		
 func move_self(direction):
-	#only called after it is confirmed safe to move
+	# Only called after it is confirmed safe to move
 	moving = true
 	var tween = create_tween()
 	tween.tween_property(self,'position',position + direction * TILE_SIZE,0.1).set_trans(Tween.TRANS_BOUNCE)
@@ -66,5 +65,3 @@ func fall_into_hole() -> void:
 	falling_tween.tween_property(self,'rotation',PI/2,duration).set_trans(trans_type).set_ease(Tween.EASE_IN)
 	falling_tween.set_parallel(false)
 	falling_tween.tween_callback(queue_free)
-
-	pass # Replace with function body.
