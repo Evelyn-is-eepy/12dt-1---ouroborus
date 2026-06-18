@@ -10,6 +10,7 @@ signal ate_tail
 @export var tail_hitbox: Area2D
 @export var body_tilemap: TileMapLayer
 @export var body_line: Line2D
+@export var body_collider: Area2D
 @export var confetti: GPUParticles2D
 @export var blood: GPUParticles2D
 @export var head_sprite: AnimatedSprite2D
@@ -178,7 +179,9 @@ func _process(_delta: float) -> void:
 			if movable_objects_ray.is_colliding():
 				var object_to_move = movable_objects_ray.get_collider().get_parent()
 				object_to_move.move_self(move_direction)
-		
+			
+			# Update body collision shape
+			recreate_body_hitbox()
 		
 		# If there is something in the way (oooooooooo-oooooh)
 		else:
@@ -196,6 +199,28 @@ func finish_move_and_check():
 			if cell_data:
 				if cell_data.has_custom_data('falling_pit'):
 					fall_into_hole()
+
+# Function to rebuild the line body's hitbox, removing the old hitbox
+# places a tile-sized collider on each point except the first (tail) and last (head)
+func recreate_body_hitbox():
+	# Deleting old collision shapes
+	var old_collsion_shapes = body_collider.get_children()
+	for shape in old_collsion_shapes:
+		shape.queue_free()
+	# Get all points other than tail and head
+	var body_points = body_line.points.duplicate()
+	body_points.remove_at(0)
+	body_points.remove_at(-1)
+	# Instance a collision rect as a child of the body hitbox Area2D on each point
+	for point in body_points:
+		# Make a tile-sized collision rect
+		var collision_square = CollisionShape2D.new()
+		collision_square.shape = RectangleShape2D.new()
+		collision_square.shape.size = Vector2(TILE_SIZE,TILE_SIZE)
+		collision_square.position = point
+		# Add it to the Area2D as child
+		body_collider.add_child(collision_square)
+	pass
 
 func win() -> void:
 	print('you won!')

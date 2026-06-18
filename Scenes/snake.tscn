@@ -326,7 +326,7 @@ size = Vector2(8, 8)
 
 [node name="Node2D" type="Node2D" unique_id=989255042]
 
-[node name="Head" type="Node2D" parent="." unique_id=760044799 node_paths=PackedStringArray("facing_ray", "movable_objects_ray", "tail_hitbox", "body_tilemap", "body_line", "confetti", "blood", "head_sprite", "face_sprite", "personal_crown")]
+[node name="Head" type="Node2D" parent="." unique_id=760044799 node_paths=PackedStringArray("facing_ray", "movable_objects_ray", "tail_hitbox", "body_tilemap", "body_line", "body_collider", "confetti", "blood", "head_sprite", "face_sprite", "personal_crown")]
 z_index = 1
 script = ExtResource("1_16tbv")
 facing_ray = NodePath("WallRay")
@@ -334,6 +334,7 @@ movable_objects_ray = NodePath("MovableObjectRay")
 tail_hitbox = NodePath("../TailArea")
 body_tilemap = NodePath("../Body")
 body_line = NodePath("../Line2D")
+body_collider = NodePath("../BodyHitbox")
 confetti = NodePath("GPUParticles2D")
 blood = NodePath("GPUParticles2D2")
 head_sprite = NodePath("AnimatedSprite2D")
@@ -343,6 +344,7 @@ personal_crown = NodePath("ColorRect")
 [node name="WallRay" type="RayCast2D" parent="Head" unique_id=1444581878]
 visible = false
 target_position = Vector2(16, 0)
+collide_with_areas = true
 
 [node name="MovableObjectRay" type="RayCast2D" parent="Head" unique_id=989567380]
 modulate = Color(0.9999996, 0.7802642, 0.23396412, 1)
@@ -396,10 +398,13 @@ joint_mode = 2
 begin_cap_mode = 2
 end_cap_mode = 2
 
+[node name="BodyHitbox" type="Area2D" parent="." unique_id=1813044984]
+
 [node name="Body" type="TileMapLayer" parent="." unique_id=831044662 groups=["snake_body"]]
 visible = false
 position = Vector2(-8, -8)
 tile_set = SubResource("TileSet_lmvgn")
+collision_enabled = false
 
 [node name="TailArea" type="Area2D" parent="." unique_id=207504011 groups=["snake_tail"]]
 collision_layer = 2
