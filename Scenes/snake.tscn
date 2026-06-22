@@ -321,17 +321,21 @@ custom_data_layer_0/name = "is_tail"
 custom_data_layer_0/type = 1
 sources/0 = SubResource("TileSetAtlasSource_rku0m")
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_lmvgn"]
+size = Vector2(16, 4)
+
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_rku0m"]
 size = Vector2(8, 8)
 
 [node name="Node2D" type="Node2D" unique_id=989255042]
 
-[node name="Head" type="Node2D" parent="." unique_id=760044799 node_paths=PackedStringArray("facing_ray", "movable_objects_ray", "tail_hitbox", "body_tilemap", "body_line", "body_collider", "confetti", "blood", "head_sprite", "face_sprite", "personal_crown")]
+[node name="Head" type="Node2D" parent="." unique_id=760044799 node_paths=PackedStringArray("facing_ray", "movable_objects_ray", "tail_hitbox", "tail_pivot", "body_tilemap", "body_line", "body_collider", "confetti", "blood", "head_sprite", "face_sprite", "personal_crown")]
 z_index = 1
 script = ExtResource("1_16tbv")
 facing_ray = NodePath("WallRay")
 movable_objects_ray = NodePath("MovableObjectRay")
-tail_hitbox = NodePath("../TailArea")
+tail_hitbox = NodePath("../TailPivot/TailArea")
+tail_pivot = NodePath("../TailPivot")
 body_tilemap = NodePath("../Body")
 body_line = NodePath("../Line2D")
 body_collider = NodePath("../BodyHitbox")
@@ -339,6 +343,7 @@ confetti = NodePath("GPUParticles2D")
 blood = NodePath("GPUParticles2D2")
 head_sprite = NodePath("AnimatedSprite2D")
 face_sprite = NodePath("AnimatedSprite2D2")
+starting_direction = Vector2(0, -1)
 personal_crown = NodePath("ColorRect")
 
 [node name="WallRay" type="RayCast2D" parent="Head" unique_id=1444581878]
@@ -406,11 +411,19 @@ position = Vector2(-8, -8)
 tile_set = SubResource("TileSet_lmvgn")
 collision_enabled = false
 
-[node name="TailArea" type="Area2D" parent="." unique_id=207504011 groups=["snake_tail"]]
+[node name="TailPivot" type="Node2D" parent="." unique_id=2061737025]
+
+[node name="Area2D2" type="Area2D" parent="TailPivot" unique_id=1185679992]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="TailPivot/Area2D2" unique_id=455055837]
+position = Vector2(0, -6)
+shape = SubResource("RectangleShape2D_lmvgn")
+
+[node name="TailArea" type="Area2D" parent="TailPivot" unique_id=207504011 groups=["snake_tail"]]
 collision_layer = 2
 collision_mask = 2
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="TailArea" unique_id=1121657930]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="TailPivot/TailArea" unique_id=1121657930]
 shape = SubResource("RectangleShape2D_rku0m")
 debug_color = Color(0.5385406, 0.7388369, 0, 0.41960785)
 

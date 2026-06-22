@@ -8,6 +8,7 @@ signal ate_tail
 @export var facing_ray: RayCast2D
 @export var movable_objects_ray: RayCast2D
 @export var tail_hitbox: Area2D
+@export var tail_pivot: Node2D
 @export var body_tilemap: TileMapLayer
 @export var body_line: Line2D
 @export var body_collider: Area2D
@@ -15,7 +16,7 @@ signal ate_tail
 @export var blood: GPUParticles2D
 @export var head_sprite: AnimatedSprite2D
 @export var face_sprite: AnimatedSprite2D
-@export var starting_direction = Vector2.UP
+@export var starting_direction: Vector2
 @export var manager: Node2D
 @export var personal_crown: ColorRect
 
@@ -34,7 +35,6 @@ var has_crown: bool = false
 func _ready() -> void:
 	manager = get_node('/root/Node2D')
 	connect('ate_tail',manager.player_wins)
-	
 	# Add the tail segment behind the head and orient the head sprite
 	var new_head_direction: String
 	match starting_direction:
@@ -48,42 +48,27 @@ func _ready() -> void:
 			new_head_direction = 'up'
 	current_head_direction = new_head_direction
 	head_sprite.play(new_head_direction)
-	
 	face_sprite.play('normal_'+new_head_direction)
-	
-	var tail_cell = body_tilemap.local_to_map(position - starting_direction * TILE_SIZE)
-	var tail_tile_id
-	match starting_direction:
-		Vector2(0,-1):
-			tail_tile_id = Vector2i(3,1)
-		Vector2(0,1):
-			tail_tile_id = Vector2i(3,0)
-		Vector2(-1,0):
-			tail_tile_id = Vector2i(2,0)
-		Vector2(1,0):
-			tail_tile_id = Vector2i(2,1)
-	body_tilemap.set_cell(tail_cell,0,tail_tile_id,0)
-	
 	# Remove all points and add tail to line body
 	body_line.clear_points()
 	body_line.add_point(position - starting_direction * TILE_SIZE)
 	# Add head/neck point
 	body_line.add_point(position)
-	
-	tail_hitbox.position = position - starting_direction * TILE_SIZE
-		
-
+	# Move and rotate the tail so that it is behind the head
+	tail_pivot.position = position - starting_direction * TILE_SIZE
+	# Rotation altered to be measured from upwards bearing
+	tail_pivot.rotation = starting_direction.rotated(PI/2).angle() 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(_delta: float) -> void:
-	
 	# Stick the last point on the body line to the head so that there is a visible neck.
 	body_line.points[-1] = position
-	
+	#take player inputs for move direction
 	var move_direction: Vector2 = Vector2(0,0)
 	if not moving and can_move:
-		move_direction.x = (int(Input.is_action_just_pressed("move_right")) - int(Input.is_action_just_pressed("move_left")))
-		move_direction.y = (int(Input.is_action_just_pressed("move_down")) - int(Input.is_action_just_pressed("move_up")))
+		move_direction.x = Input.get_axis("move_left","move_right")
+		move_direction.y = Input.get_axis("move_up","move_down")
+		#if both y and x have input, take only x
 		if move_direction.x and move_direction.y:
 			move_direction = Vector2(move_direction.x,0)
 	# Handle movement
@@ -91,13 +76,13 @@ func _process(_delta: float) -> void:
 		# Find direction of last body segment from array
 		last_moved_direction = previous_move_directions[0]
 		
-		# Point rays in direction of movement
+		# Point rays in direction of movement and force update
 		var movement_obstructed:bool = false
 		facing_ray.target_position = move_direction * TILE_SIZE
 		facing_ray.force_raycast_update()
 		movable_objects_ray.target_position = move_direction * TILE_SIZE
 		movable_objects_ray.force_raycast_update()
-		
+		# Check for collisions and update movement_obstructed if needed
 		if facing_ray.is_colliding():
 			movement_obstructed = true
 		if movable_objects_ray.is_colliding():
@@ -107,12 +92,11 @@ func _process(_delta: float) -> void:
 		
 		# Only move the player if their chosen direction is not blocked and they still have length to spare
 		if not movement_obstructed and body_length < max_body_length:
-			# initiate movement of snake head
+			# Initiate movement of snake head
 			var tween = create_tween()
 			moving = true
 			tween.tween_property(self,'position',position + move_direction * TILE_SIZE,move_duration).set_trans(Tween.TRANS_BOUNCE)
 			tween.tween_callback(finish_move_and_check)
-			
 			# Change head sprite & face sprite
 			var new_head_direction: String
 			match move_direction:
@@ -126,63 +110,20 @@ func _process(_delta: float) -> void:
 					new_head_direction = 'up'
 			current_head_direction = new_head_direction
 			head_sprite.play(new_head_direction)
-			
 			face_sprite.play(face_state+'_'+new_head_direction)
-		
-			# Update snake body
-			var previous_position = position
-			var previous_cell = body_tilemap.local_to_map(previous_position)
-			var new_tile_id: Vector2i
-			
-			# Figure out what the second to last segment should be based on the last two move directions
-			match [last_moved_direction, move_direction]:
-				# Cases where segment becomes straight (4 cases)
-				[Vector2.RIGHT,Vector2.RIGHT]: # >>
-					new_tile_id = Vector2i(0,2) 
-				[Vector2.UP,Vector2.UP]: # ^^
-					new_tile_id = Vector2i(1,2)
-				[Vector2.DOWN,Vector2.DOWN]: # vv
-					new_tile_id = Vector2i(1,2)
-				[Vector2.LEFT,Vector2.LEFT]: # <<
-					new_tile_id = Vector2i(0,2)
-				# Cases where segment becomes corner (8 cases)
-				[Vector2.UP,Vector2.RIGHT]: # ^>
-					new_tile_id = Vector2i(0,0) 
-				[Vector2.LEFT,Vector2.DOWN]: # <v
-					new_tile_id = Vector2i(0,0)
-				[Vector2.RIGHT,Vector2.DOWN]: # >v
-					new_tile_id = Vector2i(1,0)
-				[Vector2.UP,Vector2.LEFT]: # ^<
-					new_tile_id = Vector2i(1,0)
-				[Vector2.DOWN,Vector2.RIGHT]: # v>
-					new_tile_id = Vector2i(0,1) 
-				[Vector2.LEFT,Vector2.UP]: # <^
-					new_tile_id = Vector2i(0,1)
-				[Vector2.RIGHT,Vector2.UP]: # >^
-					new_tile_id = Vector2i(1,1)
-				[Vector2.DOWN,Vector2.LEFT]: # v<
-					new_tile_id = Vector2i(1,1)
-				
-			# Using this information, place the new body segment on the tilemap
-			body_tilemap.set_cell(previous_cell,0,new_tile_id,0)
-			
 			# Add point to line body.
 			# This means that the previous endpoint will no longer be 'stuck' to the head,
 			# and come to rest on this point, while the new becomes 'stuck' as the neck.
 			body_line.add_point(position)
-			
 			# Update previous moves array
 			previous_move_directions.insert(0,move_direction)
 			body_length += 1
-			
 			# Move boxes
 			if movable_objects_ray.is_colliding():
 				var object_to_move = movable_objects_ray.get_collider().get_parent()
 				object_to_move.move_self(move_direction)
-			
 			# Update body collision shape
 			recreate_body_hitbox()
-		
 		# If there is something in the way (oooooooooo-oooooh)
 		else:
 			print('bonk!')
@@ -222,6 +163,8 @@ func recreate_body_hitbox():
 		body_collider.add_child(collision_square)
 	pass
 
+# Function called when the player wins a level
+# Signals to main, chnages the face sprite and disables movement
 func win() -> void:
 	print('you won!')
 	ate_tail.emit()
@@ -234,12 +177,12 @@ func win() -> void:
 func _on_area_2d_area_entered(area: Area2D) -> void:
 	# For eating own tail or colliding with area objects
 	print('area collision!')
-	
-	var crown = area.get_parent()
+	# If the object is the tail, you win.
 	if area.is_in_group('snake_tail'):
 		win()
-	
-	elif crown.is_in_group('crown'):
+	#If the area is a crown, remove it and unhide the crown decoration.
+	var crown = area.get_parent()
+	if crown.is_in_group('crown'):
 		print('crown picked up!')
 		crown.queue_free()
 		personal_crown.visible = true
