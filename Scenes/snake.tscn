@@ -329,19 +329,18 @@ size = Vector2(8, 8)
 
 [node name="Node2D" type="Node2D" unique_id=989255042]
 
-[node name="Head" type="Node2D" parent="." unique_id=760044799 node_paths=PackedStringArray("facing_ray", "movable_objects_ray", "tail_hitbox", "tail_pivot", "body_tilemap", "body_line", "body_collider", "confetti", "blood", "head_sprite", "face_sprite", "personal_crown")]
+[node name="Head" type="Node2D" parent="." unique_id=760044799 node_paths=PackedStringArray("facing_ray", "movable_objects_ray", "tail_hitbox", "tail_pivot", "body_line", "body_collider", "confetti", "blood", "head_sprite", "face_sprite", "personal_crown")]
 z_index = 1
 script = ExtResource("1_16tbv")
 facing_ray = NodePath("WallRay")
 movable_objects_ray = NodePath("MovableObjectRay")
 tail_hitbox = NodePath("../TailPivot/TailArea")
 tail_pivot = NodePath("../TailPivot")
-body_tilemap = NodePath("../Body")
 body_line = NodePath("../Line2D")
 body_collider = NodePath("../BodyHitbox")
 confetti = NodePath("GPUParticles2D")
 blood = NodePath("GPUParticles2D2")
-head_sprite = NodePath("AnimatedSprite2D")
+head_sprite = NodePath("HeadSprite")
 face_sprite = NodePath("AnimatedSprite2D2")
 starting_direction = Vector2(0, -1)
 personal_crown = NodePath("ColorRect")
@@ -357,13 +356,18 @@ target_position = Vector2(16, 0)
 collision_mask = 4
 collide_with_areas = true
 
+[node name="HeadSprite" type="Sprite2D" parent="Head" unique_id=2035960213]
+scale = Vector2(0.17812502, 0.22499995)
+texture = ExtResource("4_lmvgn")
+
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="Head" unique_id=1446944199]
+visible = false
 sprite_frames = SubResource("SpriteFrames_rjxvt")
 animation = &"up"
 
 [node name="AnimatedSprite2D2" type="AnimatedSprite2D" parent="Head" unique_id=955344301]
 sprite_frames = SubResource("SpriteFrames_7okff")
-animation = &"normal_up"
+animation = &"happy_up"
 
 [node name="Area2D" type="Area2D" parent="Head" unique_id=109781030]
 collision_layer = 2

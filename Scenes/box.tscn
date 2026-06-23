@@ -3,9 +3,6 @@
 [ext_resource type="Script" uid="uid://cp63vbhypkfjc" path="res://Scripts/box.gd" id="1_xkb4e"]
 [ext_resource type="Texture2D" uid="uid://du1qox7qkjhsf" path="res://Assets/box.png" id="2_ego7h"]
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_p6ket"]
-size = Vector2(14, 14)
-
 [sub_resource type="AtlasTexture" id="AtlasTexture_2jyye"]
 atlas = ExtResource("2_ego7h")
 region = Rect2(0, 0, 16, 16)
@@ -28,10 +25,17 @@ animations = [{
 "speed": 1.0
 }]
 
-[node name="Node2D" type="Node2D" unique_id=639441410 node_paths=PackedStringArray("wall_ray", "movable_objects_ray") groups=["box"]]
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_p6ket"]
+size = Vector2(14, 14)
+
+[node name="Node2D" type="Node2D" unique_id=639441410 node_paths=PackedStringArray("wall_ray", "movable_objects_ray", "tail_ray") groups=["box"]]
 script = ExtResource("1_xkb4e")
 wall_ray = NodePath("WallRay")
 movable_objects_ray = NodePath("MovableObjectRay")
+tail_ray = NodePath("TailRay")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=1912487094]
+sprite_frames = SubResource("SpriteFrames_y7274")
 
 [node name="Area2D" type="Area2D" parent="." unique_id=866269031]
 collision_layer = 6
@@ -40,15 +44,17 @@ collision_mask = 6
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D" unique_id=2068037449]
 shape = SubResource("RectangleShape2D_p6ket")
 
+[node name="TailRay" type="RayCast2D" parent="." unique_id=824289475]
+collision_mask = 2
+collide_with_areas = true
+
 [node name="WallRay" type="RayCast2D" parent="." unique_id=1201641385]
 target_position = Vector2(0, 16)
+collide_with_areas = true
 
 [node name="MovableObjectRay" type="RayCast2D" parent="." unique_id=484090548]
 target_position = Vector2(0, 16)
 collision_mask = 4
 collide_with_areas = true
-
-[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=1912487094]
-sprite_frames = SubResource("SpriteFrames_y7274")
 
 [connection signal="body_entered" from="Area2D" to="." method="_on_area_2d_body_entered"]

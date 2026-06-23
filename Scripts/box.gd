@@ -4,12 +4,15 @@ const TILE_SIZE: int = 16
 
 @export var wall_ray: RayCast2D
 @export var movable_objects_ray: RayCast2D
+@export var tail_ray: RayCast2D
+@export var trans_type = Tween.TRANS_CIRC
+@export var duration = 0.6
 
 var moving = false
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
-	$AnimatedSprite2D.play('default')
+	pass
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
@@ -19,9 +22,11 @@ func _process(_delta: float) -> void:
 func is_blocked_in_direction(direction) -> bool:
 	wall_ray.target_position = direction * TILE_SIZE
 	movable_objects_ray.target_position = direction * TILE_SIZE
+	tail_ray.target_position = direction * TILE_SIZE
 	wall_ray.force_raycast_update()
 	movable_objects_ray.force_raycast_update()
-	if wall_ray.is_colliding():
+	tail_ray.force_raycast_update()
+	if wall_ray.is_colliding() or tail_ray.is_colliding():
 		return true
 	elif movable_objects_ray.is_colliding():
 		var object_to_move = movable_objects_ray.get_collider().get_parent()
@@ -39,6 +44,7 @@ func move_self(direction):
 	tween.tween_property(self,'position',position + direction * TILE_SIZE,0.1).set_trans(Tween.TRANS_BOUNCE)
 	tween.tween_callback(finish_move_and_check)
 	movable_objects_ray.target_position = direction * TILE_SIZE
+	# Blindly telling other boxes to move should be safe, as this only happens once it's verified that they're not blocked
 	if movable_objects_ray.is_colliding():
 		var object_to_move = movable_objects_ray.get_collider().get_parent()
 		object_to_move.move_self(direction)
@@ -57,8 +63,6 @@ func finish_move_and_check():
 func fall_into_hole() -> void:
 	$Area2D.set_deferred('disabled',true)
 	var falling_tween = create_tween()
-	var trans_type = Tween.TRANS_CIRC
-	var duration = 0.6
 	falling_tween.set_parallel()
 	falling_tween.tween_property(self, 'scale', Vector2(0,0), duration).set_trans(trans_type).set_ease(Tween.EASE_IN)
 	falling_tween.tween_property(self,'position',position + Vector2(0,8.0), duration).set_trans(trans_type).set_ease(Tween.EASE_IN)

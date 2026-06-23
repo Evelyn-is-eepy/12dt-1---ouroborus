@@ -56,6 +56,9 @@ func _process(_delta: float) -> void:
 	# Checks if the player has pressed space to reset the level
 	if Input.is_action_just_pressed("restart"):
 		get_tree().reload_current_scene()
+	# Checks if the player has pressed escape to exit the level
+	if Input.is_action_pressed("exit"):
+		get_tree().change_scene_to_file("res://Scenes/level_select.tscn")
 
 func player_wins() -> void:
 	# Called when the player eats their own tail
