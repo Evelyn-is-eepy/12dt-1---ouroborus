@@ -28,11 +28,12 @@ animations = [{
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_p6ket"]
 size = Vector2(14, 14)
 
-[node name="Node2D" type="Node2D" unique_id=639441410 node_paths=PackedStringArray("wall_ray", "movable_objects_ray", "tail_ray") groups=["box"]]
+[node name="Node2D" type="Node2D" unique_id=639441410 node_paths=PackedStringArray("wall_ray", "movable_objects_ray", "tail_ray", "collision_area") groups=["box"]]
 script = ExtResource("1_xkb4e")
 wall_ray = NodePath("WallRay")
 movable_objects_ray = NodePath("MovableObjectRay")
 tail_ray = NodePath("TailRay")
+collision_area = NodePath("Area2D")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=1912487094]
 sprite_frames = SubResource("SpriteFrames_y7274")
@@ -45,6 +46,7 @@ collision_mask = 6
 shape = SubResource("RectangleShape2D_p6ket")
 
 [node name="TailRay" type="RayCast2D" parent="." unique_id=824289475]
+target_position = Vector2(0, 16)
 collision_mask = 2
 collide_with_areas = true
 

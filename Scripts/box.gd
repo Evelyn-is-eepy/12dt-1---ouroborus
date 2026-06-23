@@ -5,6 +5,7 @@ const TILE_SIZE: int = 16
 @export var wall_ray: RayCast2D
 @export var movable_objects_ray: RayCast2D
 @export var tail_ray: RayCast2D
+@export var collision_area: Area2D
 @export var trans_type = Tween.TRANS_CIRC
 @export var duration = 0.6
 
@@ -26,9 +27,12 @@ func is_blocked_in_direction(direction) -> bool:
 	wall_ray.force_raycast_update()
 	movable_objects_ray.force_raycast_update()
 	tail_ray.force_raycast_update()
-	if wall_ray.is_colliding() or tail_ray.is_colliding():
+	if wall_ray.is_colliding():
 		return true
-	elif movable_objects_ray.is_colliding():
+	if tail_ray.is_colliding():
+		if tail_ray.get_collider().is_in_group("snake_tail"):
+			return true
+	if movable_objects_ray.is_colliding():
 		var object_to_move = movable_objects_ray.get_collider().get_parent()
 		if object_to_move.is_blocked_in_direction(direction):
 			return true
@@ -51,8 +55,8 @@ func move_self(direction):
 		
 func finish_move_and_check():
 	moving = false
-	if $Area2D.get_overlapping_bodies():
-		var collider = $Area2D.get_overlapping_bodies()[0]
+	if collision_area.get_overlapping_bodies():
+		var collider = collision_area.get_overlapping_bodies()[0]
 		if collider.is_in_group('terrain_and_hazards'):
 			var cell = collider.local_to_map(collider.to_local(global_position))
 			var cell_data = collider.get_cell_tile_data(cell)
@@ -61,7 +65,7 @@ func finish_move_and_check():
 					fall_into_hole()
 
 func fall_into_hole() -> void:
-	$Area2D.set_deferred('disabled',true)
+	collision_area.queue_free()
 	var falling_tween = create_tween()
 	falling_tween.set_parallel()
 	falling_tween.tween_property(self, 'scale', Vector2(0,0), duration).set_trans(trans_type).set_ease(Tween.EASE_IN)
