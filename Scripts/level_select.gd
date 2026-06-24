@@ -6,6 +6,8 @@ extends Control
 var level_scene_path: String ="res://Scenes/Levels/"
 var level_references: Array = ["level_1","level_2","level_3"]
 var button_style: StyleBox = load("res://Assets/menu_button_style.tres")
+# File path of the main menu scene
+@export var exit_scene: String
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
@@ -18,8 +20,6 @@ func _ready() -> void:
 		new_level_button.level_select_control = self
 		new_level_button.add_theme_stylebox_override('normal',button_style)
 		button_container.add_child(new_level_button)
-		
-	pass # Replace with function body.
 
 func level_selected(reference):
 	print(reference)
@@ -27,9 +27,8 @@ func level_selected(reference):
 
 
 func _on_button_pressed() -> void:
-	get_tree().change_scene_to_file("res://Scenes/main_menu.tscn")
-	pass # Replace with function body.
+	get_tree().change_scene_to_file(exit_scene)
 
 func _process(_delta: float) -> void:
 	if Input.is_action_just_pressed("exit"):
-		get_tree().change_scene_to_file("res://Scenes/main_menu.tscn")
+		get_tree().change_scene_to_file(exit_scene)

@@ -25,7 +25,6 @@ var face_state: String = 'normal'
 var current_head_direction: Vector2
 var last_moved_direction: Vector2 = starting_direction
 var previous_move_directions: Array = [starting_direction]
-var body_length: int = 0
 var max_body_length: int = 300
 
 var moving: bool = false
@@ -79,8 +78,10 @@ func _process(_delta: float) -> void:
 			var object_to_move = movable_objects_ray.get_collider().get_parent()
 			if object_to_move.is_blocked_in_direction(move_direction):
 				movement_obstructed = true
+		# Find the length of the snake's body (number of body points other than head and tail)
+		var body_length: int = len(body_line.points) - 2
 		# Only move the player if their chosen direction is not blocked and they still have length to spare
-		if not movement_obstructed and body_length < max_body_length:
+		if not movement_obstructed and body_length <= max_body_length:
 			# Initiate movement of snake head
 			var tween = create_tween()
 			moving = true
@@ -96,7 +97,6 @@ func _process(_delta: float) -> void:
 			body_line.add_point(position)
 			# Update previous moves array
 			previous_move_directions.insert(0,move_direction)
-			body_length += 1
 			# Move boxes
 			if movable_objects_ray.is_colliding():
 				var object_to_move = movable_objects_ray.get_collider().get_parent()
@@ -170,14 +170,16 @@ func _on_area_2d_area_entered(area: Area2D) -> void:
 	print('area collision!')
 	# If the object is the tail, you win.
 	if area.is_in_group('snake_tail'):
-		win()
-	#If the area is a crown, remove it and unhide the crown decoration.
-	var crown = area.get_parent()
-	if crown.is_in_group('crown'):
-		print('crown picked up!')
-		crown.queue_free()
-		personal_crown.visible = true
-		has_crown = true
+		win() # This code is amusing.
+	#If the area is a consumable (crown, apple, crystal):
+	elif area.get_parent().is_in_group('consumable'):
+		# Get the area2D's parent (the node that is the 'object' itself)
+		var consumable_object = area.get_parent()
+		# Go through the possibilities
+		if consumable_object.is_in_group('crown'):
+			pass # Crown code to go here.
+		elif consumable_object.is_in_group('apple'):
+			max_body_length += 3
 
 func fall_into_hole():
 	# 'Animation' for falling into a pit

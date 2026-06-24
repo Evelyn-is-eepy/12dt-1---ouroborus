@@ -14,6 +14,8 @@ texture = ExtResource("1_a0ijl")
 1:1/0/custom_data_3 = true
 3:0/0 = 0
 3:0/0/custom_data_4 = true
+2:1/0 = 0
+2:1/0/custom_data_5 = true
 
 [resource]
 custom_data_layer_0/name = "box"
@@ -26,4 +28,6 @@ custom_data_layer_3/name = "switch_magenta"
 custom_data_layer_3/type = 1
 custom_data_layer_4/name = "crown"
 custom_data_layer_4/type = 1
+custom_data_layer_5/name = "apple"
+custom_data_layer_5/type = 1
 sources/0 = SubResource("TileSetAtlasSource_wqkje")

@@ -345,6 +345,7 @@ background_layer = NodePath("BackgroundLayer")
 box_scene = ExtResource("2_wqkje")
 player_scene = ExtResource("1_tumq0")
 camera = NodePath("WorldEnvironment/Camera2D")
+exit_scene = "\"res://Scenes/level_select.tscn\""
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="." unique_id=937800498]
 environment = ExtResource("4_t8ai0")

@@ -17,6 +17,7 @@ theme = ExtResource("2_lx4vd")
 script = ExtResource("1_nkys2")
 button_container = NodePath("VBoxContainer/GridContainer")
 button_scene = ExtResource("2_2sqnl")
+exit_scene = "\"res://Scenes/main_menu.tscn\""
 
 [node name="VBoxContainer" type="VBoxContainer" parent="." unique_id=1104466571]
 layout_mode = 0

@@ -4,13 +4,15 @@ const TILE_SIZE: int = 16
 
 @export var spawn_directions = [Vector2.UP, Vector2.LEFT,Vector2.DOWN,Vector2.RIGHT]
 @export var spawn_direction_id: int
-
 @export var spawn_layer: TileMapLayer
 @export var background_layer: TileMapLayer
 @export var box_scene: PackedScene
 @export var player_scene: PackedScene
 @export var crown_scene: PackedScene
+@export var apple_scene: PackedScene
 @export var camera: Camera2D
+# File path of the main menu scene
+@export var exit_scene: String
 
 var player_already_spawned: bool = false
 
@@ -58,10 +60,10 @@ func _process(_delta: float) -> void:
 		get_tree().reload_current_scene()
 	# Checks if the player has pressed escape to exit the level
 	if Input.is_action_pressed("exit"):
-		get_tree().change_scene_to_file("res://Scenes/level_select.tscn")
+		get_tree().change_scene_to_file(exit_scene)
 
 func player_wins() -> void:
 	# Called when the player eats their own tail
 	print('wohoo!')
 	await get_tree().create_timer(3).timeout
-	get_tree().change_scene_to_file("res://Scenes/level_select.tscn")
+	get_tree().change_scene_to_file(exit_scene)
