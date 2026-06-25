@@ -14,7 +14,6 @@ grow_horizontal = 2
 grow_vertical = 2
 theme = ExtResource("1_gryuy")
 script = ExtResource("2_1bamb")
-exit_scene = "\"res://Scenes/main_menu.tscn\""
 
 [node name="VBoxContainer" type="VBoxContainer" parent="." unique_id=1917461519]
 layout_mode = 0
@@ -52,5 +51,9 @@ layout_mode = 2
 layout_mode = 2
 theme_override_styles/normal = ExtResource("3_ccovl")
 text = "Back"
+
+[node name="Camera2D" type="Camera2D" parent="." unique_id=407650405]
+position = Vector2(216, 112)
+zoom = Vector2(4, 4)
 
 [connection signal="pressed" from="VBoxContainer/Button" to="." method="_on_button_pressed"]

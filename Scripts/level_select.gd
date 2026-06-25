@@ -7,7 +7,7 @@ var level_scene_path: String ="res://Scenes/Levels/"
 var level_references: Array = ["level_1","level_2","level_3"]
 var button_style: StyleBox = load("res://Assets/menu_button_style.tres")
 # File path of the main menu scene
-@export var exit_scene: String
+@export var exit_scene: String = "res://Scenes/main_menu.tscn"
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:

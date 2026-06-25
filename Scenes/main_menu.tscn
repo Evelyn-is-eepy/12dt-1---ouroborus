@@ -76,6 +76,10 @@ autoplay = "default"
 [node name="WorldEnvironment" type="WorldEnvironment" parent="." unique_id=39204067]
 environment = ExtResource("6_opfnp")
 
+[node name="Camera2D" type="Camera2D" parent="." unique_id=499663580]
+position = Vector2(216, 112)
+zoom = Vector2(4, 4)
+
 [connection signal="pressed" from="VBoxContainer/Button" to="." method="_on_button_pressed"]
 [connection signal="pressed" from="VBoxContainer/Button3" to="." method="_on_button_3_pressed"]
 [connection signal="pressed" from="VBoxContainer/Button2" to="." method="_on_button_2_pressed"]

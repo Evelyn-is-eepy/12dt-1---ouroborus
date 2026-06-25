@@ -4,6 +4,7 @@
 [ext_resource type="Texture2D" uid="uid://bpiri6nkn63on" path="res://Assets/Ouroboros level tileset.png" id="1_k5f4k"]
 [ext_resource type="PackedScene" uid="uid://d2obc0bysr4q" path="res://Scenes/snake.tscn" id="1_tumq0"]
 [ext_resource type="PackedScene" uid="uid://l8gufufpge0c" path="res://Scenes/box.tscn" id="2_wqkje"]
+[ext_resource type="PackedScene" uid="uid://c3w4fu5i7k3cj" path="res://Scenes/apple.tscn" id="4_ej2hx"]
 [ext_resource type="Environment" uid="uid://c8qpv2wh6f7ts" path="res://Assets/world_environment.tres" id="4_t8ai0"]
 [ext_resource type="TileSet" uid="uid://h8v5owr3q6dx" path="res://Assets/Tilesets/object_spawns.tres" id="5_t8ai0"]
 
@@ -340,18 +341,20 @@ sources/0 = SubResource("TileSetAtlasSource_k5f4k")
 
 [node name="Node2D" type="Node2D" unique_id=743200906 node_paths=PackedStringArray("spawn_layer", "background_layer", "camera")]
 script = ExtResource("1_6phgx")
+spawn_max_length = 30
 spawn_layer = NodePath("ObjectSpawnsLayer")
 background_layer = NodePath("BackgroundLayer")
 box_scene = ExtResource("2_wqkje")
 player_scene = ExtResource("1_tumq0")
+apple_scene = ExtResource("4_ej2hx")
 camera = NodePath("WorldEnvironment/Camera2D")
-exit_scene = "\"res://Scenes/level_select.tscn\""
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="." unique_id=937800498]
 environment = ExtResource("4_t8ai0")
 
 [node name="Camera2D" type="Camera2D" parent="WorldEnvironment" unique_id=1361182029]
 position = Vector2(8, 8)
+zoom = Vector2(4, 4)
 
 [node name="ObjectSpawnsLayer" type="TileMapLayer" parent="." unique_id=1626282959]
 tile_set = ExtResource("5_t8ai0")

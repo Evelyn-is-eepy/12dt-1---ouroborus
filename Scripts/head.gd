@@ -3,6 +3,7 @@ extends Node2D
 const TILE_SIZE: int = 16
 const move_duration = 0.1
 const move_directions_and_names = [{Vector2(1.0,0.0):"right"},{Vector2(-1.0,0.0):"left"},{Vector2(0.0,-1.0):"up"},{Vector2(0.0,1.0):"down"},]
+const apple_length_bonus: int = 3
 
 signal ate_tail
 
@@ -12,6 +13,7 @@ signal ate_tail
 @export var tail_pivot: Node2D
 @export var body_line: Line2D
 @export var body_collider: Area2D
+@export var head_collider: Area2D
 @export var confetti: GPUParticles2D
 @export var blood: GPUParticles2D
 @export var head_sprite: Sprite2D
@@ -20,12 +22,13 @@ signal ate_tail
 @export var manager: Node2D
 @export var personal_crown: ColorRect
 @export var move_trans_type = Tween.TRANS_BOUNCE
+@export var starting_max_length: int
 
 var face_state: String = 'normal'
 var current_head_direction: Vector2
 var last_moved_direction: Vector2 = starting_direction
 var previous_move_directions: Array = [starting_direction]
-var max_body_length: int = 300
+var max_body_length: int
 
 var moving: bool = false
 var can_move: bool = true
@@ -58,13 +61,11 @@ func _process(_delta: float) -> void:
 	if not moving and can_move:
 		move_direction.x = Input.get_axis("move_left","move_right")
 		move_direction.y = Input.get_axis("move_up","move_down")
-		#if both y and x have input, take only x
+		# If both y and x have input, take only x
 		if move_direction.x and move_direction.y:
 			move_direction = Vector2(move_direction.x,0)
 	# Handle movement
 	if move_direction and can_move:
-		# Find direction of last body segment from array
-		last_moved_direction = previous_move_directions[0]
 		# Point rays in direction of movement and force update
 		var movement_obstructed:bool = false
 		facing_ray.target_position = move_direction * TILE_SIZE
@@ -80,8 +81,9 @@ func _process(_delta: float) -> void:
 				movement_obstructed = true
 		# Find the length of the snake's body (number of body points other than head and tail)
 		var body_length: int = len(body_line.points) - 2
+		var body_too_long: bool = body_length >= max_body_length
 		# Only move the player if their chosen direction is not blocked and they still have length to spare
-		if not movement_obstructed and body_length <= max_body_length:
+		if not(movement_obstructed or body_too_long):
 			# Initiate movement of snake head
 			var tween = create_tween()
 			moving = true
@@ -111,14 +113,33 @@ func _process(_delta: float) -> void:
 # Finish move and check for hazards (called from tween callback)
 func finish_move_and_check():
 	moving = false
-	if $Area2D.get_overlapping_bodies():
-		var collider = $Area2D.get_overlapping_bodies()[0]
-		if collider.is_in_group('terrain_and_hazards'):
-			var cell = collider.local_to_map(collider.to_local(global_position))
-			var cell_data = collider.get_cell_tile_data(cell)
-			if cell_data:
-				if cell_data.has_custom_data('falling_pit'):
-					fall_into_hole()
+	print("length: " + str(len(body_line.points) - 2) +" max: " + str(max_body_length))
+	# Check if the head is overlapping any bodies
+	if head_collider.get_overlapping_bodies():
+		print("bodies detected!")
+		for collider in head_collider.get_overlapping_bodies():
+			# Is it a bottomless pit?
+			if collider.is_in_group('terrain_and_hazards'):
+				var cell = collider.local_to_map(collider.to_local(global_position))
+				var cell_data = collider.get_cell_tile_data(cell)
+				if cell_data:
+					if cell_data.has_custom_data('falling_pit'):
+						fall_into_hole()
+	# Check for overlapping areas
+	if head_collider.get_overlapping_areas():
+		print("areas detected!")
+		for area in head_collider.get_overlapping_areas():
+			# Is it a consumable?
+			if area.get_parent().is_in_group("Consumable"):
+				print("om nom nom :')'")
+				var consumable = area.get_parent()
+				# Go through the possibilities
+				if consumable.is_in_group('crown'):
+					pass # Crown code to go here.
+				elif consumable.is_in_group('apple'):
+					max_body_length += apple_length_bonus
+				# Once done, remove the consumable
+				consumable.queue_free()
 
 # Function to rebuild the line body's hitbox, removing the old hitbox
 # places a tile-sized collider on each point except the first (tail) and last (head)
@@ -171,15 +192,6 @@ func _on_area_2d_area_entered(area: Area2D) -> void:
 	# If the object is the tail, you win.
 	if area.is_in_group('snake_tail'):
 		win() # This code is amusing.
-	#If the area is a consumable (crown, apple, crystal):
-	elif area.get_parent().is_in_group('consumable'):
-		# Get the area2D's parent (the node that is the 'object' itself)
-		var consumable_object = area.get_parent()
-		# Go through the possibilities
-		if consumable_object.is_in_group('crown'):
-			pass # Crown code to go here.
-		elif consumable_object.is_in_group('apple'):
-			max_body_length += 3
 
 func fall_into_hole():
 	# 'Animation' for falling into a pit

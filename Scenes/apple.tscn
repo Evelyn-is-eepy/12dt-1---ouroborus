@@ -32,7 +32,8 @@ size = Vector2(8, 8)
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=1882472467]
 position = Vector2(-1, -1)
 sprite_frames = SubResource("SpriteFrames_lyte0")
-frame_progress = 0.26953724
+autoplay = "default"
+frame_progress = 0.041813705
 
 [node name="Area2D" type="Area2D" parent="." unique_id=789978614]
 collision_layer = 2

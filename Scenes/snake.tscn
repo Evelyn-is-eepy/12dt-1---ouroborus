@@ -238,7 +238,7 @@ size = Vector2(8, 8)
 
 [node name="Node2D" type="Node2D" unique_id=989255042]
 
-[node name="Head" type="Node2D" parent="." unique_id=760044799 node_paths=PackedStringArray("facing_ray", "movable_objects_ray", "tail_hitbox", "tail_pivot", "body_line", "body_collider", "confetti", "blood", "head_sprite", "face_sprite", "personal_crown")]
+[node name="Head" type="Node2D" parent="." unique_id=760044799 node_paths=PackedStringArray("facing_ray", "movable_objects_ray", "tail_hitbox", "tail_pivot", "body_line", "body_collider", "head_collider", "confetti", "blood", "head_sprite", "face_sprite", "personal_crown") groups=["is_player_character"]]
 z_index = 1
 script = ExtResource("1_16tbv")
 facing_ray = NodePath("WallRay")
@@ -247,6 +247,7 @@ tail_hitbox = NodePath("../TailPivot/TailArea")
 tail_pivot = NodePath("../TailPivot")
 body_line = NodePath("../Line2D")
 body_collider = NodePath("../BodyHitbox")
+head_collider = NodePath("HeadCollider")
 confetti = NodePath("GPUParticles2D")
 blood = NodePath("GPUParticles2D2")
 head_sprite = NodePath("HeadSprite")
@@ -278,11 +279,11 @@ animation = &"up"
 sprite_frames = SubResource("SpriteFrames_7okff")
 animation = &"happy_up"
 
-[node name="Area2D" type="Area2D" parent="Head" unique_id=109781030 groups=["snake_tail"]]
+[node name="HeadCollider" type="Area2D" parent="Head" unique_id=109781030 groups=["snake_tail"]]
 collision_layer = 2
 collision_mask = 2
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Head/Area2D" unique_id=1027503926]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Head/HeadCollider" unique_id=1027503926]
 shape = SubResource("RectangleShape2D_pox6b")
 
 [node name="GPUParticles2D" type="GPUParticles2D" parent="Head" unique_id=611441584]
@@ -334,5 +335,5 @@ collision_mask = 2
 shape = SubResource("RectangleShape2D_rku0m")
 debug_color = Color(0.5385406, 0.7388369, 0, 0.41960785)
 
-[connection signal="area_entered" from="Head/Area2D" to="Head" method="_on_area_2d_area_entered"]
-[connection signal="body_entered" from="Head/Area2D" to="Head" method="_on_area_2d_body_entered"]
+[connection signal="area_entered" from="Head/HeadCollider" to="Head" method="_on_area_2d_area_entered"]
+[connection signal="body_entered" from="Head/HeadCollider" to="Head" method="_on_area_2d_body_entered"]
