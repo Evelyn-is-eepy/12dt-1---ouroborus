@@ -6,6 +6,8 @@
 [ext_resource type="Environment" uid="uid://c8qpv2wh6f7ts" path="res://Assets/world_environment.tres" id="4_2sqnl"]
 [ext_resource type="StyleBox" uid="uid://bdkp0m4r10rau" path="res://Assets/menu_button_style.tres" id="4_72w8f"]
 
+[sub_resource type="Compositor" id="Compositor_72w8f"]
+
 [node name="Control" type="Control" unique_id=1628815200 node_paths=PackedStringArray("button_container")]
 layout_mode = 3
 anchors_preset = 15
@@ -45,9 +47,9 @@ text = "Back"
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="." unique_id=1316698951]
 environment = ExtResource("4_2sqnl")
+compositor = SubResource("Compositor_72w8f")
 
 [node name="Camera2D" type="Camera2D" parent="." unique_id=1064924576]
 position = Vector2(216, 112)
-zoom = Vector2(4, 4)
 
 [connection signal="pressed" from="VBoxContainer/Button" to="." method="_on_button_pressed"]

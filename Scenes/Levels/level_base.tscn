@@ -354,7 +354,6 @@ environment = ExtResource("4_t8ai0")
 
 [node name="Camera2D" type="Camera2D" parent="WorldEnvironment" unique_id=1361182029]
 position = Vector2(8, 8)
-zoom = Vector2(4, 4)
 
 [node name="ObjectSpawnsLayer" type="TileMapLayer" parent="." unique_id=1626282959]
 tile_set = ExtResource("5_t8ai0")

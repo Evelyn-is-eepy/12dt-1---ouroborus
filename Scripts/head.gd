@@ -2,6 +2,7 @@ extends Node2D
 
 const TILE_SIZE: int = 16
 const move_duration = 0.1
+const bonk_duration = 0.2
 const move_directions_and_names = [{Vector2(1.0,0.0):"right"},{Vector2(-1.0,0.0):"left"},{Vector2(0.0,-1.0):"up"},{Vector2(0.0,1.0):"down"},]
 const apple_length_bonus: int = 3
 
@@ -22,6 +23,8 @@ signal ate_tail
 @export var manager: Node2D
 @export var personal_crown: ColorRect
 @export var move_trans_type = Tween.TRANS_BOUNCE
+@export var bonk_trans_type = Tween.TRANS_LINEAR
+@export var bonk_max_amplitude: float
 @export var starting_max_length: int
 
 var face_state: String = 'normal'
@@ -29,10 +32,12 @@ var current_head_direction: Vector2
 var last_moved_direction: Vector2 = starting_direction
 var previous_move_directions: Array = [starting_direction]
 var max_body_length: int
-
 var moving: bool = false
+var shaking: bool = false
 var can_move: bool = true
 var has_crown: bool = false
+var position_before_bonk: Vector2
+var shake_intensity: float = 0
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
@@ -54,13 +59,25 @@ func _ready() -> void:
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(_delta: float) -> void:
+	# If the body is shaking from a bonk, add a randomised offset
+	if shaking:
+		position = position_before_bonk
+		var random_rotation = randf_range(0,2*PI)
+		position += Vector2.UP.rotated(random_rotation) * shake_intensity
 	# Stick the last point on the body line to the head so that there is a visible neck.
 	body_line.points[-1] = position
 	# Take player inputs for move direction
 	var move_direction: Vector2 = Vector2(0,0)
 	if not moving and can_move:
-		move_direction.x = Input.get_axis("move_left","move_right")
-		move_direction.y = Input.get_axis("move_up","move_down")
+		# These vars are to prevent super long lines
+		# It needs to be 'action_just_pressed' to prevent icky accidental double moves
+		var input_x_pos = int(Input.is_action_just_pressed("move_right"))
+		var input_x_neg = int(Input.is_action_just_pressed("move_left"))
+		var input_y_pos = int(Input.is_action_just_pressed("move_down"))
+		var input_y_neg = int(Input.is_action_just_pressed("move_up"))
+		# This math works essentially the same as an Input.get_axis() function
+		move_direction.x = input_x_pos - input_x_neg
+		move_direction.y = input_y_pos - input_y_neg
 		# If both y and x have input, take only x
 		if move_direction.x and move_direction.y:
 			move_direction = Vector2(move_direction.x,0)
@@ -108,11 +125,22 @@ func _process(_delta: float) -> void:
 		# If there is something in the way (oooooooooo-oooooh)
 		else:
 			print('bonk!')
-			# Bonk animation not implemented... yet.
+			# prevent movement until bonk is finished
+			moving = true
+			shaking = true
+			# store the original position to prevent becoming misaligned
+			position_before_bonk = position
+			var bonk_tween = create_tween()
+			# Set shake intensity to max and then tween it back down
+			shake_intensity = bonk_max_amplitude
+			bonk_tween.tween_property(self,'shake_intensity',0,bonk_duration)
+			# this function works just as well here, no need to bloat things by adding another
+			bonk_tween.tween_callback(finish_move_and_check)
 
 # Finish move and check for hazards (called from tween callback)
 func finish_move_and_check():
 	moving = false
+	shaking = false
 	print("length: " + str(len(body_line.points) - 2) +" max: " + str(max_body_length))
 	# Check if the head is overlapping any bodies
 	if head_collider.get_overlapping_bodies():
@@ -190,7 +218,9 @@ func _on_area_2d_area_entered(area: Area2D) -> void:
 	# For eating own tail or colliding with area objects
 	print('area collision!')
 	# If the object is the tail, you win.
-	if area.is_in_group('snake_tail'):
+	# There is an issue where you could win by running into a wall for your first move,
+	# Which could make you hit your own tail through the 'bonk' shaking animation.
+	if area.is_in_group('snake_tail') and not shaking:
 		win() # This code is amusing.
 
 func fall_into_hole():

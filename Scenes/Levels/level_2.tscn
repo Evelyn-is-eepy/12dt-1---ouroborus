@@ -311,7 +311,6 @@ environment = ExtResource("4_blpqv")
 
 [node name="Camera2D" type="Camera2D" parent="WorldEnvironment" unique_id=1361182029]
 position = Vector2(8, 8)
-zoom = Vector2(4, 4)
 
 [node name="ObjectSpawnsLayer" type="TileMapLayer" parent="." unique_id=1626282959]
 tile_map_data = PackedByteArray("AAAFAAYAAAAAAAAAAAAFAAUAAAAAAAAAAAAHAAUAAAAAAAAAAAAHAAYAAAAAAAAAAAAFAAEAAAAAAAAAAAAGAAEAAAAAAAAAAAAHAAEAAAAAAAAAAAAGAAQAAAABAAAAAAA=")

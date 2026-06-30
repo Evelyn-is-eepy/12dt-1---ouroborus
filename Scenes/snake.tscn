@@ -254,6 +254,7 @@ head_sprite = NodePath("HeadSprite")
 face_sprite = NodePath("AnimatedSprite2D2")
 starting_direction = Vector2(0, -1)
 personal_crown = NodePath("ColorRect")
+bonk_max_amplitude = 2.0
 
 [node name="WallRay" type="RayCast2D" parent="Head" unique_id=1444581878]
 visible = false

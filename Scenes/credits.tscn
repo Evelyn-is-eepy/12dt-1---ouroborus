@@ -54,6 +54,5 @@ text = "Back"
 
 [node name="Camera2D" type="Camera2D" parent="." unique_id=407650405]
 position = Vector2(216, 112)
-zoom = Vector2(4, 4)
 
 [connection signal="pressed" from="VBoxContainer/Button" to="." method="_on_button_pressed"]
