@@ -69,7 +69,7 @@ func _process(_delta: float) -> void:
 	# Take player inputs for move direction
 	var move_direction: Vector2 = Vector2(0,0)
 	if not moving and can_move:
-		# These vars are to prevent super long lines
+		# These vars are to prevent super long lines of code
 		# It needs to be 'action_just_pressed' to prevent icky accidental double moves
 		var input_x_pos = int(Input.is_action_just_pressed("move_right"))
 		var input_x_neg = int(Input.is_action_just_pressed("move_left"))
@@ -99,11 +99,13 @@ func _process(_delta: float) -> void:
 		# Find the length of the snake's body (number of body points other than head and tail)
 		var body_length: int = len(body_line.points) - 2
 		var body_too_long: bool = body_length >= max_body_length
-		# Only move the player if their chosen direction is not blocked and they still have length to spare
+		# Only move the player if their chosen direction is not blocked and they still have length
 		if not(movement_obstructed or body_too_long):
 			# Initiate movement of snake head
 			var tween = create_tween()
 			moving = true
+			# I don't really know how to shorten this line without renaming variables
+			# Which I don't want to do, as it'll be a pain and make the code less clear
 			tween.tween_property(self,'position',position + move_direction * TILE_SIZE,move_duration).set_trans(move_trans_type)
 			tween.tween_callback(finish_move_and_check)
 			# Change head & face sprite
@@ -165,7 +167,24 @@ func finish_move_and_check():
 				if consumable.is_in_group('crown'):
 					pass # Crown code to go here.
 				elif consumable.is_in_group('apple'):
+					# Increase body max length
 					max_body_length += apple_length_bonus
+				elif consumable.is_in_group('crystal'):
+					# Code to swap around the tail and head
+					var tail_pos = body_line.points[-1]
+					var head_pos = body_line.points[0]
+					# Move head to tail position and vice versa
+					position = tail_pos
+					tail_pivot.position = head_pos
+					# Find new directions to be facing and apply them
+					var new_head_direction = (body_line.points[1] - tail_pos).normalized()
+					current_head_direction = new_head_direction
+					head_sprite.rotation = new_head_direction.rotated(PI/2).angle() 
+					face_sprite.play('normal_' + get_direction_name(new_head_direction))
+					var new_tail_direction = (body_line.points[-2] - head_pos).normalized()
+					tail_pivot.rotation = new_tail_direction.rotated(PI/2).angle() 
+					# Reverse the body line's order to complete this.
+					body_line.points.reverse()
 				# Once done, remove the consumable
 				consumable.queue_free()
 

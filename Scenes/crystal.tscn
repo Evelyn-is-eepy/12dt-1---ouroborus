@@ -1,0 +1,13 @@
+[gd_scene format=3 uid="uid://dl3kyh6bihalf"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_kq1it"]
+size = Vector2(8, 8)
+
+[node name="Node2D" type="Node2D" unique_id=1831444325 groups=["Consumable", "crystal"]]
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=949249382]
+
+[node name="Area2D" type="Area2D" parent="." unique_id=557418566]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D" unique_id=1368949324]
+shape = SubResource("RectangleShape2D_kq1it")

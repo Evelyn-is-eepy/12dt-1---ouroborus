@@ -6,6 +6,7 @@
 [ext_resource type="PackedScene" uid="uid://l8gufufpge0c" path="res://Scenes/box.tscn" id="2_wqkje"]
 [ext_resource type="PackedScene" uid="uid://c3w4fu5i7k3cj" path="res://Scenes/apple.tscn" id="4_ej2hx"]
 [ext_resource type="Environment" uid="uid://c8qpv2wh6f7ts" path="res://Assets/world_environment.tres" id="4_t8ai0"]
+[ext_resource type="PackedScene" uid="uid://dl3kyh6bihalf" path="res://Scenes/crystal.tscn" id="5_614yd"]
 [ext_resource type="TileSet" uid="uid://h8v5owr3q6dx" path="res://Assets/Tilesets/object_spawns.tres" id="5_t8ai0"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_6phgx"]
@@ -347,6 +348,7 @@ background_layer = NodePath("BackgroundLayer")
 box_scene = ExtResource("2_wqkje")
 player_scene = ExtResource("1_tumq0")
 apple_scene = ExtResource("4_ej2hx")
+crystal_scene = ExtResource("5_614yd")
 camera = NodePath("WorldEnvironment/Camera2D")
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="." unique_id=937800498]

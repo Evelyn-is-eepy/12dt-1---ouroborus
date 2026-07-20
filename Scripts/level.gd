@@ -11,6 +11,7 @@ const TILE_SIZE: int = 16
 @export var player_scene: PackedScene
 @export var crown_scene: PackedScene
 @export var apple_scene: PackedScene
+@export var crystal_scene: PackedScene
 @export var camera: Camera2D
 # File path of the main menu scene
 @export var exit_scene: String = "res://Scenes/level_select.tscn"

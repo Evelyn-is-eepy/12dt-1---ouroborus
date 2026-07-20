@@ -8,6 +8,7 @@
 [ext_resource type="TileSet" uid="uid://h8v5owr3q6dx" path="res://Assets/Tilesets/object_spawns.tres" id="5_5f3p6"]
 [ext_resource type="Texture2D" uid="uid://bpiri6nkn63on" path="res://Assets/Ouroboros level tileset.png" id="5_rb0md"]
 [ext_resource type="PackedScene" uid="uid://c3w4fu5i7k3cj" path="res://Scenes/apple.tscn" id="5_u5ghp"]
+[ext_resource type="PackedScene" uid="uid://dl3kyh6bihalf" path="res://Scenes/crystal.tscn" id="6_u5ghp"]
 [ext_resource type="FontFile" uid="uid://demygo22q26se" path="res://Assets/Fonts/Jersey10-Regular.ttf" id="6_xgxfi"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_6phgx"]
@@ -306,6 +307,7 @@ box_scene = ExtResource("2_xgxfi")
 player_scene = ExtResource("3_5f3p6")
 crown_scene = ExtResource("4_jv26f")
 apple_scene = ExtResource("5_u5ghp")
+crystal_scene = ExtResource("6_u5ghp")
 camera = NodePath("WorldEnvironment/Camera2D")
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="." unique_id=937800498]
