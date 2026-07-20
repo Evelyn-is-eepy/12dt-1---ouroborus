@@ -49,6 +49,11 @@ func _ready() -> void:
 					var apple = apple_scene.instantiate()
 					apple.position = spawn_layer.map_to_local(Vector2i(x,y))
 					add_child(apple)
+				# Adds crystals
+				elif cell_data.get_custom_data_by_layer_id(6):
+					var crystal = crystal_scene.instantiate()
+					crystal.position = spawn_layer.map_to_local(Vector2i(x,y))
+					add_child(crystal)
 	# Gets the snake
 	player = get_tree().get_first_node_in_group("is_player_character")
 	print(str(player))

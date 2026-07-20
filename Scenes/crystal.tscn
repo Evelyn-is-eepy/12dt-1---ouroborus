@@ -1,13 +1,42 @@
 [gd_scene format=3 uid="uid://dl3kyh6bihalf"]
 
+[ext_resource type="Texture2D" uid="uid://dgyse0bdqcw" path="res://Assets/crystal.png" id="1_c61q8"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_vacj6"]
+atlas = ExtResource("1_c61q8")
+region = Rect2(0, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_mfrgv"]
+atlas = ExtResource("1_c61q8")
+region = Rect2(0, 16, 16, 16)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_6nfb3"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_vacj6")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_mfrgv")
+}],
+"loop": true,
+"name": &"default",
+"speed": 1.0
+}]
+
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_kq1it"]
 size = Vector2(8, 8)
 
 [node name="Node2D" type="Node2D" unique_id=1831444325 groups=["Consumable", "crystal"]]
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=949249382]
+sprite_frames = SubResource("SpriteFrames_6nfb3")
+autoplay = "default"
+frame_progress = 0.42433143
 
 [node name="Area2D" type="Area2D" parent="." unique_id=557418566]
+collision_layer = 2
+collision_mask = 2
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D" unique_id=1368949324]
 shape = SubResource("RectangleShape2D_kq1it")
