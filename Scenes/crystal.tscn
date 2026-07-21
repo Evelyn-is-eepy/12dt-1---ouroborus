@@ -32,7 +32,7 @@ size = Vector2(8, 8)
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=949249382]
 sprite_frames = SubResource("SpriteFrames_6nfb3")
 autoplay = "default"
-frame_progress = 0.42433143
+frame_progress = 0.6583737
 
 [node name="Area2D" type="Area2D" parent="." unique_id=557418566]
 collision_layer = 2

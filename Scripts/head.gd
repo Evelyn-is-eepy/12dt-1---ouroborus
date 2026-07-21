@@ -124,7 +124,7 @@ func _process(_delta: float) -> void:
 				object_to_move.move_self(move_direction)
 			# Update body collision shape
 			recreate_body_hitbox()
-		# If there is something in the way (oooooooooo-oooooh)
+		# If there is something in the way
 		else:
 			print('bonk!')
 			# prevent movement until bonk is finished
@@ -161,7 +161,7 @@ func finish_move_and_check():
 		for area in head_collider.get_overlapping_areas():
 			# Is it a consumable?
 			if area.get_parent().is_in_group("Consumable"):
-				print("om nom nom :')'")
+				print("om nom nom :')'") # Debug. Also to brighten up my life a bit.
 				var consumable = area.get_parent()
 				# Go through the possibilities
 				if consumable.is_in_group('crown'):
@@ -171,20 +171,24 @@ func finish_move_and_check():
 					max_body_length += apple_length_bonus
 				elif consumable.is_in_group('crystal'):
 					# Code to swap around the tail and head
-					var tail_pos = body_line.points[-1]
-					var head_pos = body_line.points[0]
+					var tail_pos = body_line.points[0]
+					var head_pos = body_line.points[-1]
 					# Move head to tail position and vice versa
 					position = tail_pos
 					tail_pivot.position = head_pos
 					# Find new directions to be facing and apply them
-					var new_head_direction = (body_line.points[1] - tail_pos).normalized()
+					var new_head_direction = (tail_pos - body_line.points[1]).normalized()
 					current_head_direction = new_head_direction
 					head_sprite.rotation = new_head_direction.rotated(PI/2).angle() 
 					face_sprite.play('normal_' + get_direction_name(new_head_direction))
-					var new_tail_direction = (body_line.points[-2] - head_pos).normalized()
+					var new_tail_direction = (head_pos - body_line.points[-2]).normalized() * -1
 					tail_pivot.rotation = new_tail_direction.rotated(PI/2).angle() 
 					# Reverse the body line's order to complete this.
-					body_line.points.reverse()
+					var reversed_body = body_line.points
+					reversed_body.reverse()
+					body_line.clear_points()
+					for reversed_point in reversed_body:
+						body_line.add_point(reversed_point)
 				# Once done, remove the consumable
 				consumable.queue_free()
 
@@ -243,7 +247,7 @@ func _on_area_2d_area_entered(area: Area2D) -> void:
 		win() # This code is amusing.
 
 func fall_into_hole():
-	# 'Animation' for falling into a pit
+	# Animation for falling into a pit
 	blood.emitting = true
 	face_sprite.visible = false
 	can_move = false
