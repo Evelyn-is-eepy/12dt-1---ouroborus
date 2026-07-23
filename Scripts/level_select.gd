@@ -9,6 +9,8 @@ var button_style: StyleBox = load("res://Assets/menu_button_style.tres")
 # File path of the main menu scene
 @export var exit_scene: String = "res://Scenes/main_menu.tscn"
 
+var save_path = "user://data.save"
+
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	var button_number: int = 0
@@ -20,6 +22,9 @@ func _ready() -> void:
 		new_level_button.level_select_control = self
 		new_level_button.add_theme_stylebox_override('normal',button_style)
 		button_container.add_child(new_level_button)
+
+
+
 
 func level_selected(reference):
 	print(reference)

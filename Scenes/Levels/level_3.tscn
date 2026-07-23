@@ -325,7 +325,7 @@ offset_bottom = -98.0
 metadata/_edit_use_anchors_ = true
 
 [node name="ObjectSpawnsLayer" type="TileMapLayer" parent="." unique_id=1626282959]
-tile_map_data = PackedByteArray("AAAEAAUAAAABAAAAAAAMAAYAAAACAAEAAAAJAAYAAAACAAEAAAAHAAgAAAACAAEAAAAEAAcAAAACAAEAAAAMAAIAAAACAAEAAAA=")
+tile_map_data = PackedByteArray("AAAEAAUAAAABAAAAAAAMAAIAAAACAAEAAAAEAAcAAAACAAEAAAAGAAgAAAACAAEAAAAIAAcAAAACAAEAAAAKAAYAAAACAAEAAAAMAAUAAAACAAEAAAA=")
 tile_set = ExtResource("5_167vu")
 
 [node name="TerrainLayer" type="TileMapLayer" parent="." unique_id=887265732 groups=["terrain_and_hazards", "terrain_plus_hazards"]]
