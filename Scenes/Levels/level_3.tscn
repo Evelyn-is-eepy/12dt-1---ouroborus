@@ -308,8 +308,8 @@ player_scene = ExtResource("3_x1k1j")
 apple_scene = ExtResource("4_x1k1j")
 crystal_scene = ExtResource("5_4ahh4")
 camera = NodePath("WorldEnvironment/Camera2D")
-ui_layer = NodePath("CanvasLayer")
-length_ui = NodePath("CanvasLayer/Control")
+ui_layer = NodePath("")
+length_ui = NodePath("WorldEnvironment/Camera2D/Control")
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="." unique_id=937800498]
 environment = ExtResource("4_4ahh4")
@@ -317,8 +317,15 @@ environment = ExtResource("4_4ahh4")
 [node name="Camera2D" type="Camera2D" parent="WorldEnvironment" unique_id=1361182029]
 position = Vector2(8, 8)
 
+[node name="Control" parent="WorldEnvironment/Camera2D" unique_id=1710928417 instance=ExtResource("10_dl55b")]
+offset_left = -8.0
+offset_top = -98.0
+offset_right = -8.0
+offset_bottom = -98.0
+metadata/_edit_use_anchors_ = true
+
 [node name="ObjectSpawnsLayer" type="TileMapLayer" parent="." unique_id=1626282959]
-tile_map_data = PackedByteArray("AAAEAAUAAAABAAAAAAAJAAYAAAACAAEAAAAMAAIAAAACAAEAAAAMAAYAAAACAAEAAAAIAAgAAAACAAEAAAAFAAgAAAACAAEAAAAMAAQAAAACAAEAAAA=")
+tile_map_data = PackedByteArray("AAAEAAUAAAABAAAAAAAMAAYAAAACAAEAAAAJAAYAAAACAAEAAAAHAAgAAAACAAEAAAAEAAcAAAACAAEAAAAMAAIAAAACAAEAAAA=")
 tile_set = ExtResource("5_167vu")
 
 [node name="TerrainLayer" type="TileMapLayer" parent="." unique_id=887265732 groups=["terrain_and_hazards", "terrain_plus_hazards"]]
@@ -357,11 +364,3 @@ theme_override_fonts/font = ExtResource("7_167vu")
 theme_override_font_sizes/font_size = 20
 text = "Your length is limited..."
 horizontal_alignment = 1
-
-[node name="CanvasLayer" type="CanvasLayer" parent="." unique_id=278515274]
-follow_viewport_enabled = true
-
-[node name="Control" parent="CanvasLayer" unique_id=1710928417 instance=ExtResource("10_dl55b")]
-offset_top = -90.0
-offset_bottom = -90.0
-metadata/_edit_use_anchors_ = true

@@ -351,14 +351,21 @@ player_scene = ExtResource("3_gsxik")
 apple_scene = ExtResource("4_3asqb")
 crystal_scene = ExtResource("5_slbhm")
 camera = NodePath("WorldEnvironment/Camera2D")
-ui_layer = NodePath("CanvasLayer")
-length_ui = NodePath("CanvasLayer/Control")
+ui_layer = NodePath("")
+length_ui = NodePath("WorldEnvironment/Camera2D/Control")
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="." unique_id=937800498]
 environment = ExtResource("6_i5g5g")
 
 [node name="Camera2D" type="Camera2D" parent="WorldEnvironment" unique_id=1361182029]
 position = Vector2(8, 8)
+
+[node name="Control" parent="WorldEnvironment/Camera2D" unique_id=1710928417 instance=ExtResource("9_keyqw")]
+offset_left = -8.0
+offset_top = -98.0
+offset_right = -8.0
+offset_bottom = -98.0
+metadata/_edit_use_anchors_ = true
 
 [node name="ObjectSpawnsLayer" type="TileMapLayer" parent="." unique_id=1626282959]
 tile_map_data = PackedByteArray("AAADAAUAAAABAAAAAAAJAAUAAAADAAEAAAA=")
@@ -379,11 +386,3 @@ offset_top = -1466.0
 offset_right = 1267.0
 offset_bottom = 1267.0
 color = Color(0.037730496, 0.0074130455, 0.081240915, 1)
-
-[node name="CanvasLayer" type="CanvasLayer" parent="." unique_id=364265702]
-follow_viewport_enabled = true
-
-[node name="Control" parent="CanvasLayer" unique_id=1710928417 instance=ExtResource("9_keyqw")]
-offset_top = -90.0
-offset_bottom = -90.0
-metadata/_edit_use_anchors_ = true

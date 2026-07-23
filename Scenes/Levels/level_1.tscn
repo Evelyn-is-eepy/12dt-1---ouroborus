@@ -310,14 +310,21 @@ crown_scene = ExtResource("4_jv26f")
 apple_scene = ExtResource("5_u5ghp")
 crystal_scene = ExtResource("6_u5ghp")
 camera = NodePath("WorldEnvironment/Camera2D")
-ui_layer = NodePath("CanvasLayer")
-length_ui = NodePath("CanvasLayer/Control")
+ui_layer = NodePath("")
+length_ui = NodePath("WorldEnvironment/Camera2D/Control")
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="." unique_id=937800498]
 environment = ExtResource("4_5f3p6")
 
 [node name="Camera2D" type="Camera2D" parent="WorldEnvironment" unique_id=1361182029]
 position = Vector2(8, 8)
+
+[node name="Control" parent="WorldEnvironment/Camera2D" unique_id=1710928417 instance=ExtResource("11_hwvp3")]
+offset_left = -8.0
+offset_top = -8.0
+offset_right = -8.0
+offset_bottom = -8.0
+metadata/_edit_use_anchors_ = true
 
 [node name="ObjectSpawnsLayer" type="TileMapLayer" parent="." unique_id=1626282959]
 tile_map_data = PackedByteArray("AAAAAAEAAAABAAAAAAA=")
@@ -360,9 +367,3 @@ theme_override_fonts/font = ExtResource("6_xgxfi")
 theme_override_font_sizes/font_size = 20
 text = "have fun! :P"
 horizontal_alignment = 1
-
-[node name="CanvasLayer" type="CanvasLayer" parent="." unique_id=401878530]
-follow_viewport_enabled = true
-
-[node name="Control" parent="CanvasLayer" unique_id=1710928417 instance=ExtResource("11_hwvp3")]
-metadata/_edit_use_anchors_ = true
