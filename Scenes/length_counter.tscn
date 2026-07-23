@@ -1,0 +1,35 @@
+[gd_scene format=3 uid="uid://btnrclj6kx4kb"]
+
+[ext_resource type="Script" uid="uid://dlskeibwikus2" path="res://Scripts/length_counter.gd" id="1_p512s"]
+[ext_resource type="Theme" uid="uid://bttvneaybjt4" path="res://Assets/menu_box_theme.tres" id="2_nliex"]
+[ext_resource type="StyleBox" uid="uid://bdkp0m4r10rau" path="res://Assets/menu_button_style.tres" id="3_itt47"]
+
+[node name="Control" type="Control" unique_id=1710928417 node_paths=PackedStringArray("label", "container")]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_p512s")
+label = NodePath("PanelContainer/Label")
+container = NodePath("PanelContainer")
+
+[node name="PanelContainer" type="PanelContainer" parent="." unique_id=1467712769]
+layout_mode = 0
+offset_left = -20.0
+offset_top = -10.0
+offset_right = 20.0
+offset_bottom = 10.0
+
+[node name="Label" type="Label" parent="PanelContainer" unique_id=1800949049]
+z_index = 1
+layout_mode = 2
+theme = ExtResource("2_nliex")
+text = "00"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Panel" type="Panel" parent="PanelContainer" unique_id=908205478]
+layout_mode = 2
+theme_override_styles/panel = ExtResource("3_itt47")

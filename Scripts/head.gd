@@ -7,6 +7,7 @@ const move_directions_and_names = [{Vector2(1.0,0.0):"right"},{Vector2(-1.0,0.0)
 const apple_length_bonus: int = 3
 
 signal ate_tail
+signal new_length
 
 @export var facing_ray: RayCast2D
 @export var movable_objects_ray: RayCast2D
@@ -191,6 +192,7 @@ func finish_move_and_check():
 						body_line.add_point(reversed_point)
 				# Once done, remove the consumable
 				consumable.queue_free()
+	new_length.emit((len(body_line.points) - 2), max_body_length)
 
 # Function to rebuild the line body's hitbox, removing the old hitbox
 # places a tile-sized collider on each point except the first (tail) and last (head)

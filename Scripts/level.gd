@@ -13,6 +13,8 @@ const TILE_SIZE: int = 16
 @export var apple_scene: PackedScene
 @export var crystal_scene: PackedScene
 @export var camera: Camera2D
+@export var ui_layer: CanvasLayer
+@export var length_ui: Control
 # File path of the main menu scene
 @export var exit_scene: String = "res://Scenes/level_select.tscn"
 
@@ -60,6 +62,8 @@ func _ready() -> void:
 	# Applies level settings to the snake
 	player.starting_direction = spawn_directions[spawn_direction_id]
 	player.max_body_length = spawn_max_length
+	# Connects the snake to the length UI
+	player.new_length.connect(length_ui.change_values)
 	# Center camera
 	var background_bounds = background_layer.get_used_rect()
 	var new_camera_x = lerp(background_bounds.position.x,background_bounds.end.x,0.5) * TILE_SIZE

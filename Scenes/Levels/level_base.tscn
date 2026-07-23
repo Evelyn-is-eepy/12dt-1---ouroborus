@@ -8,6 +8,7 @@
 [ext_resource type="Environment" uid="uid://c8qpv2wh6f7ts" path="res://Assets/world_environment.tres" id="4_t8ai0"]
 [ext_resource type="PackedScene" uid="uid://dl3kyh6bihalf" path="res://Scenes/crystal.tscn" id="5_614yd"]
 [ext_resource type="TileSet" uid="uid://h8v5owr3q6dx" path="res://Assets/Tilesets/object_spawns.tres" id="5_t8ai0"]
+[ext_resource type="PackedScene" uid="uid://btnrclj6kx4kb" path="res://Scenes/length_counter.tscn" id="9_4f6dp"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_6phgx"]
 texture = ExtResource("1_k5f4k")
@@ -340,7 +341,7 @@ terrain_set_0/terrain_0/name = "Terrain 0"
 terrain_set_0/terrain_0/color = Color(0.63691413, 0.093233116, 0.5630298, 1)
 sources/0 = SubResource("TileSetAtlasSource_k5f4k")
 
-[node name="Node2D" type="Node2D" unique_id=743200906 node_paths=PackedStringArray("spawn_layer", "background_layer", "camera")]
+[node name="Node2D" type="Node2D" unique_id=743200906 node_paths=PackedStringArray("spawn_layer", "background_layer", "camera", "ui_layer", "length_ui")]
 script = ExtResource("1_6phgx")
 spawn_max_length = 30
 spawn_layer = NodePath("ObjectSpawnsLayer")
@@ -350,6 +351,8 @@ player_scene = ExtResource("1_tumq0")
 apple_scene = ExtResource("4_ej2hx")
 crystal_scene = ExtResource("5_614yd")
 camera = NodePath("WorldEnvironment/Camera2D")
+ui_layer = NodePath("CanvasLayer")
+length_ui = NodePath("CanvasLayer/Control")
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="." unique_id=937800498]
 environment = ExtResource("4_t8ai0")
@@ -374,3 +377,11 @@ offset_top = -1466.0
 offset_right = 1267.0
 offset_bottom = 1267.0
 color = Color(0.037730496, 0.0074130455, 0.081240915, 1)
+
+[node name="CanvasLayer" type="CanvasLayer" parent="." unique_id=640719355]
+follow_viewport_enabled = true
+
+[node name="Control" parent="CanvasLayer" unique_id=1710928417 instance=ExtResource("9_4f6dp")]
+offset_top = -90.0
+offset_bottom = -90.0
+metadata/_edit_use_anchors_ = true
