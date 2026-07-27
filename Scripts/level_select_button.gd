@@ -12,3 +12,4 @@ func _ready() -> void:
 
 func _on_pressed() -> void:
 	level_selected.emit(level_reference)
+	

@@ -6,6 +6,10 @@ extends Control
 func _ready() -> void:
 	pass # Replace with function body.
 
+func _process(_delta: float) -> void:
+	if Input.is_action_just_pressed("reset save"):
+		Global.reset_save()
+
 func _on_button_pressed() -> void:
 	var transition_effect = transition_effect_scene.instantiate()
 	transition_effect.control_node = self
@@ -16,6 +20,7 @@ func _on_button_pressed() -> void:
 
 
 func _on_button_2_pressed() -> void:
+	Global.save_data()
 	get_tree().quit()
 
 

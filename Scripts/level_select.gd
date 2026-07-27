@@ -9,10 +9,10 @@ var button_style: StyleBox = load("res://Assets/menu_button_style.tres")
 # File path of the main menu scene
 @export var exit_scene: String = "res://Scenes/main_menu.tscn"
 
-var save_path = "user://data.save"
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
+	var free_button = true # so that you can access the next level you haven't played
 	var button_number: int = 0
 	for level in level_references:
 		button_number += 1
@@ -21,6 +21,12 @@ func _ready() -> void:
 		new_level_button.level_reference = level
 		new_level_button.level_select_control = self
 		new_level_button.add_theme_stylebox_override('normal',button_style)
+		# Check if the level is acessible; if not, deactivate it.
+		if not Global.levels_completed[level]:
+			if free_button:
+				free_button = false
+			else:
+				new_level_button.disabled = true
 		button_container.add_child(new_level_button)
 
 

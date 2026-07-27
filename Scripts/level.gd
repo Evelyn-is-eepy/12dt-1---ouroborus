@@ -64,6 +64,7 @@ func _ready() -> void:
 	player.max_body_length = spawn_max_length
 	# Connects the snake to the length UI
 	player.new_length.connect(length_ui.change_values)
+	player.ate_tail.connect(player_wins)
 	# Center camera
 	var background_bounds = background_layer.get_used_rect()
 	var new_camera_x = lerp(background_bounds.position.x,background_bounds.end.x,0.5) * TILE_SIZE
@@ -86,4 +87,5 @@ func player_wins() -> void:
 	# Called when the player eats their own tail
 	print('wohoo!')
 	await get_tree().create_timer(3).timeout
+	Global.levels_completed[self.name] = true
 	get_tree().change_scene_to_file(exit_scene)

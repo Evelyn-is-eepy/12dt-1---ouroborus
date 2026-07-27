@@ -7,6 +7,7 @@
 [ext_resource type="Theme" uid="uid://bttvneaybjt4" path="res://Assets/menu_box_theme.tres" id="2_opfnp"]
 [ext_resource type="Texture2D" uid="uid://dcqibhq1asd61" path="res://Assets/title0001.png" id="3_ce3w2"]
 [ext_resource type="Environment" uid="uid://c8qpv2wh6f7ts" path="res://Assets/world_environment.tres" id="6_opfnp"]
+[ext_resource type="FontFile" uid="uid://dcoytanayvx7c" path="res://Assets/Fonts/Micro5-Regular.ttf" id="8_yhxw7"]
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_n45e2"]
 animations = [{
@@ -78,6 +79,15 @@ environment = ExtResource("6_opfnp")
 
 [node name="Camera2D" type="Camera2D" parent="." unique_id=499663580]
 position = Vector2(216, 112)
+
+[node name="Label" type="Label" parent="." unique_id=40524080]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 23.0
+theme_override_colors/font_color = Color(1, 1, 1, 0.46666667)
+theme_override_fonts/font = ExtResource("8_yhxw7")
+theme_override_font_sizes/font_size = 10
+text = "press X to reset save data"
 
 [connection signal="pressed" from="VBoxContainer/Button" to="." method="_on_button_pressed"]
 [connection signal="pressed" from="VBoxContainer/Button3" to="." method="_on_button_3_pressed"]

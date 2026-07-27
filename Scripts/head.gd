@@ -42,8 +42,6 @@ var shake_intensity: float = 0
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
-	manager = get_node('/root/Node2D')
-	connect('ate_tail',manager.player_wins)
 	# Orient the head and face
 	current_head_direction = starting_direction
 	head_sprite.rotation = starting_direction.rotated(PI/2).angle() 

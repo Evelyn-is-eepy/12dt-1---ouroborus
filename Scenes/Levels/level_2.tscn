@@ -298,7 +298,7 @@ terrain_set_0/terrain_0/name = "Terrain 0"
 terrain_set_0/terrain_0/color = Color(0.63691413, 0.093233116, 0.5630298, 1)
 sources/0 = SubResource("TileSetAtlasSource_k5f4k")
 
-[node name="Node2D" type="Node2D" unique_id=743200906 node_paths=PackedStringArray("spawn_layer", "background_layer", "camera", "ui_layer", "length_ui")]
+[node name="level_2" type="Node2D" unique_id=743200906 node_paths=PackedStringArray("spawn_layer", "background_layer", "camera", "ui_layer", "length_ui")]
 script = ExtResource("1_8qsmg")
 spawn_max_length = 30
 spawn_layer = NodePath("ObjectSpawnsLayer")
