@@ -33,16 +33,16 @@ script = ExtResource("1_xkb4e")
 wall_ray = NodePath("WallRay")
 movable_objects_ray = NodePath("MovableObjectRay")
 tail_ray = NodePath("TailRay")
-collision_area = NodePath("Area2D")
+collision_area = NodePath("BoxHitbox")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=1912487094]
 sprite_frames = SubResource("SpriteFrames_y7274")
 
-[node name="Area2D" type="Area2D" parent="." unique_id=866269031]
+[node name="BoxHitbox" type="Area2D" parent="." unique_id=866269031 groups=["blocks_button_walls"]]
 collision_layer = 6
 collision_mask = 6
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D" unique_id=2068037449]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="BoxHitbox" unique_id=2068037449]
 shape = SubResource("RectangleShape2D_p6ket")
 
 [node name="TailRay" type="RayCast2D" parent="." unique_id=824289475]
@@ -59,4 +59,4 @@ target_position = Vector2(0, 16)
 collision_mask = 4
 collide_with_areas = true
 
-[connection signal="body_entered" from="Area2D" to="." method="_on_area_2d_body_entered"]
+[connection signal="body_entered" from="BoxHitbox" to="." method="_on_area_2d_body_entered"]

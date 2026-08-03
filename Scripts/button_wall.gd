@@ -5,6 +5,7 @@ extends Node2D
 @export var weight_checker: RayCast2D
 @export var sprite: AnimatedSprite2D
 
+var nodes_that_block = ["BodyHitbox", "HeadCollider", "BoxHitbox"]
 var anim_names = ["close", "open"]
 var is_active: bool
 var weighed_down: bool = false
@@ -22,14 +23,15 @@ func activate_or_deactivate():
 	else:
 		# Check that the snake or boxes are not blocking the way
 		weight_checker.force_raycast_update()
-		var colliding_area = weight_checker.get_collider()
+		var colliding_area: Node2D = weight_checker.get_collider()
 		if colliding_area:
-			print("          checking")
-			if colliding_area.is_in_group("blocks_button_walls"):
+			print("    checking: " + str(colliding_area))
+			if colliding_area.name in nodes_that_block:
+				print("     obstruction detected!")
 				weighed_down = true
 		if not weighed_down:
 			is_active = true
 			blocker_shape.set_deferred("disabled", not is_active)
 			sprite.play(anim_names[0])
 	
-	print("    roger sir, kachunking now " + str(weighed_down)) # Debug
+	print("    roger sir, kachunking now: " + str(weighed_down)) # Debug
