@@ -18,6 +18,8 @@ texture = ExtResource("1_a0ijl")
 2:1/0/custom_data_5 = true
 3:1/0 = 0
 3:1/0/custom_data_6 = true
+0:2/0 = 0
+0:2/0/custom_data_7 = true
 
 [resource]
 custom_data_layer_0/name = "box"
@@ -34,4 +36,6 @@ custom_data_layer_5/name = "apple"
 custom_data_layer_5/type = 1
 custom_data_layer_6/name = "crystal"
 custom_data_layer_6/type = 1
+custom_data_layer_7/name = "button_wall"
+custom_data_layer_7/type = 1
 sources/0 = SubResource("TileSetAtlasSource_wqkje")

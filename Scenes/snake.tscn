@@ -237,6 +237,7 @@ size = Vector2(16, 4)
 size = Vector2(8, 8)
 
 [node name="Node2D" type="Node2D" unique_id=989255042]
+z_index = 1
 
 [node name="Head" type="Node2D" parent="." unique_id=760044799 node_paths=PackedStringArray("facing_ray", "movable_objects_ray", "tail_hitbox", "tail_pivot", "body_line", "body_collider", "head_collider", "confetti", "blood", "head_sprite", "face_sprite", "personal_crown") groups=["is_player_character"]]
 z_index = 1

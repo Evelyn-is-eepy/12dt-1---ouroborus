@@ -5,6 +5,7 @@
 [ext_resource type="PackedScene" uid="uid://d2obc0bysr4q" path="res://Scenes/snake.tscn" id="3_gsxik"]
 [ext_resource type="PackedScene" uid="uid://c3w4fu5i7k3cj" path="res://Scenes/apple.tscn" id="4_3asqb"]
 [ext_resource type="PackedScene" uid="uid://dl3kyh6bihalf" path="res://Scenes/crystal.tscn" id="5_slbhm"]
+[ext_resource type="PackedScene" uid="uid://dk1w3wbol1pyi" path="res://Scenes/button_wall.tscn" id="6_gsxik"]
 [ext_resource type="Environment" uid="uid://c8qpv2wh6f7ts" path="res://Assets/world_environment.tres" id="6_i5g5g"]
 [ext_resource type="TileSet" uid="uid://h8v5owr3q6dx" path="res://Assets/Tilesets/object_spawns.tres" id="7_3osng"]
 [ext_resource type="Texture2D" uid="uid://bpiri6nkn63on" path="res://Assets/Ouroboros level tileset.png" id="8_eb4ip"]
@@ -341,17 +342,17 @@ terrain_set_0/terrain_0/name = "Terrain 0"
 terrain_set_0/terrain_0/color = Color(0.63691413, 0.093233116, 0.5630298, 1)
 sources/0 = SubResource("TileSetAtlasSource_k5f4k")
 
-[node name="level_4" type="Node2D" unique_id=743200906 node_paths=PackedStringArray("spawn_layer", "background_layer", "camera", "ui_layer", "length_ui")]
+[node name="level_4" type="Node2D" unique_id=743200906 node_paths=PackedStringArray("spawn_layer", "background_layer", "camera", "length_ui")]
 script = ExtResource("1_h0uxt")
-spawn_max_length = 30
+spawn_max_length = 14
 spawn_layer = NodePath("ObjectSpawnsLayer")
 background_layer = NodePath("BackgroundLayer")
 box_scene = ExtResource("2_keyqw")
 player_scene = ExtResource("3_gsxik")
 apple_scene = ExtResource("4_3asqb")
 crystal_scene = ExtResource("5_slbhm")
+button_wall_scene = ExtResource("6_gsxik")
 camera = NodePath("WorldEnvironment/Camera2D")
-ui_layer = NodePath("")
 length_ui = NodePath("WorldEnvironment/Camera2D/Control")
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="." unique_id=937800498]
@@ -368,10 +369,11 @@ offset_bottom = -98.0
 metadata/_edit_use_anchors_ = true
 
 [node name="ObjectSpawnsLayer" type="TileMapLayer" parent="." unique_id=1626282959]
-tile_map_data = PackedByteArray("AAADAAUAAAABAAAAAAAJAAUAAAADAAEAAAA=")
+tile_map_data = PackedByteArray("AAAMAAIAAAADAAEAAAAFAAcAAAABAAAAAAAFAAkAAAACAAEAAAAGAAkAAAACAAEAAAAHAAkAAAACAAEAAAAIAAkAAAACAAEAAAAJAAkAAAACAAEAAAALAAIAAAAAAAIAAAALAAMAAAAAAAIAAAAKAAMAAAAAAAIAAAAJAAMAAAAAAAIAAAAIAAMAAAAAAAIAAAAHAAMAAAAAAAIAAAAGAAMAAAAAAAIAAAAFAAMAAAAAAAIAAAAEAAMAAAAAAAIAAAADAAMAAAAAAAIAAAACAAMAAAAAAAIAAAACAAIAAAAAAAIAAAADAAIAAAAAAAIAAAAEAAIAAAAAAAIAAAAFAAIAAAAAAAIAAAAGAAIAAAAAAAIAAAAHAAIAAAAAAAIAAAAIAAIAAAAAAAIAAAAJAAIAAAAAAAIAAAAKAAIAAAAAAAIAAAA=")
 tile_set = ExtResource("7_3osng")
 
 [node name="TerrainLayer" type="TileMapLayer" parent="." unique_id=887265732 groups=["terrain_and_hazards", "terrain_plus_hazards"]]
+tile_map_data = PackedByteArray("AAABAAgAAAAAAAEAAAABAAcAAAAAAAAAAAABAAYAAAAAAAAAAAABAAUAAAAAAAAAAAABAAQAAAAAAAAAAAABAAMAAAAAAAAAAAABAAIAAAAAAAAAAAABAAEAAAAAAAAAAAACAAEAAAAAAAEAAAADAAEAAAAAAAEAAAAEAAEAAAAAAAEAAAAFAAEAAAAAAAEAAAAGAAEAAAAAAAEAAAAHAAEAAAAAAAEAAAAIAAEAAAAAAAEAAAAJAAEAAAAAAAEAAAAKAAEAAAAAAAEAAAALAAEAAAAAAAEAAAAMAAEAAAAAAAAAAAAMAAMAAAAAAAAAAAAMAAQAAAAAAAAAAAAMAAUAAAAAAAAAAAAMAAYAAAAAAAAAAAAMAAcAAAAAAAAAAAAMAAgAAAAAAAEAAAALAAgAAAAAAAEAAAAKAAgAAAAAAAEAAAAJAAgAAAAAAAEAAAAGAAgAAAAAAAEAAAAEAAgAAAAAAAEAAAADAAgAAAAAAAEAAAACAAgAAAAAAAEAAAAHAAgAAAAAAAEAAAAIAAgAAAAAAAEAAAA=")
 tile_set = SubResource("TileSet_81xng")
 
 [node name="BackgroundLayer" type="TileMapLayer" parent="." unique_id=1825455332]

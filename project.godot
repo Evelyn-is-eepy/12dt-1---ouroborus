@@ -36,6 +36,8 @@ window/stretch/scale_mode="integer"
 
 Consumable=""
 is_player_character=""
+button_wall=""
+blocks_button_walls=""
 
 [input]
 

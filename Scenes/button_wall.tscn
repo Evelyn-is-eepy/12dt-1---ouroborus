@@ -1,0 +1,75 @@
+[gd_scene format=3 uid="uid://dk1w3wbol1pyi"]
+
+[ext_resource type="Script" uid="uid://ccw84wgj1wfbc" path="res://Scripts/button_wall.gd" id="1_ensp4"]
+[ext_resource type="Texture2D" uid="uid://tao1f13yytsi" path="res://Assets/buttonwall.png" id="2_nwq0u"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_nwq0u"]
+size = Vector2(16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_sqvaa"]
+atlas = ExtResource("2_nwq0u")
+region = Rect2(0, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_51e6p"]
+atlas = ExtResource("2_nwq0u")
+region = Rect2(16, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_jleki"]
+atlas = ExtResource("2_nwq0u")
+region = Rect2(0, 16, 16, 16)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_lo7ua"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_sqvaa")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_51e6p")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_jleki")
+}],
+"loop": false,
+"name": &"close",
+"speed": 10.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_jleki")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_51e6p")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_sqvaa")
+}],
+"loop": false,
+"name": &"open",
+"speed": 10.0
+}]
+
+[node name="Node2D" type="Node2D" unique_id=392279538 node_paths=PackedStringArray("blocker_area", "blocker_shape", "weight_checker", "sprite") groups=["button_wall"]]
+script = ExtResource("1_ensp4")
+blocker_area = NodePath("Area2D2")
+blocker_shape = NodePath("Area2D2/CollisionShape2D")
+weight_checker = NodePath("RayCast2D")
+sprite = NodePath("AnimatedSprite2D")
+
+[node name="RayCast2D" type="RayCast2D" parent="." unique_id=1837692672]
+target_position = Vector2(0, 0)
+collision_mask = 3
+hit_from_inside = true
+collide_with_areas = true
+collide_with_bodies = false
+
+[node name="Area2D2" type="Area2D" parent="." unique_id=1983428444]
+collision_layer = 3
+collision_mask = 3
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D2" unique_id=377837784]
+shape = SubResource("RectangleShape2D_nwq0u")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=94952894]
+sprite_frames = SubResource("SpriteFrames_lo7ua")
+animation = &"open"

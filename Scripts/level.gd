@@ -12,6 +12,7 @@ const TILE_SIZE: int = 16
 @export var crown_scene: PackedScene
 @export var apple_scene: PackedScene
 @export var crystal_scene: PackedScene
+@export var button_wall_scene: PackedScene
 @export var camera: Camera2D
 @export var ui_layer: CanvasLayer
 @export var length_ui: Control
@@ -20,6 +21,7 @@ const TILE_SIZE: int = 16
 
 var player_already_spawned: bool = false
 var player: Node2D
+var button_walls = []
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
@@ -56,6 +58,14 @@ func _ready() -> void:
 					var crystal = crystal_scene.instantiate()
 					crystal.position = spawn_layer.map_to_local(Vector2i(x,y))
 					add_child(crystal)
+				# Adds button walls
+				elif cell_data.get_custom_data_by_layer_id(7):
+					var button_wall = button_wall_scene.instantiate()
+					button_wall.position = spawn_layer.map_to_local(Vector2i(x,y))
+					add_child(button_wall)
+	# Puts all button walls in an array to be accessed
+	button_walls = get_tree().get_nodes_in_group("button_wall")
+	print(button_walls) # Debug
 	# Gets the snake
 	player = get_tree().get_first_node_in_group("is_player_character")
 	print(str(player))
@@ -82,6 +92,9 @@ func _process(_delta: float) -> void:
 	# Checks if the player has pressed escape to exit the level
 	if Input.is_action_just_pressed("exit"):
 		get_tree().change_scene_to_file(exit_scene)
+	# Debug: test walls
+	if Input.is_action_just_pressed("ui_accept"):
+		switch_button_walls()
 
 func player_wins() -> void:
 	# Called when the player eats their own tail
@@ -89,3 +102,9 @@ func player_wins() -> void:
 	await get_tree().create_timer(3).timeout
 	Global.levels_completed[self.name] = true
 	get_tree().change_scene_to_file(exit_scene)
+
+func switch_button_walls() -> void:
+	print("kachunk")
+	# Switch every wall
+	for wall in button_walls:
+		wall.activate_or_deactivate()
