@@ -71,5 +71,6 @@ collision_mask = 3
 shape = SubResource("RectangleShape2D_nwq0u")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=94952894]
+position = Vector2(0, -3)
 sprite_frames = SubResource("SpriteFrames_lo7ua")
 animation = &"open"

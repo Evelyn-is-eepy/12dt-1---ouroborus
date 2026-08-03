@@ -5,6 +5,7 @@ extends Node2D
 @export var weight_checker: RayCast2D
 @export var sprite: AnimatedSprite2D
 
+# I tried to use a group to do this nicely, but it didn't work for reasons I don't understand :[
 var nodes_that_block = ["BodyHitbox", "HeadCollider", "BoxHitbox"]
 var anim_names = ["close", "open"]
 var is_active: bool
@@ -22,16 +23,15 @@ func activate_or_deactivate():
 		sprite.play(anim_names[1])
 	else:
 		# Check that the snake or boxes are not blocking the way
+		weighed_down = false
 		weight_checker.force_raycast_update()
 		var colliding_area: Node2D = weight_checker.get_collider()
+		# If a collider is found, check if it is one that is meant to block doors from rising
 		if colliding_area:
-			print("    checking: " + str(colliding_area))
-			if colliding_area.name in nodes_that_block:
-				print("     obstruction detected!")
+			if colliding_area.name in nodes_that_block: # There's a better way.
 				weighed_down = true
+		# Only make the wall rise if it is unblocked
 		if not weighed_down:
 			is_active = true
 			blocker_shape.set_deferred("disabled", not is_active)
 			sprite.play(anim_names[0])
-	
-	print("    roger sir, kachunking now: " + str(weighed_down)) # Debug
