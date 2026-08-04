@@ -21,6 +21,7 @@ config/icon="res://icon.svg"
 [autoload]
 
 Global="*uid://cfs8w46xspv2c"
+TransitionLayer="*uid://di4m2j6og3u4e"
 
 [display]
 
@@ -38,6 +39,7 @@ Consumable=""
 is_player_character=""
 button_wall=""
 blocks_button_walls=""
+transition_layer=""
 
 [input]
 

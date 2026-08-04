@@ -34,12 +34,12 @@ func _ready() -> void:
 
 func level_selected(reference):
 	print(reference)
-	get_tree().change_scene_to_file(level_scene_path + reference + '.tscn')
+	Global.transition_to_scene(level_scene_path + reference + '.tscn')
 
 
 func _on_button_pressed() -> void:
-	get_tree().change_scene_to_file(exit_scene)
+	Global.transition_to_scene(exit_scene)
 
 func _process(_delta: float) -> void:
 	if Input.is_action_just_pressed("exit"):
-		get_tree().change_scene_to_file(exit_scene)
+		Global.transition_to_scene(exit_scene)

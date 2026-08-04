@@ -91,7 +91,7 @@ func _process(_delta: float) -> void:
 		get_tree().reload_current_scene()
 	# Checks if the player has pressed escape to exit the level
 	if Input.is_action_just_pressed("exit"):
-		get_tree().change_scene_to_file(exit_scene)
+		Global.transition_to_scene(exit_scene)
 	# Debug: test walls
 	if Input.is_action_just_pressed("ui_accept"):
 		switch_button_walls()
@@ -101,7 +101,7 @@ func player_wins() -> void:
 	print('wohoo!')
 	await get_tree().create_timer(3).timeout
 	Global.levels_completed[self.name] = true
-	get_tree().change_scene_to_file(exit_scene)
+	Global.transition_to_scene(exit_scene)
 
 func switch_button_walls() -> void:
 	print("kachunk")
