@@ -1,0 +1,47 @@
+[gd_scene format=3 uid="uid://mgmaiqnx8fky"]
+
+[ext_resource type="Texture2D" uid="uid://dhaa08onppfkl" path="res://Assets/Button.png" id="1_hinho"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_swbo4"]
+size = Vector2(8, 8)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_v71cw"]
+atlas = ExtResource("1_hinho")
+region = Rect2(0, 16, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_og4gy"]
+atlas = ExtResource("1_hinho")
+region = Rect2(0, 0, 16, 16)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_1xkr6"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_v71cw")
+}],
+"loop": false,
+"name": &"pressed",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_og4gy")
+}],
+"loop": false,
+"name": &"unpressed",
+"speed": 5.0
+}]
+
+[node name="Node2D" type="Node2D" unique_id=907545039 groups=["button"]]
+
+[node name="Area2D" type="Area2D" parent="." unique_id=1961112429]
+collision_layer = 2
+collision_mask = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D" unique_id=813503911]
+shape = SubResource("RectangleShape2D_swbo4")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=1295410771]
+sprite_frames = SubResource("SpriteFrames_1xkr6")
+animation = &"unpressed"
+autoplay = "unpressed"

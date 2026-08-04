@@ -7,6 +7,7 @@
 [ext_resource type="PackedScene" uid="uid://dl3kyh6bihalf" path="res://Scenes/crystal.tscn" id="5_slbhm"]
 [ext_resource type="PackedScene" uid="uid://dk1w3wbol1pyi" path="res://Scenes/button_wall.tscn" id="6_gsxik"]
 [ext_resource type="Environment" uid="uid://c8qpv2wh6f7ts" path="res://Assets/world_environment.tres" id="6_i5g5g"]
+[ext_resource type="PackedScene" uid="uid://mgmaiqnx8fky" path="res://Scenes/switch.tscn" id="7_3asqb"]
 [ext_resource type="TileSet" uid="uid://h8v5owr3q6dx" path="res://Assets/Tilesets/object_spawns.tres" id="7_3osng"]
 [ext_resource type="Texture2D" uid="uid://bpiri6nkn63on" path="res://Assets/Ouroboros level tileset.png" id="8_eb4ip"]
 [ext_resource type="PackedScene" uid="uid://btnrclj6kx4kb" path="res://Scenes/length_counter.tscn" id="9_keyqw"]
@@ -352,6 +353,7 @@ player_scene = ExtResource("3_gsxik")
 apple_scene = ExtResource("4_3asqb")
 crystal_scene = ExtResource("5_slbhm")
 button_wall_scene = ExtResource("6_gsxik")
+switch_scene = ExtResource("7_3asqb")
 camera = NodePath("WorldEnvironment/Camera2D")
 length_ui = NodePath("WorldEnvironment/Camera2D/Control")
 
@@ -369,7 +371,7 @@ offset_bottom = -98.0
 metadata/_edit_use_anchors_ = true
 
 [node name="ObjectSpawnsLayer" type="TileMapLayer" parent="." unique_id=1626282959]
-tile_map_data = PackedByteArray("AAAMAAIAAAADAAEAAAAFAAcAAAABAAAAAAAFAAkAAAACAAEAAAAGAAkAAAACAAEAAAAHAAkAAAACAAEAAAAIAAkAAAACAAEAAAAJAAkAAAACAAEAAAALAAIAAAAAAAIAAAALAAMAAAAAAAIAAAAKAAMAAAAAAAIAAAAJAAMAAAAAAAIAAAAIAAMAAAAAAAIAAAAHAAMAAAAAAAIAAAAGAAMAAAAAAAIAAAAFAAMAAAAAAAIAAAAEAAMAAAAAAAIAAAADAAMAAAAAAAIAAAACAAMAAAAAAAIAAAACAAIAAAAAAAIAAAADAAIAAAAAAAIAAAAEAAIAAAAAAAIAAAAFAAIAAAAAAAIAAAAGAAIAAAAAAAIAAAAHAAIAAAAAAAIAAAAIAAIAAAAAAAIAAAAJAAIAAAAAAAIAAAAKAAIAAAAAAAIAAAA=")
+tile_map_data = PackedByteArray("AAAMAAIAAAADAAEAAAAFAAcAAAABAAAAAAAFAAkAAAACAAEAAAAGAAkAAAACAAEAAAAHAAkAAAACAAEAAAAIAAkAAAACAAEAAAAJAAkAAAACAAEAAAALAAIAAAAAAAIAAAALAAMAAAAAAAIAAAAKAAMAAAAAAAIAAAAJAAMAAAAAAAIAAAAIAAMAAAAAAAIAAAAHAAMAAAAAAAIAAAAGAAMAAAAAAAIAAAAFAAMAAAAAAAIAAAAEAAMAAAAAAAIAAAADAAMAAAAAAAIAAAACAAMAAAAAAAIAAAACAAIAAAAAAAIAAAADAAIAAAAAAAIAAAAEAAIAAAAAAAIAAAAFAAIAAAAAAAIAAAAGAAIAAAAAAAIAAAAHAAIAAAAAAAIAAAAIAAIAAAAAAAIAAAAJAAIAAAAAAAIAAAAKAAIAAAAAAAIAAAAFAAUAAAAAAAEAAAA=")
 tile_set = ExtResource("7_3osng")
 
 [node name="TerrainLayer" type="TileMapLayer" parent="." unique_id=887265732 groups=["terrain_and_hazards", "terrain_plus_hazards"]]

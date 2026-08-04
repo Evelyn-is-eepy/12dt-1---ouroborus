@@ -11,6 +11,7 @@ var levels_master: Dictionary = {
 var transition_layer: CanvasLayer
 var transition_material: Material
 var transition_duration: float = 0.5
+var trans_type = Tween.TRANS_LINEAR
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
@@ -39,14 +40,17 @@ func reset_save():
 	levels_completed = levels_master
 	save_data()
 
+# Function to add screen transitions on changing scene.
 func transition_to_scene(scene_path):
-	print("transitioning to " + scene_path)
+	# Unhides the transition effect layer, tweens its material until the screen is obscured,
+	# Changes the scene, and then reverses the obscurement
+	print("transitioning to " + scene_path) # Debug
 	transition_layer.visible = true
 	var transition_tween = create_tween()
 	transition_material.set_shader_parameter("progress", 0.0)
-	transition_tween.tween_property(transition_material, "shader_parameter/progress", 1.0, transition_duration / 2).set_trans(Tween.TRANS_LINEAR)
+	transition_tween.tween_property(transition_material, "shader_parameter/progress", 1.0, transition_duration / 2).set_trans(trans_type)
 	transition_tween.tween_callback(get_tree().change_scene_to_file.bind(scene_path))
-	transition_tween.tween_callback(print.bind("changing scene"))
-	transition_tween.tween_property(transition_material, "shader_parameter/progress", 0.0, transition_duration / 2).set_trans(Tween.TRANS_LINEAR)
-	transition_tween.tween_callback(print.bind("transition finished"))
+	transition_tween.tween_callback(print.bind("changing scene")) # Debug
+	transition_tween.tween_property(transition_material, "shader_parameter/progress", 0.0, transition_duration / 2).set_trans(trans_type)
+	transition_tween.tween_callback(print.bind("transition finished")) # Debug
 	transition_tween.tween_callback(transition_layer.set.bind("visible", false))

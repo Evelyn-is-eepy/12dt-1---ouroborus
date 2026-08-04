@@ -16,7 +16,7 @@ config/features=PackedStringArray("4.6", "Forward Plus")
 boot_splash/bg_color=Color(0.039215688, 0.007843138, 0.08235294, 1)
 boot_splash/stretch_mode=4
 boot_splash/use_filter=false
-config/icon="res://icon.svg"
+config/icon="uid://batccwkhhjbyl"
 
 [autoload]
 

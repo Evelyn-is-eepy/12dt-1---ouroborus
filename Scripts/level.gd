@@ -13,6 +13,7 @@ const TILE_SIZE: int = 16
 @export var apple_scene: PackedScene
 @export var crystal_scene: PackedScene
 @export var button_wall_scene: PackedScene
+@export var switch_scene: PackedScene
 @export var camera: Camera2D
 @export var ui_layer: CanvasLayer
 @export var length_ui: Control
@@ -43,6 +44,11 @@ func _ready() -> void:
 					player_to_add.position = spawn_layer.map_to_local(Vector2i(x,y))
 					add_child(player_to_add)
 					player_already_spawned = true
+				# Adds switches
+				if cell_data.get_custom_data_by_layer_id(2):
+					var switch = switch_scene.instantiate()
+					switch.position = spawn_layer.map_to_local(Vector2i(x,y))
+					add_child(switch)
 				# Adds the crown
 				elif cell_data.get_custom_data_by_layer_id(4):
 					var crown = crown_scene.instantiate()
@@ -69,6 +75,8 @@ func _ready() -> void:
 	# Gets the snake
 	player = get_tree().get_first_node_in_group("is_player_character")
 	print(str(player))
+	# Connects signals
+	player.connect("switch_pressed", switch_button_walls)
 	# Applies level settings to the snake
 	player.starting_direction = spawn_directions[spawn_direction_id]
 	player.max_body_length = spawn_max_length
@@ -98,13 +106,13 @@ func _process(_delta: float) -> void:
 
 func player_wins() -> void:
 	# Called when the player eats their own tail
-	print('wohoo!')
+	print('wohoo!') # Debug
 	await get_tree().create_timer(3).timeout
 	Global.levels_completed[self.name] = true
 	Global.transition_to_scene(exit_scene)
 
 func switch_button_walls() -> void:
-	print("kachunk")
+	print("kachunk") # Debug
 	# Switch every wall
 	for wall in button_walls:
 		wall.activate_or_deactivate()

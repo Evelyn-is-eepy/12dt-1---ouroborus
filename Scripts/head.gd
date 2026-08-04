@@ -8,6 +8,7 @@ const apple_length_bonus: int = 3
 
 signal ate_tail
 signal new_length
+signal switch_pressed
 
 @export var facing_ray: RayCast2D
 @export var movable_objects_ray: RayCast2D
@@ -42,6 +43,8 @@ var shake_intensity: float = 0
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
+	# Connect signals to the level manager
+	
 	# Orient the head and face
 	current_head_direction = starting_direction
 	head_sprite.rotation = starting_direction.rotated(PI/2).angle() 
@@ -190,6 +193,12 @@ func finish_move_and_check():
 						body_line.add_point(reversed_point)
 				# Once done, remove the consumable
 				consumable.queue_free()
+			# Or is it a switch?
+			if area.get_parent().is_in_group("button"):
+				# Change the sprite and send a signal to switch all doors
+				var switch = area.get_parent()
+				switch.get_node("AnimatedSprite2D").animation = "pressed"
+				switch_pressed.emit()
 	new_length.emit((len(body_line.points) - 2), max_body_length)
 
 # Function to rebuild the line body's hitbox, removing the old hitbox
