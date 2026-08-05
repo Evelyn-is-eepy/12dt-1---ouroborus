@@ -12,6 +12,9 @@ var transition_layer: CanvasLayer
 var transition_material: Material
 var transition_duration: float = 0.5
 var trans_type = Tween.TRANS_LINEAR
+var sound_paths: Dictionary = {
+	"test_die": "res://Assets/Audio/die copy.ogg"
+}
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
@@ -54,3 +57,14 @@ func transition_to_scene(scene_path):
 	transition_tween.tween_property(transition_material, "shader_parameter/progress", 0.0, transition_duration / 2).set_trans(trans_type)
 	transition_tween.tween_callback(print.bind("transition finished")) # Debug
 	transition_tween.tween_callback(transition_layer.set.bind("visible", false))
+
+func play_sound_effect(sound_name: String):
+	if sound_paths.has(sound_name):
+		var player = AudioStreamPlayer.new()
+		player.stream = AudioStreamOggVorbis.load_from_file(sound_paths[sound_name]) 
+		add_child(player)
+		player.play()
+		await player.finished
+		player.queue_free()
+	else:
+		print("cannot play: no such sound '" + sound_name + "'")

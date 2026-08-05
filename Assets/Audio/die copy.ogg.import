@@ -1,0 +1,19 @@
+[remap]
+
+importer="oggvorbisstr"
+type="AudioStreamOggVorbis"
+uid="uid://bpl3h0v64254i"
+path="res://.godot/imported/die copy.ogg-57e077fb8d3d5c449ab3485bfa17f5ab.oggvorbisstr"
+
+[deps]
+
+source_file="res://Assets/Audio/die copy.ogg"
+dest_files=["res://.godot/imported/die copy.ogg-57e077fb8d3d5c449ab3485bfa17f5ab.oggvorbisstr"]
+
+[params]
+
+loop=false
+loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4

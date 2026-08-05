@@ -170,6 +170,7 @@ func finish_move_and_check():
 					pass # Crown code to go here.
 				elif consumable.is_in_group('apple'):
 					# Increase body max length
+					Global.play_sound_effect("test_die")
 					max_body_length += apple_length_bonus
 				elif consumable.is_in_group('crystal'):
 					# Code to swap around the tail and head
