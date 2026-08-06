@@ -19,6 +19,7 @@ const TILE_SIZE: int = 16
 @export var length_ui: Control
 # File path of the main menu scene
 @export var exit_scene: String = "res://Scenes/level_select.tscn"
+@export var level_music: String
 
 var player_already_spawned: bool = false
 var player: Node2D
@@ -26,6 +27,8 @@ var button_walls = []
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
+	#change music
+	Global.change_music(level_music)
 	# Finds bounds of level to search within for entity spawn markers
 	var spawn_map_bounds = spawn_layer.get_used_rect()
 	for x in range(spawn_map_bounds.position.x,spawn_map_bounds.end.x):
@@ -100,6 +103,7 @@ func _process(_delta: float) -> void:
 	# Checks if the player has pressed escape to exit the level
 	if Input.is_action_just_pressed("exit"):
 		Global.transition_to_scene(exit_scene)
+		Global.change_music("test_theme02")
 	# Debug: test walls
 	if Input.is_action_just_pressed("ui_accept"):
 		switch_button_walls()

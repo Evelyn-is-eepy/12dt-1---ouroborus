@@ -356,6 +356,7 @@ button_wall_scene = ExtResource("6_ouscj")
 switch_scene = ExtResource("7_ls6f5")
 camera = NodePath("WorldEnvironment/Camera2D")
 length_ui = NodePath("WorldEnvironment/Camera2D/Control")
+level_music = "test_theme02"
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="." unique_id=937800498]
 environment = ExtResource("4_t8ai0")

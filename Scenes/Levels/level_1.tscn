@@ -299,7 +299,7 @@ terrain_set_0/terrain_0/name = "Terrain 0"
 terrain_set_0/terrain_0/color = Color(0.63691413, 0.093233116, 0.5630298, 1)
 sources/0 = SubResource("TileSetAtlasSource_k5f4k")
 
-[node name="level_1" type="Node2D" unique_id=743200906 node_paths=PackedStringArray("spawn_layer", "background_layer", "camera", "ui_layer", "length_ui")]
+[node name="level_1" type="Node2D" unique_id=743200906 node_paths=PackedStringArray("spawn_layer", "background_layer", "camera", "length_ui")]
 script = ExtResource("1_cyadu")
 spawn_max_length = 12
 spawn_layer = NodePath("ObjectSpawnsLayer")
@@ -310,8 +310,8 @@ crown_scene = ExtResource("4_jv26f")
 apple_scene = ExtResource("5_u5ghp")
 crystal_scene = ExtResource("6_u5ghp")
 camera = NodePath("WorldEnvironment/Camera2D")
-ui_layer = NodePath("")
 length_ui = NodePath("WorldEnvironment/Camera2D/Control")
+level_music = "test_theme02"
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="." unique_id=937800498]
 environment = ExtResource("4_5f3p6")

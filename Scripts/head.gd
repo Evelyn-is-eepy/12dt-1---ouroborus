@@ -4,6 +4,10 @@ const TILE_SIZE: int = 16
 const move_duration = 0.1
 const bonk_duration = 0.2
 const move_directions_and_names = [{Vector2(1.0,0.0):"right"},{Vector2(-1.0,0.0):"left"},{Vector2(0.0,-1.0):"up"},{Vector2(0.0,1.0):"down"},]
+# Sound effect names
+const move_sounds = ["scoot1", "scoot2", "scoot3"]
+const bonk_sound = "bump"
+const win_sound = "win_jingle"
 const apple_length_bonus: int = 3
 
 signal ate_tail
@@ -85,6 +89,8 @@ func _process(_delta: float) -> void:
 			move_direction = Vector2(move_direction.x,0)
 	# Handle movement
 	if move_direction and can_move:
+		# Play the appropriate sound effect
+		Global.play_sound_effect(move_sounds.pick_random())
 		# Point rays in direction of movement and force update
 		var movement_obstructed:bool = false
 		facing_ray.target_position = move_direction * TILE_SIZE
@@ -129,6 +135,8 @@ func _process(_delta: float) -> void:
 		# If there is something in the way
 		else:
 			print('bonk!')
+			# Play the appropriate sound effect
+			Global.play_sound_effect(bonk_sound)
 			# prevent movement until bonk is finished
 			moving = true
 			shaking = true
@@ -210,9 +218,9 @@ func recreate_body_hitbox():
 	for shape in old_collsion_shapes:
 		shape.queue_free()
 	# Get all points other than tail and head
-	var body_points = body_line.points.duplicate()
-	body_points.remove_at(0)
-	body_points.remove_at(-1)
+	var body_points: Array = body_line.points.duplicate()
+	body_points.pop_front()
+	body_points.pop_back()
 	# Instance a collision rect as a child of the body hitbox Area2D on each point
 	for point in body_points:
 		# Make a tile-sized collision rect
@@ -254,7 +262,9 @@ func _on_area_2d_area_entered(area: Area2D) -> void:
 	# There is an issue where you could win by running into a wall for your first move,
 	# Which could make you hit your own tail through the 'bonk' shaking animation.
 	if area.is_in_group('snake_tail') and not shaking:
-		win() # This code is amusing.
+		# Play the appropriate sound effect
+		Global.play_sound_effect(win_sound)
+		win()
 
 func fall_into_hole():
 	# Animation for falling into a pit

@@ -13,14 +13,28 @@ var transition_material: Material
 var transition_duration: float = 0.5
 var trans_type = Tween.TRANS_LINEAR
 var sound_paths: Dictionary = {
-	"test_die": "res://Assets/Audio/die copy.ogg"
+	"test_die": "res://Assets/Audio/die copy.ogg",
+	"scoot1" : "res://Assets/Audio/scoot.wav",
+	"scoot2" : "res://Assets/Audio/scoot2.wav",
+	"scoot3" : "res://Assets/Audio/scoot3.wav",
+	"bump" : "res://Assets/Audio/bump.wav",
+	"win_jingle" : "res://Assets/Audio/Win Jingle.mp3",
 }
+var music_paths: Dictionary = {
+	"test_theme02": "res://Assets/Audio/Theme test 02.mp3"
+}
+var menu_music = "test_theme02"
+var music_player: AudioStreamPlayer
+var file_extensions = ['ogg', 'mp3', 'wav']
+var audio_buses = ["Master", "Sound Effects"]
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	transition_layer = get_node("/root/TransitionLayer")
+	music_player = get_node("/root/MusicPlayer")
 	transition_material = transition_layer.get_node("ColorRect").material
 	transition_layer.visible = false
+	change_music(menu_music)
 	load_data()
 	pass # Replace with function body.
 
@@ -61,10 +75,33 @@ func transition_to_scene(scene_path):
 func play_sound_effect(sound_name: String):
 	if sound_paths.has(sound_name):
 		var player = AudioStreamPlayer.new()
-		player.stream = AudioStreamOggVorbis.load_from_file(sound_paths[sound_name]) 
+		player.bus = audio_buses[1]
+		var extension = sound_paths[sound_name].get_extension()
+		# Load the file differently according to filetype (no universal audiostream type)
+		if extension == file_extensions[0]:
+			player.stream = AudioStreamOggVorbis.load_from_file(sound_paths[sound_name])
+		elif extension == file_extensions[1]:
+			player.stream = AudioStreamMP3.load_from_file(sound_paths[sound_name])
+		elif extension == file_extensions[2]:
+			player.stream = AudioStreamWAV.load_from_file(sound_paths[sound_name])
 		add_child(player)
 		player.play()
 		await player.finished
 		player.queue_free()
 	else:
 		print("cannot play: no such sound '" + sound_name + "'")
+		play_sound_effect("test_die") # Minos Prime is a good debugging tool :3
+
+func change_music(new_track: String):
+	if music_paths.has(new_track):
+		var extension = music_paths[new_track].get_extension()
+		# Load the file differently according to filetype (no universal audiostream type)
+		if extension == file_extensions[0]:
+			music_player.stream = AudioStreamOggVorbis.load_from_file(music_paths[new_track])
+		elif extension == file_extensions[1]:
+			music_player.stream = AudioStreamMP3.load_from_file(music_paths[new_track])
+		elif extension == file_extensions[2]:
+			music_player.stream = AudioStreamWAV.load_from_file(music_paths[new_track])
+		else:
+			print("unsupported audio type!")
+		music_player.play()
