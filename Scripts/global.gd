@@ -19,12 +19,19 @@ var sound_paths: Dictionary = {
 	"scoot3" : "res://Assets/Audio/scoot3.wav",
 	"bump" : "res://Assets/Audio/bump.wav",
 	"win_jingle" : "res://Assets/Audio/Win Jingle.mp3",
+	"reset_level": "res://Assets/Audio/reset.wav",
+	"crystal": "res://Assets/Audio/crystal_teleport.wav",
+	"apple": "res://Assets/Audio/apple_eat.wav",
+	"fall_into_pit": "res://Assets/Audio/pitfall.wav",
+	"box_scoot": "res://Assets/Audio/box_scoot.wav",
 }
 var music_paths: Dictionary = {
-	"test_theme02": "res://Assets/Audio/Theme test 02.mp3"
+	"test_theme02": "res://Assets/Audio/Theme test 02.mp3",
+	"test_theme01": "res://Assets/Audio/Theme test 01.ogg"
 }
 var menu_music = "test_theme02"
 var music_player: AudioStreamPlayer
+var last_played_music: String
 var file_extensions = ['ogg', 'mp3', 'wav']
 var audio_buses = ["Master", "Sound Effects"]
 
@@ -93,7 +100,8 @@ func play_sound_effect(sound_name: String):
 		play_sound_effect("test_die") # Minos Prime is a good debugging tool :3
 
 func change_music(new_track: String):
-	if music_paths.has(new_track):
+	# To avoid errors and/or restarting a track when switching between scenes with the same music
+	if music_paths.has(new_track) and new_track != last_played_music:
 		var extension = music_paths[new_track].get_extension()
 		# Load the file differently according to filetype (no universal audiostream type)
 		if extension == file_extensions[0]:
@@ -105,3 +113,4 @@ func change_music(new_track: String):
 		else:
 			print("unsupported audio type!")
 		music_player.play()
+		last_played_music = new_track

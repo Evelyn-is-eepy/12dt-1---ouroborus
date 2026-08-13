@@ -3,11 +3,20 @@ extends Node2D
 const TILE_SIZE: int = 16
 const move_duration = 0.1
 const bonk_duration = 0.2
-const move_directions_and_names = [{Vector2(1.0,0.0):"right"},{Vector2(-1.0,0.0):"left"},{Vector2(0.0,-1.0):"up"},{Vector2(0.0,1.0):"down"},]
+const move_directions_and_names = [
+{Vector2(1.0,0.0):"right"},
+{Vector2(-1.0,0.0):"left"},
+{Vector2(0.0,-1.0):"up"},
+{Vector2(0.0,1.0):"down"},
+]
 # Sound effect names
 const move_sounds = ["scoot1", "scoot2", "scoot3"]
+const box_move_sound = "box_scoot"
 const bonk_sound = "bump"
 const win_sound = "win_jingle"
+const apple_sound = "apple"
+const crystal_sound = "crystal"
+const pitfall_sound = "fall_into_pit"
 const apple_length_bonus: int = 3
 
 signal ate_tail
@@ -47,8 +56,6 @@ var shake_intensity: float = 0
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
-	# Connect signals to the level manager
-	
 	# Orient the head and face
 	current_head_direction = starting_direction
 	head_sprite.rotation = starting_direction.rotated(PI/2).angle() 
@@ -104,6 +111,9 @@ func _process(_delta: float) -> void:
 			var object_to_move = movable_objects_ray.get_collider().get_parent()
 			if object_to_move.is_blocked_in_direction(move_direction):
 				movement_obstructed = true
+			else:
+				# This means you are pushing a box, so play that sound
+				Global.play_sound_effect(box_move_sound)
 		# Find the length of the snake's body (number of body points other than head and tail)
 		var body_length: int = len(body_line.points) - 2
 		var body_too_long: bool = body_length >= max_body_length
@@ -164,6 +174,8 @@ func finish_move_and_check():
 				var cell_data = collider.get_cell_tile_data(cell)
 				if cell_data:
 					if cell_data.has_custom_data('falling_pit'):
+						# Play sound effect
+						Global.play_sound_effect(pitfall_sound)
 						fall_into_hole()
 	# Check for overlapping areas
 	if head_collider.get_overlapping_areas():
@@ -178,9 +190,12 @@ func finish_move_and_check():
 					pass # Crown code to go here.
 				elif consumable.is_in_group('apple'):
 					# Increase body max length
-					Global.play_sound_effect("test_die")
+					# Play appropriate sound effect
+					Global.play_sound_effect(apple_sound)
 					max_body_length += apple_length_bonus
 				elif consumable.is_in_group('crystal'):
+					# Play the appropriate sound effect
+					Global.play_sound_effect(crystal_sound)
 					# Code to swap around the tail and head
 					var tail_pos = body_line.points[0]
 					var head_pos = body_line.points[-1]
