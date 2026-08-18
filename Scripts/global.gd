@@ -39,6 +39,7 @@ var audio_buses = ["Master", "Sound Effects"]
 func _ready() -> void:
 	transition_layer = get_node("/root/TransitionLayer")
 	music_player = get_node("/root/MusicPlayer")
+	music_player.connect('finished', loop_music)
 	transition_material = transition_layer.get_node("ColorRect").material
 	transition_layer.visible = false
 	change_music(menu_music)
@@ -91,12 +92,16 @@ func play_sound_effect(sound_name: String):
 			player.stream = AudioStreamMP3.load_from_file(sound_paths[sound_name])
 		elif extension == file_extensions[2]:
 			player.stream = AudioStreamWAV.load_from_file(sound_paths[sound_name])
+		else:
+			print("cannot play sound: invalid file type")
+			player.queue_free()
+			return
 		add_child(player)
 		player.play()
 		await player.finished
 		player.queue_free()
 	else:
-		print("cannot play: no such sound '" + sound_name + "'")
+		print("cannot play sound: no such sound '" + sound_name + "'")
 		play_sound_effect("test_die") # Minos Prime is a good debugging tool :3
 
 func change_music(new_track: String):
@@ -114,3 +119,6 @@ func change_music(new_track: String):
 			print("unsupported audio type!")
 		music_player.play()
 		last_played_music = new_track
+
+func loop_music():
+	music_player.play()

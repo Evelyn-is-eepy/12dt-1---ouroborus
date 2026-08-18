@@ -104,9 +104,6 @@ func _process(_delta: float) -> void:
 	if Input.is_action_just_pressed("exit"):
 		Global.transition_to_scene(exit_scene)
 		Global.change_music("test_theme02")
-	# Debug: test walls
-	if Input.is_action_just_pressed("ui_accept"):
-		switch_button_walls()
 
 func player_wins() -> void:
 	# Called when the player eats their own tail
