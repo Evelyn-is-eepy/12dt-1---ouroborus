@@ -63,6 +63,11 @@ func finish_move_and_check():
 			if cell_data:
 				if cell_data.has_custom_data('falling_pit'):
 					fall_into_hole()
+	if collision_area.get_overlapping_areas():
+		var colliders = collision_area.get_overlapping_areas()
+		for collider in colliders:
+			if collider.get_parent().is_in_group('button'):
+				collider.get_parent().pressed_down()
 
 func fall_into_hole() -> void:
 	collision_area.queue_free()

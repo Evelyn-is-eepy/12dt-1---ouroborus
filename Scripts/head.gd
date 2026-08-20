@@ -21,7 +21,6 @@ const apple_length_bonus: int = 3
 
 signal ate_tail
 signal new_length
-signal switch_pressed
 
 @export var facing_ray: RayCast2D
 @export var movable_objects_ray: RayCast2D
@@ -221,8 +220,7 @@ func finish_move_and_check():
 			if area.get_parent().is_in_group("button"):
 				# Change the sprite and send a signal to switch all doors
 				var switch = area.get_parent()
-				switch.get_node("AnimatedSprite2D").animation = "pressed"
-				switch_pressed.emit()
+				switch.pressed_down()
 	new_length.emit((len(body_line.points) - 2), max_body_length)
 
 # Function to rebuild the line body's hitbox, removing the old hitbox

@@ -52,6 +52,7 @@ func _ready() -> void:
 					var switch = switch_scene.instantiate()
 					switch.position = spawn_layer.map_to_local(Vector2i(x,y))
 					add_child(switch)
+					switch.connect('switch_pressed', switch_button_walls)
 				# Adds the crown
 				elif cell_data.get_custom_data_by_layer_id(4):
 					var crown = crown_scene.instantiate()
@@ -78,8 +79,6 @@ func _ready() -> void:
 	# Gets the snake
 	player = get_tree().get_first_node_in_group("is_player_character")
 	print(str(player))
-	# Connects signals
-	player.connect("switch_pressed", switch_button_walls)
 	# Applies level settings to the snake
 	player.starting_direction = spawn_directions[spawn_direction_id]
 	player.max_body_length = spawn_max_length
