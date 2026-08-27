@@ -2,13 +2,13 @@
 
 importer="wav"
 type="AudioStreamWAV"
-uid="uid://cbuhi462miv8y"
-path="res://.godot/imported/pitfall.wav-fd110fef9b83b09ff881cc2915180f43.sample"
+uid="uid://deox006b3ydt7"
+path="res://.godot/imported/shwomp.wav-74eb9acdde30c51ba92d6c6a6a0fea5b.sample"
 
 [deps]
 
-source_file="res://Assets/Audio/pitfall.wav"
-dest_files=["res://.godot/imported/pitfall.wav-fd110fef9b83b09ff881cc2915180f43.sample"]
+source_file="res://Assets/Audio/shwomp.wav"
+dest_files=["res://.godot/imported/shwomp.wav-74eb9acdde30c51ba92d6c6a6a0fea5b.sample"]
 
 [params]
 

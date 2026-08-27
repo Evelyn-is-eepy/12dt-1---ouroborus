@@ -1,23 +1,18 @@
 extends Node2D
 
 const TILE_SIZE: int = 16
-const move_duration = 0.1
-const bonk_duration = 0.2
-const move_directions_and_names = [
-{Vector2(1.0,0.0):"right"},
-{Vector2(-1.0,0.0):"left"},
-{Vector2(0.0,-1.0):"up"},
-{Vector2(0.0,1.0):"down"},
-]
+const MOVE_DURATION = 0.1
+const BONK_DURATION = 0.2
+
 # Sound effect names
-const move_sounds = ["scoot1", "scoot2", "scoot3"]
-const box_move_sound = "box_scoot"
-const bonk_sound = "bump"
-const win_sound = "win_jingle"
-const apple_sound = "apple"
-const crystal_sound = "crystal"
-const pitfall_sound = "fall_into_pit"
-const apple_length_bonus: int = 3
+const MOVE_SOUNDS = ["scoot1", "scoot2", "scoot3"]
+const BOX_MOVE_SOUND = "box_scoot"
+const BONK_SOUND = "bump"
+const WIN_SOUND = "win_jingle"
+const APPLE_SOUND = "apple"
+const CRYSTAL_SOUND = "crystal"
+const PITFALL_SOUND = "fall_into_pit"
+const APPLE_LENGTH_BONUS: int = 3
 
 signal ate_tail
 signal new_length
@@ -41,6 +36,12 @@ signal new_length
 @export var bonk_max_amplitude: float
 @export var starting_max_length: int
 
+var move_directions_and_names = [
+{ Vector2(1.0,0.0): "right" },
+{ Vector2(-1.0,0.0): "left" },
+{ Vector2(0.0,-1.0): "up" },
+{ Vector2(0.0,1.0): "down" },
+]
 var face_state: String = 'normal'
 var current_head_direction: Vector2
 var last_moved_direction: Vector2 = starting_direction
@@ -52,6 +53,7 @@ var can_move: bool = true
 var has_crown: bool = false
 var position_before_bonk: Vector2
 var shake_intensity: float = 0
+
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
@@ -66,15 +68,17 @@ func _ready() -> void:
 	body_line.add_point(position)
 	# Move and rotate the tail so that it is behind the head
 	tail_pivot.position = position - starting_direction * TILE_SIZE
-	
 	tail_pivot.rotation = starting_direction.rotated(PI/2).angle() 
+	# Update length counter
+	new_length.emit(0, max_body_length)
+
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(_delta: float) -> void:
 	# If the body is shaking from a bonk, add a randomised offset
 	if shaking:
 		position = position_before_bonk
-		var random_rotation = randf_range(0,2*PI)
+		var random_rotation = randf_range(0, 2 * PI)
 		position += Vector2.UP.rotated(random_rotation) * shake_intensity
 	# Stick the last point on the body line to the head so that there is a visible neck.
 	body_line.points[-1] = position
@@ -92,11 +96,11 @@ func _process(_delta: float) -> void:
 		move_direction.y = input_y_pos - input_y_neg
 		# If both y and x have input, take only x
 		if move_direction.x and move_direction.y:
-			move_direction = Vector2(move_direction.x,0)
+			move_direction = Vector2(move_direction.x, 0)
 	# Handle movement
 	if move_direction and can_move:
 		# Play the appropriate sound effect
-		Global.play_sound_effect(move_sounds.pick_random())
+		Global.play_sound_effect(MOVE_SOUNDS.pick_random())
 		# Point rays in direction of movement and force update
 		var movement_obstructed:bool = false
 		facing_ray.target_position = move_direction * TILE_SIZE
@@ -112,7 +116,7 @@ func _process(_delta: float) -> void:
 				movement_obstructed = true
 			else:
 				# This means you are pushing a box, so play that sound
-				Global.play_sound_effect(box_move_sound)
+				Global.play_sound_effect(BOX_MOVE_SOUND)
 		# Find the length of the snake's body (number of body points other than head and tail)
 		var body_length: int = len(body_line.points) - 2
 		var body_too_long: bool = body_length >= max_body_length
@@ -121,20 +125,20 @@ func _process(_delta: float) -> void:
 			# Initiate movement of snake head
 			var tween = create_tween()
 			moving = true
-			# I don't really know how to shorten this line without renaming variables
-			# Which I don't want to do, as it'll be a pain and make the code less clear
-			tween.tween_property(self,'position',position + move_direction * TILE_SIZE,move_duration).set_trans(move_trans_type)
+			tween.set_trans(move_trans_type)
+			var distance_to_move = move_direction * TILE_SIZE
+			tween.tween_property(self, 'position', position + distance_to_move, MOVE_DURATION)
 			tween.tween_callback(finish_move_and_check)
 			# Change head & face sprite
 			current_head_direction = move_direction
-			head_sprite.rotation = move_direction.rotated(PI/2).angle()
+			head_sprite.rotation = move_direction.rotated(PI / 2).angle()
 			face_sprite.play(face_state + '_' + get_direction_name(current_head_direction))
 			# Add point to line body.
 			# This means that the previous endpoint will no longer be 'stuck' to the head,
 			# and come to rest on this point, while the new becomes 'stuck' as the neck.
 			body_line.add_point(position)
 			# Update previous moves array
-			previous_move_directions.insert(0,move_direction)
+			previous_move_directions.insert(0, move_direction)
 			# Move boxes
 			if movable_objects_ray.is_colliding():
 				var object_to_move = movable_objects_ray.get_collider().get_parent()
@@ -145,7 +149,7 @@ func _process(_delta: float) -> void:
 		else:
 			print('bonk!')
 			# Play the appropriate sound effect
-			Global.play_sound_effect(bonk_sound)
+			Global.play_sound_effect(BONK_SOUND)
 			# prevent movement until bonk is finished
 			moving = true
 			shaking = true
@@ -154,15 +158,16 @@ func _process(_delta: float) -> void:
 			var bonk_tween = create_tween()
 			# Set shake intensity to max and then tween it back down
 			shake_intensity = bonk_max_amplitude
-			bonk_tween.tween_property(self,'shake_intensity',0,bonk_duration)
+			bonk_tween.tween_property(self, 'shake_intensity', 0, BONK_DURATION)
 			# this function works just as well here, no need to bloat things by adding another
 			bonk_tween.tween_callback(finish_move_and_check)
+
 
 # Finish move and check for hazards (called from tween callback)
 func finish_move_and_check():
 	moving = false
 	shaking = false
-	print("length: " + str(len(body_line.points) - 2) +" max: " + str(max_body_length))
+	print("length: " + str(len(body_line.points) - 2) + " max: " + str(max_body_length))
 	# Check if the head is overlapping any bodies
 	if head_collider.get_overlapping_bodies():
 		print("bodies detected!")
@@ -174,7 +179,7 @@ func finish_move_and_check():
 				if cell_data:
 					if cell_data.has_custom_data('falling_pit'):
 						# Play sound effect
-						Global.play_sound_effect(pitfall_sound)
+						Global.play_sound_effect(PITFALL_SOUND)
 						fall_into_hole()
 	# Check for overlapping areas
 	if head_collider.get_overlapping_areas():
@@ -184,17 +189,19 @@ func finish_move_and_check():
 			if area.get_parent().is_in_group("Consumable"):
 				print("om nom nom :')'") # Debug. Also to brighten up my life a bit.
 				var consumable = area.get_parent()
-				# Go through the possibilities
-				if consumable.is_in_group('crown'):
-					pass # Crown code to go here.
-				elif consumable.is_in_group('apple'):
+				# Go through the possibilities.
+				if consumable.is_in_group('apple'):
 					# Increase body max length
 					# Play appropriate sound effect
-					Global.play_sound_effect(apple_sound)
-					max_body_length += apple_length_bonus
+					Global.play_sound_effect(APPLE_SOUND)
+					# Create a particle effect
+					Global.create_particle_burst(Global.ParticleTypes.APPLE, global_position)
+					max_body_length += APPLE_LENGTH_BONUS
 				elif consumable.is_in_group('crystal'):
 					# Play the appropriate sound effect
-					Global.play_sound_effect(crystal_sound)
+					Global.play_sound_effect(CRYSTAL_SOUND)
+					# Create a particle effect
+					Global.create_particle_burst(Global.ParticleTypes.CRYSTAL, global_position)
 					# Code to swap around the tail and head
 					var tail_pos = body_line.points[0]
 					var head_pos = body_line.points[-1]
@@ -204,10 +211,10 @@ func finish_move_and_check():
 					# Find new directions to be facing and apply them
 					var new_head_direction = (tail_pos - body_line.points[1]).normalized()
 					current_head_direction = new_head_direction
-					head_sprite.rotation = new_head_direction.rotated(PI/2).angle() 
-					face_sprite.play('normal_' + get_direction_name(new_head_direction))
+					head_sprite.rotation = new_head_direction.rotated(PI / 2).angle() 
+					face_sprite.play(face_state + '_' + get_direction_name(new_head_direction))
 					var new_tail_direction = (head_pos - body_line.points[-2]).normalized() * -1
-					tail_pivot.rotation = new_tail_direction.rotated(PI/2).angle() 
+					tail_pivot.rotation = new_tail_direction.rotated(PI / 2).angle() 
 					# Reverse the body line's order to complete this.
 					var reversed_body = body_line.points
 					reversed_body.reverse()
@@ -222,6 +229,7 @@ func finish_move_and_check():
 				var switch = area.get_parent()
 				switch.pressed_down()
 	new_length.emit((len(body_line.points) - 2), max_body_length)
+
 
 # Function to rebuild the line body's hitbox, removing the old hitbox
 # places a tile-sized collider on each point except the first (tail) and last (head)
@@ -245,6 +253,7 @@ func recreate_body_hitbox():
 		body_collider.add_child(collision_square)
 	pass
 
+
 # Function to take the current move direction and output a string such as 'down' accordingly
 # This is for managing the face sprites
 func get_direction_name(direction) -> String:
@@ -256,6 +265,7 @@ func get_direction_name(direction) -> String:
 	print("get_direction_name(): direction does not match given cardinals")
 	# Just to be safe :P
 	return "up"
+
 
 # Function called when the player wins a level
 # Signals to main, chnages the face sprite and disables movement
@@ -276,11 +286,12 @@ func _on_area_2d_area_entered(area: Area2D) -> void:
 	# Which could make you hit your own tail through the 'bonk' shaking animation.
 	if area.is_in_group('snake_tail') and not shaking:
 		# Play the appropriate sound effect
-		Global.play_sound_effect(win_sound)
+		Global.play_sound_effect(WIN_SOUND)
 		win()
 
+
 func fall_into_hole():
-	# Animation for falling into a pit
+	# 'Animation' for falling into a pit
 	blood.emitting = true
 	face_sprite.visible = false
 	can_move = false

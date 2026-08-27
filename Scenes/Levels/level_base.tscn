@@ -1,7 +1,6 @@
 [gd_scene format=3 uid="uid://d22gbmvd14wj5"]
 
 [ext_resource type="Script" uid="uid://djeepxxym5ucw" path="res://Scripts/level.gd" id="1_6phgx"]
-[ext_resource type="Texture2D" uid="uid://bpiri6nkn63on" path="res://Assets/Ouroboros level tileset.png" id="1_k5f4k"]
 [ext_resource type="PackedScene" uid="uid://d2obc0bysr4q" path="res://Scenes/snake.tscn" id="1_tumq0"]
 [ext_resource type="PackedScene" uid="uid://l8gufufpge0c" path="res://Scenes/box.tscn" id="2_wqkje"]
 [ext_resource type="PackedScene" uid="uid://c3w4fu5i7k3cj" path="res://Scenes/apple.tscn" id="4_ej2hx"]
@@ -12,85 +11,7 @@
 [ext_resource type="PackedScene" uid="uid://mgmaiqnx8fky" path="res://Scenes/switch.tscn" id="7_ls6f5"]
 [ext_resource type="PackedScene" uid="uid://btnrclj6kx4kb" path="res://Scenes/length_counter.tscn" id="9_4f6dp"]
 [ext_resource type="TileSet" uid="uid://dnwgj036125ch" path="res://Assets/terrain_tileset.tres" id="11_w4ad0"]
-
-[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_k5f4k"]
-texture = ExtResource("1_k5f4k")
-1:0/0 = 0
-1:0/0/terrain_set = 0
-1:0/0/terrain = 0
-1:0/0/terrains_peering_bit/right_side = 0
-1:0/0/terrains_peering_bit/bottom_right_corner = 0
-1:0/0/terrains_peering_bit/bottom_side = 0
-2:0/0 = 0
-2:0/0/terrain_set = 0
-2:0/0/terrain = 0
-2:0/0/terrains_peering_bit/right_side = 0
-2:0/0/terrains_peering_bit/bottom_right_corner = 0
-2:0/0/terrains_peering_bit/bottom_side = 0
-2:0/0/terrains_peering_bit/bottom_left_corner = 0
-2:0/0/terrains_peering_bit/left_side = 0
-3:0/0 = 0
-3:0/0/terrain_set = 0
-3:0/0/terrain = 0
-3:0/0/terrains_peering_bit/bottom_side = 0
-3:0/0/terrains_peering_bit/bottom_left_corner = 0
-3:0/0/terrains_peering_bit/left_side = 0
-3:1/0 = 0
-3:1/0/terrain_set = 0
-3:1/0/terrain = 0
-3:1/0/terrains_peering_bit/bottom_side = 0
-3:1/0/terrains_peering_bit/bottom_left_corner = 0
-3:1/0/terrains_peering_bit/left_side = 0
-3:1/0/terrains_peering_bit/top_left_corner = 0
-3:1/0/terrains_peering_bit/top_side = 0
-2:1/0 = 0
-2:1/0/terrain_set = 0
-2:1/0/terrain = 0
-2:1/0/terrains_peering_bit/right_side = 0
-2:1/0/terrains_peering_bit/bottom_right_corner = 0
-2:1/0/terrains_peering_bit/bottom_side = 0
-2:1/0/terrains_peering_bit/bottom_left_corner = 0
-2:1/0/terrains_peering_bit/left_side = 0
-2:1/0/terrains_peering_bit/top_left_corner = 0
-2:1/0/terrains_peering_bit/top_side = 0
-2:1/0/terrains_peering_bit/top_right_corner = 0
-1:1/0 = 0
-1:1/0/terrain_set = 0
-1:1/0/terrain = 0
-1:1/0/terrains_peering_bit/right_side = 0
-1:1/0/terrains_peering_bit/bottom_right_corner = 0
-1:1/0/terrains_peering_bit/bottom_side = 0
-1:1/0/terrains_peering_bit/top_side = 0
-1:1/0/terrains_peering_bit/top_right_corner = 0
-1:2/0 = 0
-1:2/0/terrain_set = 0
-1:2/0/terrain = 0
-1:2/0/terrains_peering_bit/right_side = 0
-1:2/0/terrains_peering_bit/top_side = 0
-1:2/0/terrains_peering_bit/top_right_corner = 0
-2:2/0 = 0
-2:2/0/terrain_set = 0
-2:2/0/terrain = 0
-2:2/0/terrains_peering_bit/right_side = 0
-2:2/0/terrains_peering_bit/left_side = 0
-2:2/0/terrains_peering_bit/top_left_corner = 0
-2:2/0/terrains_peering_bit/top_side = 0
-2:2/0/terrains_peering_bit/top_right_corner = 0
-3:2/0 = 0
-3:2/0/terrain_set = 0
-3:2/0/terrain = 0
-3:2/0/terrains_peering_bit/left_side = 0
-3:2/0/terrains_peering_bit/top_left_corner = 0
-3:2/0/terrains_peering_bit/top_side = 0
-4:0/0 = 0
-4:0/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
-
-[sub_resource type="TileSet" id="TileSet_wqkje"]
-physics_layer_0/collision_layer = 1
-terrain_set_0/mode = 0
-terrain_set_0/terrain_0/name = "Terrain 0"
-terrain_set_0/terrain_0/color = Color(0.63691413, 0.093233116, 0.5630298, 1)
-sources/0 = SubResource("TileSetAtlasSource_k5f4k")
+[ext_resource type="TileSet" uid="uid://is3fwxmuxevs" path="res://Assets/Tilesets/background.tres" id="12_w4ad0"]
 
 [node name="Node2D" type="Node2D" unique_id=743200906 node_paths=PackedStringArray("spawn_layer", "background_layer", "camera", "length_ui")]
 script = ExtResource("1_6phgx")
@@ -105,7 +26,7 @@ button_wall_scene = ExtResource("6_ouscj")
 switch_scene = ExtResource("7_ls6f5")
 camera = NodePath("WorldEnvironment/Camera2D")
 length_ui = NodePath("WorldEnvironment/Camera2D/Control")
-level_music = "test_theme02"
+level_music = "test_theme01"
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="." unique_id=937800498]
 environment = ExtResource("4_t8ai0")
@@ -128,7 +49,7 @@ tile_set = ExtResource("11_w4ad0")
 
 [node name="BackgroundLayer" type="TileMapLayer" parent="." unique_id=1825455332]
 z_index = -1
-tile_set = SubResource("TileSet_wqkje")
+tile_set = ExtResource("12_w4ad0")
 
 [node name="ColorRect" type="ColorRect" parent="." unique_id=913962571]
 z_index = -3

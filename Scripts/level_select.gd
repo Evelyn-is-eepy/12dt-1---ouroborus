@@ -11,8 +11,9 @@ var button_style: StyleBox = load("res://Assets/menu_button_style.tres")
 
 
 # Called when the node enters the scene tree for the first time.
+# Creates all of the level selection buttons in the container.
 func _ready() -> void:
-	var free_button = true # so that you can access the next level you haven't played
+	var free_button = true # So that you can access the next level you haven't played.
 	var button_number: int = 0
 	for level in level_references:
 		button_number += 1
@@ -30,16 +31,18 @@ func _ready() -> void:
 		button_container.add_child(new_level_button)
 
 
-
-
+# Called from the level_select_button's level_selected signal
 func level_selected(reference):
-	print(reference)
+	# Transitions to the specific level
+	print(reference) # Debug
 	Global.transition_to_scene(level_scene_path + reference + '.tscn')
 
 
+# On Exit button being pressed.
 func _on_button_pressed() -> void:
 	Global.transition_to_scene(exit_scene)
 
 func _process(_delta: float) -> void:
+	# Alternative method for exiting the level (esc key)
 	if Input.is_action_just_pressed("exit"):
 		Global.transition_to_scene(exit_scene)

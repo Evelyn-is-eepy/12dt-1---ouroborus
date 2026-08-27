@@ -27,6 +27,7 @@ func _process(_delta: float) -> void:
 		container.position += Vector2(0, random_modulus).rotated(random_rotation)
 	pass
 
+
 # Change the value displayed as remaining length
 func change_values(new_length: int, new_max_length: int):
 	# Find the remaining length and display it on the label

@@ -11,9 +11,11 @@ var anim_names = ["close", "open"]
 var is_active: bool
 var weighed_down: bool = false
 
+
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	activate_or_deactivate()
+
 
 func activate_or_deactivate():
 	# When a button is pushed down, all walls switch state from open to closed or vice versa.

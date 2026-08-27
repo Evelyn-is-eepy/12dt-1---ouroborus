@@ -3,7 +3,6 @@
 [ext_resource type="Script" uid="uid://b1v7upr85l0vc" path="res://Scripts/main_menu.gd" id="1_n45e2"]
 [ext_resource type="Texture2D" uid="uid://upwhlasrwigj" path="res://Assets/title0000.png" id="2_1ehe0"]
 [ext_resource type="StyleBox" uid="uid://bdkp0m4r10rau" path="res://Assets/menu_button_style.tres" id="2_ce3w2"]
-[ext_resource type="PackedScene" uid="uid://di4m2j6og3u4e" path="res://Scenes/transition_effect.tscn" id="2_cp0ys"]
 [ext_resource type="Theme" uid="uid://bttvneaybjt4" path="res://Assets/menu_box_theme.tres" id="2_opfnp"]
 [ext_resource type="Texture2D" uid="uid://dcqibhq1asd61" path="res://Assets/title0001.png" id="3_ce3w2"]
 [ext_resource type="Environment" uid="uid://c8qpv2wh6f7ts" path="res://Assets/world_environment.tres" id="6_opfnp"]
@@ -32,7 +31,6 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_n45e2")
-transition_effect_scene = ExtResource("2_cp0ys")
 
 [node name="VBoxContainer" type="VBoxContainer" parent="." unique_id=1991629143]
 custom_minimum_size = Vector2(150, 100)
@@ -87,7 +85,8 @@ offset_bottom = 23.0
 theme_override_colors/font_color = Color(1, 1, 1, 0.46666667)
 theme_override_fonts/font = ExtResource("8_yhxw7")
 theme_override_font_sizes/font_size = 10
-text = "press X to reset save data"
+text = "press X to reset save data
+press M at any time to toggle mute"
 
 [connection signal="pressed" from="VBoxContainer/Button" to="." method="_on_button_pressed"]
 [connection signal="pressed" from="VBoxContainer/Button3" to="." method="_on_button_3_pressed"]

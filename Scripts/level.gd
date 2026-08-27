@@ -27,12 +27,12 @@ var button_walls = []
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
-	#change music
+	# Change music
 	Global.change_music(level_music)
 	# Finds bounds of level to search within for entity spawn markers
 	var spawn_map_bounds = spawn_layer.get_used_rect()
-	for x in range(spawn_map_bounds.position.x,spawn_map_bounds.end.x):
-		for y in range(spawn_map_bounds.position.y,spawn_map_bounds.end.y):
+	for x in range(spawn_map_bounds.position.x, spawn_map_bounds.end.x):
+		for y in range(spawn_map_bounds.position.y, spawn_map_bounds.end.y):
 			# Checks if a tile has custom data to indicate a spawn marker
 			if spawn_layer.get_cell_tile_data(Vector2i(x,y)):
 				var cell_data = spawn_layer.get_cell_tile_data(Vector2i(x,y))
@@ -84,11 +84,12 @@ func _ready() -> void:
 	player.max_body_length = spawn_max_length
 	# Connects the snake to the length UI
 	player.new_length.connect(length_ui.change_values)
+	player.new_length.emit(0, spawn_max_length)
 	player.ate_tail.connect(player_wins)
 	# Center camera
 	var background_bounds = background_layer.get_used_rect()
-	var new_camera_x = lerp(background_bounds.position.x,background_bounds.end.x,0.5) * TILE_SIZE
-	var new_camera_y = lerp(background_bounds.position.y,background_bounds.end.y,0.5) * TILE_SIZE
+	var new_camera_x = lerp(background_bounds.position.x, background_bounds.end.x, 0.5) * TILE_SIZE
+	var new_camera_y = lerp(background_bounds.position.y, background_bounds.end.y, 0.5) * TILE_SIZE
 	camera.position = Vector2(new_camera_x,new_camera_y)
 	# Hides the object spawn layer
 	spawn_layer.visible = false
@@ -104,12 +105,14 @@ func _process(_delta: float) -> void:
 		Global.transition_to_scene(exit_scene)
 		Global.change_music("test_theme02")
 
+
 func player_wins() -> void:
 	# Called when the player eats their own tail
 	print('wohoo!') # Debug
 	await get_tree().create_timer(3).timeout
 	Global.levels_completed[self.name] = true
 	Global.transition_to_scene(exit_scene)
+
 
 func switch_button_walls() -> void:
 	print("kachunk") # Debug

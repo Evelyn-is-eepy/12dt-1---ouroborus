@@ -139,21 +139,11 @@ offset_bottom = 1267.0
 color = Color(0.037730496, 0.0074130455, 0.081240915, 1)
 
 [node name="Label" type="Label" parent="." unique_id=327303167]
-offset_left = 21.0
-offset_top = 157.0
-offset_right = 269.0
-offset_bottom = 206.0
+offset_left = 12.0
+offset_top = 158.0
+offset_right = 260.0
+offset_bottom = 207.0
 theme_override_fonts/font = ExtResource("7_167vu")
 theme_override_font_sizes/font_size = 20
-text = "But apples let you grow!"
-horizontal_alignment = 1
-
-[node name="Label2" type="Label" parent="." unique_id=1729158534]
-offset_left = 18.0
-offset_top = -22.0
-offset_right = 266.0
-offset_bottom = 27.0
-theme_override_fonts/font = ExtResource("7_167vu")
-theme_override_font_sizes/font_size = 20
-text = "Your length is limited..."
+text = "Apples let you grow! :]"
 horizontal_alignment = 1

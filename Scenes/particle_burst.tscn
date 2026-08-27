@@ -1,0 +1,35 @@
+[gd_scene format=3 uid="uid://bonlisrrcrcaa"]
+
+[ext_resource type="Texture2D" uid="uid://bmxl73fquljwp" path="res://Assets/crystal_particle.png" id="1_5snqb"]
+[ext_resource type="Script" uid="uid://bjuy6jrcufjnk" path="res://Scripts/particle_burst.gd" id="2_rrbn5"]
+
+[sub_resource type="Curve" id="Curve_xuxo1"]
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), -2.6973948, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="CurveTexture" id="CurveTexture_im03s"]
+curve = SubResource("Curve_xuxo1")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_fm5jw"]
+particle_flag_disable_z = true
+angle_min = -720.0
+angle_max = 720.0
+spread = 180.0
+initial_velocity_min = 55.55
+initial_velocity_max = 75.32
+gravity = Vector3(0, 0, 0)
+radial_accel_min = -150.0
+radial_accel_max = -150.0
+scale_max = 2.5
+scale_curve = SubResource("CurveTexture_im03s")
+
+[node name="GPUParticles2D" type="GPUParticles2D" unique_id=508377177]
+z_index = 1
+emitting = false
+amount = 4
+texture = ExtResource("1_5snqb")
+lifetime = 0.5
+one_shot = true
+explosiveness = 1.0
+process_material = SubResource("ParticleProcessMaterial_fm5jw")
+script = ExtResource("2_rrbn5")
