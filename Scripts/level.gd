@@ -19,6 +19,7 @@ const TILE_SIZE: int = 16
 @export var length_ui: Control
 # File path of the main menu scene
 @export var exit_scene: String = "res://Scenes/level_select.tscn"
+@export var scene_path: String
 @export var level_music: String
 
 var player_already_spawned: bool = false
@@ -97,9 +98,9 @@ func _ready() -> void:
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(_delta: float) -> void:
-	# Checks if the player has pressed space to reset the level
+	# Checks if the player has pressed R to reset the level
 	if Input.is_action_just_pressed("restart"):
-		get_tree().reload_current_scene()
+		Global.transition_to_scene(scene_path)
 	# Checks if the player has pressed escape to exit the level
 	if Input.is_action_just_pressed("exit"):
 		Global.transition_to_scene(exit_scene)

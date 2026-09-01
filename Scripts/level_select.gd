@@ -4,10 +4,11 @@ extends Control
 @export var button_scene: PackedScene
 
 var level_scene_path: String ="res://Scenes/Levels/"
-var level_references: Array = ["level_1","level_2","level_3","level_4"]
+var level_references: Array = ["level_1", "level_2", "level_3", "level_4", "level_5"]
 var button_style: StyleBox = load("res://Assets/menu_button_style.tres")
 # File path of the main menu scene
 @export var exit_scene: String = "res://Scenes/main_menu.tscn"
+var button_hover_sound = "blip"
 
 
 # Called when the node enters the scene tree for the first time.
@@ -22,6 +23,7 @@ func _ready() -> void:
 		new_level_button.level_reference = level
 		new_level_button.level_select_control = self
 		new_level_button.add_theme_stylebox_override('normal',button_style)
+		new_level_button.connect("mouse_entered", _on_button_mouse_entered)
 		# Check if the level is acessible; if not, deactivate it.
 		if not Global.levels_completed[level]:
 			if free_button:
@@ -46,3 +48,7 @@ func _process(_delta: float) -> void:
 	# Alternative method for exiting the level (esc key)
 	if Input.is_action_just_pressed("exit"):
 		Global.transition_to_scene(exit_scene)
+
+# All buttons in this scene are linked to this function to make them clicky :3
+func _on_button_mouse_entered() -> void:
+	Global.play_sound_effect(button_hover_sound)

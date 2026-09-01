@@ -5,6 +5,7 @@
 [ext_resource type="Theme" uid="uid://bttvneaybjt4" path="res://Assets/menu_box_theme.tres" id="2_lx4vd"]
 [ext_resource type="Environment" uid="uid://c8qpv2wh6f7ts" path="res://Assets/world_environment.tres" id="4_2sqnl"]
 [ext_resource type="StyleBox" uid="uid://bdkp0m4r10rau" path="res://Assets/menu_button_style.tres" id="4_72w8f"]
+[ext_resource type="StyleBox" uid="uid://luo0mq2otg5x" path="res://Assets/menu_button_hover_style.tres" id="5_s6o25"]
 
 [sub_resource type="Compositor" id="Compositor_72w8f"]
 
@@ -43,6 +44,7 @@ columns = 4
 [node name="Button" type="Button" parent="VBoxContainer" unique_id=1384131766]
 layout_mode = 2
 theme_override_styles/normal = ExtResource("4_72w8f")
+theme_override_styles/hover = ExtResource("5_s6o25")
 text = "Back"
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="." unique_id=1316698951]
@@ -52,4 +54,5 @@ compositor = SubResource("Compositor_72w8f")
 [node name="Camera2D" type="Camera2D" parent="." unique_id=1064924576]
 position = Vector2(216, 112)
 
+[connection signal="mouse_entered" from="VBoxContainer/Button" to="." method="_on_button_mouse_entered"]
 [connection signal="pressed" from="VBoxContainer/Button" to="." method="_on_button_pressed"]

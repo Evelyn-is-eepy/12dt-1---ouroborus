@@ -1,6 +1,7 @@
 extends Control
 
 var menu_music = "test_theme02"
+var button_hover_sound = "blip"
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
@@ -27,4 +28,9 @@ func _on_button_2_pressed() -> void:
 func _on_button_3_pressed() -> void:
 	# Transitions to the credits screen.
 	Global.transition_to_scene("res://Scenes/credits.tscn")
+	pass # Replace with function body.
+
+# Every button is connected to this one function to make them pleasantly clicky.
+func _on_button_mouse_entered() -> void:
+	Global.play_sound_effect(button_hover_sound)
 	pass # Replace with function body.

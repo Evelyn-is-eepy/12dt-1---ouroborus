@@ -5,6 +5,7 @@
 [ext_resource type="StyleBox" uid="uid://bdkp0m4r10rau" path="res://Assets/menu_button_style.tres" id="2_ce3w2"]
 [ext_resource type="Theme" uid="uid://bttvneaybjt4" path="res://Assets/menu_box_theme.tres" id="2_opfnp"]
 [ext_resource type="Texture2D" uid="uid://dcqibhq1asd61" path="res://Assets/title0001.png" id="3_ce3w2"]
+[ext_resource type="StyleBox" uid="uid://luo0mq2otg5x" path="res://Assets/menu_button_hover_style.tres" id="4_yhxw7"]
 [ext_resource type="Environment" uid="uid://c8qpv2wh6f7ts" path="res://Assets/world_environment.tres" id="6_opfnp"]
 [ext_resource type="FontFile" uid="uid://dcoytanayvx7c" path="res://Assets/Fonts/Micro5-Regular.ttf" id="8_yhxw7"]
 
@@ -45,16 +46,19 @@ theme = ExtResource("2_opfnp")
 [node name="Button" type="Button" parent="VBoxContainer" unique_id=1091924058]
 layout_mode = 2
 theme_override_styles/normal = ExtResource("2_ce3w2")
+theme_override_styles/hover = ExtResource("4_yhxw7")
 text = "LEVELS"
 
 [node name="Button3" type="Button" parent="VBoxContainer" unique_id=469766087]
 layout_mode = 2
 theme_override_styles/normal = ExtResource("2_ce3w2")
+theme_override_styles/hover = ExtResource("4_yhxw7")
 text = "Credits"
 
 [node name="Button2" type="Button" parent="VBoxContainer" unique_id=416808829]
 layout_mode = 2
 theme_override_styles/normal = ExtResource("2_ce3w2")
+theme_override_styles/hover = ExtResource("4_yhxw7")
 text = "QUIT"
 
 [node name="ColorRect" type="ColorRect" parent="." unique_id=1067440009]
@@ -88,6 +92,9 @@ theme_override_font_sizes/font_size = 10
 text = "press X to reset save data
 press M at any time to toggle mute"
 
+[connection signal="mouse_entered" from="VBoxContainer/Button" to="." method="_on_button_mouse_entered"]
 [connection signal="pressed" from="VBoxContainer/Button" to="." method="_on_button_pressed"]
+[connection signal="mouse_entered" from="VBoxContainer/Button3" to="." method="_on_button_mouse_entered"]
 [connection signal="pressed" from="VBoxContainer/Button3" to="." method="_on_button_3_pressed"]
+[connection signal="mouse_entered" from="VBoxContainer/Button2" to="." method="_on_button_mouse_entered"]
 [connection signal="pressed" from="VBoxContainer/Button2" to="." method="_on_button_2_pressed"]

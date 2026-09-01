@@ -1,0 +1,65 @@
+[gd_scene format=4 uid="uid://cbo7j5753ca8n"]
+
+[ext_resource type="Script" uid="uid://djeepxxym5ucw" path="res://Scripts/level.gd" id="1_3koi7"]
+[ext_resource type="PackedScene" uid="uid://l8gufufpge0c" path="res://Scenes/box.tscn" id="2_20kd1"]
+[ext_resource type="PackedScene" uid="uid://d2obc0bysr4q" path="res://Scenes/snake.tscn" id="3_gqyih"]
+[ext_resource type="PackedScene" uid="uid://c3w4fu5i7k3cj" path="res://Scenes/apple.tscn" id="4_srugb"]
+[ext_resource type="PackedScene" uid="uid://dl3kyh6bihalf" path="res://Scenes/crystal.tscn" id="5_vdq4f"]
+[ext_resource type="PackedScene" uid="uid://dk1w3wbol1pyi" path="res://Scenes/button_wall.tscn" id="6_633d5"]
+[ext_resource type="PackedScene" uid="uid://mgmaiqnx8fky" path="res://Scenes/switch.tscn" id="7_rw7sn"]
+[ext_resource type="Environment" uid="uid://c8qpv2wh6f7ts" path="res://Assets/world_environment.tres" id="8_27vqw"]
+[ext_resource type="PackedScene" uid="uid://btnrclj6kx4kb" path="res://Scenes/length_counter.tscn" id="9_jd0ia"]
+[ext_resource type="TileSet" uid="uid://h8v5owr3q6dx" path="res://Assets/Tilesets/object_spawns.tres" id="10_b7yer"]
+[ext_resource type="TileSet" uid="uid://dnwgj036125ch" path="res://Assets/terrain_tileset.tres" id="11_yhtsi"]
+[ext_resource type="TileSet" uid="uid://is3fwxmuxevs" path="res://Assets/Tilesets/background.tres" id="12_ijosb"]
+
+[node name="level_5" type="Node2D" unique_id=743200906 node_paths=PackedStringArray("spawn_layer", "background_layer", "camera", "length_ui")]
+script = ExtResource("1_3koi7")
+spawn_direction_id = 3
+spawn_max_length = 21
+spawn_layer = NodePath("ObjectSpawnsLayer")
+background_layer = NodePath("BackgroundLayer")
+box_scene = ExtResource("2_20kd1")
+player_scene = ExtResource("3_gqyih")
+apple_scene = ExtResource("4_srugb")
+crystal_scene = ExtResource("5_vdq4f")
+button_wall_scene = ExtResource("6_633d5")
+switch_scene = ExtResource("7_rw7sn")
+camera = NodePath("WorldEnvironment/Camera2D")
+length_ui = NodePath("WorldEnvironment/Camera2D/Control")
+scene_path = "res://Scenes/Levels/level_5.tscn"
+level_music = "test_theme01"
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="." unique_id=937800498]
+environment = ExtResource("8_27vqw")
+
+[node name="Camera2D" type="Camera2D" parent="WorldEnvironment" unique_id=1361182029]
+position = Vector2(8, 8)
+
+[node name="Control" parent="WorldEnvironment/Camera2D" unique_id=1710928417 instance=ExtResource("9_jd0ia")]
+offset_left = -8.0
+offset_top = -98.0
+offset_right = -8.0
+offset_bottom = -98.0
+metadata/_edit_use_anchors_ = true
+
+[node name="ObjectSpawnsLayer" type="TileMapLayer" parent="." unique_id=1626282959]
+tile_map_data = PackedByteArray("AAABAAYAAAABAAAAAAACAAcAAAAAAAIAAAADAAUAAAAAAAEAAAAFAAMAAAAAAAEAAAADAAQAAAAAAAIAAAAFAAQAAAAAAAIAAAAEAAUAAAAAAAIAAAAEAAMAAAAAAAIAAAAFAAYAAAAAAAEAAAADAAIAAAAAAAEAAAABAAIAAAACAAEAAAAFAAIAAAADAAEAAAAHAAYAAAACAAEAAAA=")
+tile_set = ExtResource("10_b7yer")
+
+[node name="TerrainLayer" type="TileMapLayer" parent="." unique_id=887265732 groups=["terrain_and_hazards", "terrain_plus_hazards"]]
+tile_map_data = PackedByteArray("AAAAAAAAAAABAAMAAAAAAAEAAAAAAAIAAAAAAAIAAAAAAAIAAAAAAAMAAAAAAAIAAAAAAAQAAAABAAMAAAAAAAUAAAAAAAIAAAAAAAYAAAAAAAIAAAAAAAcAAAAAAAIAAAAAAAgAAAAAAAEAAAABAAAAAAAAAAEAAAACAAAAAAAAAAEAAAADAAAAAAAAAAEAAAAEAAAAAAAAAAEAAAAFAAAAAAAAAAEAAAAGAAAAAAAAAAEAAAAHAAAAAAAAAAEAAAAIAAAAAAABAAMAAAACAAIAAAAAAAMAAAAEAAIAAAAAAAMAAAAGAAIAAAAAAAMAAAACAAQAAAACAAMAAAACAAYAAAACAAQAAAAEAAYAAAACAAMAAAAEAAQAAAAAAAMAAAAGAAQAAAACAAQAAAAGAAYAAAAAAAMAAAABAAgAAAAAAAEAAAACAAgAAAAAAAEAAAADAAgAAAAAAAEAAAAEAAgAAAAAAAEAAAAFAAgAAAAAAAEAAAAGAAgAAAAAAAEAAAAHAAgAAAAAAAEAAAAIAAgAAAAAAAEAAAAIAAcAAAAAAAIAAAAIAAYAAAAAAAIAAAAIAAUAAAAAAAIAAAAIAAQAAAABAAMAAAAIAAMAAAAAAAIAAAAIAAIAAAAAAAIAAAAIAAEAAAAAAAIAAAADAAYAAAAAAAEAAAAHAAQAAAAAAAEAAAABAAQAAAAAAAEAAAA=")
+tile_set = ExtResource("11_yhtsi")
+
+[node name="BackgroundLayer" type="TileMapLayer" parent="." unique_id=1825455332]
+z_index = -1
+tile_map_data = PackedByteArray("AAAIAAgAAAADAAIAAAAIAAcAAAADAAEAAAAIAAYAAAADAAEAAAAIAAUAAAADAAEAAAAIAAQAAAADAAEAAAAIAAMAAAADAAEAAAAIAAIAAAADAAEAAAAIAAEAAAADAAEAAAAIAAAAAAADAAAAAAAHAAgAAAACAAIAAAAHAAcAAAACAAEAAAAHAAYAAAACAAEAAAAHAAUAAAACAAEAAAAHAAQAAAACAAEAAAAHAAMAAAACAAEAAAAHAAIAAAACAAEAAAAHAAEAAAACAAEAAAAHAAAAAAACAAAAAAAGAAgAAAACAAIAAAAGAAcAAAACAAEAAAAGAAYAAAACAAEAAAAGAAUAAAACAAEAAAAGAAQAAAACAAEAAAAGAAMAAAACAAEAAAAGAAIAAAACAAEAAAAGAAEAAAACAAEAAAAGAAAAAAACAAAAAAAFAAgAAAACAAIAAAAFAAcAAAACAAEAAAAFAAYAAAACAAEAAAAFAAUAAAACAAEAAAAFAAQAAAACAAEAAAAFAAMAAAACAAEAAAAFAAIAAAACAAEAAAAFAAEAAAACAAEAAAAFAAAAAAACAAAAAAAEAAgAAAACAAIAAAAEAAcAAAACAAEAAAAEAAYAAAACAAEAAAAEAAUAAAACAAEAAAAEAAQAAAACAAEAAAAEAAMAAAACAAEAAAAEAAIAAAACAAEAAAAEAAEAAAACAAEAAAAEAAAAAAACAAAAAAADAAgAAAACAAIAAAADAAcAAAACAAEAAAADAAYAAAACAAEAAAADAAUAAAACAAEAAAADAAQAAAACAAEAAAADAAMAAAACAAEAAAADAAIAAAACAAEAAAADAAEAAAACAAEAAAADAAAAAAACAAAAAAACAAgAAAACAAIAAAACAAcAAAACAAEAAAACAAYAAAACAAEAAAACAAUAAAACAAEAAAACAAQAAAACAAEAAAACAAMAAAACAAEAAAACAAIAAAACAAEAAAACAAEAAAACAAEAAAACAAAAAAACAAAAAAABAAgAAAACAAIAAAABAAcAAAACAAEAAAABAAYAAAACAAEAAAABAAUAAAACAAEAAAABAAQAAAACAAEAAAABAAMAAAACAAEAAAABAAIAAAACAAEAAAABAAEAAAACAAEAAAABAAAAAAACAAAAAAAAAAgAAAABAAIAAAAAAAcAAAABAAEAAAAAAAYAAAABAAEAAAAAAAUAAAABAAEAAAAAAAQAAAABAAEAAAAAAAMAAAABAAEAAAAAAAIAAAABAAEAAAAAAAEAAAABAAEAAAAAAAAAAAABAAAAAAA=")
+tile_set = ExtResource("12_ijosb")
+
+[node name="ColorRect" type="ColorRect" parent="." unique_id=913962571]
+z_index = -3
+offset_left = -1466.0
+offset_top = -1466.0
+offset_right = 1267.0
+offset_bottom = 1267.0
+color = Color(0.037730496, 0.0074130455, 0.081240915, 1)

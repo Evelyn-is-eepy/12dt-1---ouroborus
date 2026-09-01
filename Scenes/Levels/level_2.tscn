@@ -102,6 +102,7 @@ apple_scene = ExtResource("4_pnnky")
 crystal_scene = ExtResource("5_blpqv")
 camera = NodePath("WorldEnvironment/Camera2D")
 length_ui = NodePath("WorldEnvironment/Camera2D/Control")
+scene_path = "res://Scenes/Levels/level_2.tscn"
 level_music = "test_theme01"
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="." unique_id=937800498]

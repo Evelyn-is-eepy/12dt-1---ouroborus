@@ -1,6 +1,7 @@
 [gd_scene format=3 uid="uid://dvpewgqwryefh"]
 
 [ext_resource type="Script" uid="uid://cr4vl1022c3i5" path="res://Scripts/level_select_button.gd" id="1_k1syi"]
+[ext_resource type="StyleBox" uid="uid://luo0mq2otg5x" path="res://Assets/menu_button_hover_style.tres" id="1_yqa6l"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_k1syi"]
 content_margin_left = 2.0
@@ -19,6 +20,7 @@ offset_right = 8.0
 offset_bottom = 8.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
+theme_override_styles/hover = ExtResource("1_yqa6l")
 theme_override_styles/disabled = SubResource("StyleBoxFlat_k1syi")
 script = ExtResource("1_k1syi")
 
