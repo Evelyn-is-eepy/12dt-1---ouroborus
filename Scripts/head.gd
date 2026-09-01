@@ -16,6 +16,7 @@ const APPLE_LENGTH_BONUS: int = 3
 
 signal ate_tail
 signal new_length
+signal player_stuck
 
 @export var facing_ray: RayCast2D
 @export var movable_objects_ray: RayCast2D
@@ -180,6 +181,8 @@ func finish_move_and_check():
 					if cell_data.has_custom_data('falling_pit'):
 						# Play sound effect
 						Global.play_sound_effect(PITFALL_SOUND)
+						# Send relevant signal to the level manager
+						player_stuck.emit()
 						fall_into_hole()
 	# Check for overlapping areas
 	if head_collider.get_overlapping_areas():

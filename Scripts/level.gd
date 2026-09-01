@@ -1,6 +1,7 @@
 extends Node2D
 
 const TILE_SIZE: int = 16
+const RESTART_WAIT: float = 1.5
 
 @export var spawn_directions = [Vector2.UP, Vector2.LEFT,Vector2.DOWN,Vector2.RIGHT]
 @export var spawn_direction_id: int
@@ -87,6 +88,7 @@ func _ready() -> void:
 	player.new_length.connect(length_ui.change_values)
 	player.new_length.emit(0, spawn_max_length)
 	player.ate_tail.connect(player_wins)
+	player.player_stuck.connect(prompt_restart)
 	# Center camera
 	var background_bounds = background_layer.get_used_rect()
 	var new_camera_x = lerp(background_bounds.position.x, background_bounds.end.x, 0.5) * TILE_SIZE
@@ -120,3 +122,13 @@ func switch_button_walls() -> void:
 	# Switch every wall
 	for wall in button_walls:
 		wall.activate_or_deactivate()
+
+
+func prompt_restart():
+	# Enable the low-pass filter on the master bus
+	AudioServer.set_bus_effect_enabled(0, 0, true)
+	# Wait a short time
+	await get_tree().create_timer(RESTART_WAIT).timeout
+	# Disable the effect and reload the scene with a screen transition
+	AudioServer.set_bus_effect_enabled(0, 0, false)
+	Global.transition_to_scene(scene_path)
