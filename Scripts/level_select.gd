@@ -4,7 +4,7 @@ extends Control
 @export var button_scene: PackedScene
 
 var level_scene_path: String ="res://Scenes/Levels/"
-var level_references: Array = ["level_1", "level_2", "level_3", "level_4", "level_5", "level_6"]
+var level_references: Array = ["level_1", "level_2", "level_3", "level_4", "level_5", "level_6", "level_7", "level_8"]
 var button_style: StyleBox = load("res://Assets/menu_button_style.tres")
 # File path of the main menu scene
 @export var exit_scene: String = "res://Scenes/main_menu.tscn"

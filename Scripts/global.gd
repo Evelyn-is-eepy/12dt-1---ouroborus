@@ -10,6 +10,8 @@ var levels_master: Dictionary = {
 	"level_4": false,
 	"level_5": false,
 	"level_6": false,
+	"level_7": false,
+	"level_8": false
 }
 var transition_layer: CanvasLayer
 var transition_material: Material
