@@ -15,7 +15,6 @@
 
 [node name="level_5" type="Node2D" unique_id=743200906 node_paths=PackedStringArray("spawn_layer", "background_layer", "camera", "length_ui")]
 script = ExtResource("1_3koi7")
-spawn_direction_id = 3
 spawn_max_length = 21
 spawn_layer = NodePath("ObjectSpawnsLayer")
 background_layer = NodePath("BackgroundLayer")
