@@ -45,6 +45,7 @@ var last_played_music: String
 var file_extensions = ['ogg', 'mp3', 'wav']
 var audio_buses = ["Master", "Sound Effects", "Music"]
 var particle_burst_scene: PackedScene = load("res://Scenes/particle_burst.tscn")
+var can_transition: bool = true
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
@@ -81,21 +82,25 @@ func reset_save():
 
 # Function to add screen transitions on changing scene.
 func transition_to_scene(scene_path: String):
-	# Unhides the transition effect layer, tweens its material until the screen is obscured,
-	# Changes the scene, and then reverses the obscurement
-	print("transitioning to " + scene_path) # Debug
-	play_sound_effect(transition_sound)
-	transition_layer.visible = true
-	var transitioner = create_tween()
-	transitioner.set_trans(trans_type)
-	transition_material.set_shader_parameter("progress", 0.0)
-	var trans_time = transition_duration / 2 # To shorten lines
-	transitioner.tween_property(transition_material, "shader_parameter/progress", 1.0, trans_time)
-	transitioner.tween_callback(get_tree().change_scene_to_file.bind(scene_path))
-	transitioner.tween_callback(print.bind("changing scene")) # Debug
-	transitioner.tween_property(transition_material, "shader_parameter/progress", 0.0, trans_time)
-	transitioner.tween_callback(print.bind("transition finished")) # Debug
-	transitioner.tween_callback(transition_layer.set.bind("visible", false))
+	# So that you can't trigger a scene transition when one is already occuring
+	if can_transition: # You still have time (iykyk)
+		# Unhides the transition effect layer, tweens its material until the screen is obscured,
+		# Changes the scene, and then reverses the obscurement
+		can_transition = false
+		print("transitioning to " + scene_path) # Debug
+		play_sound_effect(transition_sound)
+		transition_layer.visible = true
+		var transitioner = create_tween()
+		transitioner.set_trans(trans_type)
+		transition_material.set_shader_parameter("progress", 0.0)
+		var trans_time = transition_duration / 2 # To shorten lines
+		transitioner.tween_property(transition_material, "shader_parameter/progress", 1.0, trans_time)
+		transitioner.tween_callback(get_tree().change_scene_to_file.bind(scene_path))
+		transitioner.tween_callback(print.bind("changing scene")) # Debug
+		transitioner.tween_property(transition_material, "shader_parameter/progress", 0.0, trans_time)
+		transitioner.tween_callback(print.bind("transition finished")) # Debug
+		transitioner.tween_callback(transition_layer.set.bind("visible", false))
+		transitioner.tween_callback(set.bind("can_transition", true))
 
 
 func play_sound_effect(sound_name: String):
