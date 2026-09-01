@@ -47,6 +47,7 @@ func _ready() -> void:
 				elif cell_data.get_custom_data_by_layer_id(1) and not player_already_spawned:
 					var player_to_add = player_scene.instantiate()
 					player_to_add.position = spawn_layer.map_to_local(Vector2i(x,y))
+					# Sets the player's starting direction
 					add_child(player_to_add)
 					player_already_spawned = true
 				# Adds switches
@@ -82,8 +83,9 @@ func _ready() -> void:
 	player = get_tree().get_first_node_in_group("is_player_character")
 	print(str(player))
 	# Applies level settings to the snake
-	player.starting_direction = spawn_directions[spawn_direction_id]
 	player.max_body_length = spawn_max_length
+	player.starting_direction = spawn_directions[spawn_direction_id]
+	player.construct_starting_body()
 	# Connects the snake to the length UI
 	player.new_length.connect(length_ui.change_values)
 	player.new_length.emit(0, spawn_max_length)

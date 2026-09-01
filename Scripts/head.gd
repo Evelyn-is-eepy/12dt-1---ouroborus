@@ -29,7 +29,6 @@ signal player_stuck
 @export var blood: GPUParticles2D
 @export var head_sprite: Sprite2D
 @export var face_sprite: AnimatedSprite2D
-@export var starting_direction: Vector2
 @export var manager: Node2D
 @export var personal_crown: ColorRect
 @export var move_trans_type = Tween.TRANS_BOUNCE
@@ -44,6 +43,7 @@ var move_directions_and_names = [
 { Vector2(0.0,1.0): "down" },
 ]
 var face_state: String = 'normal'
+var starting_direction: Vector2
 var current_head_direction: Vector2
 var last_moved_direction: Vector2 = starting_direction
 var previous_move_directions: Array = [starting_direction]
@@ -58,6 +58,13 @@ var shake_intensity: float = 0
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
+	# Update length counter
+	new_length.emit(0, max_body_length)
+
+
+# This used to be in the ready function, but needed to be called after the node was created
+# (But in the same frame)
+func construct_starting_body():
 	# Orient the head and face
 	current_head_direction = starting_direction
 	head_sprite.rotation = starting_direction.rotated(PI/2).angle() 
@@ -70,8 +77,6 @@ func _ready() -> void:
 	# Move and rotate the tail so that it is behind the head
 	tail_pivot.position = position - starting_direction * TILE_SIZE
 	tail_pivot.rotation = starting_direction.rotated(PI/2).angle() 
-	# Update length counter
-	new_length.emit(0, max_body_length)
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
