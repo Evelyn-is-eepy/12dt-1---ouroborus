@@ -27,6 +27,7 @@ buses/default_bus_layout="uid://bu073kjxhu354"
 Global="*uid://cfs8w46xspv2c"
 TransitionLayer="*uid://di4m2j6og3u4e"
 MusicPlayer="*uid://ck8w8cxgqr0nl"
+EffectsLayer="*uid://dr2lq4l1pacgp"
 
 [display]
 
@@ -34,7 +35,7 @@ window/size/viewport_width=432
 window/size/viewport_height=224
 window/size/mode=3
 window/size/resizable=false
-window/stretch/mode="viewport"
+window/stretch/mode="canvas_items"
 window/stretch/aspect="keep_height"
 window/stretch/scale_mode="integer"
 

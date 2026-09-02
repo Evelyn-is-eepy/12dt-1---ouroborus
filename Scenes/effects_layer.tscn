@@ -1,0 +1,18 @@
+[gd_scene format=3 uid="uid://dr2lq4l1pacgp"]
+
+[ext_resource type="Shader" uid="uid://dsk7nkgavfyrg" path="res://Assets/Shaders/pixel_shader.gdshader" id="1_kuxrq"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_g8xu7"]
+shader = ExtResource("1_kuxrq")
+
+[node name="EffectsLayer" type="CanvasLayer" unique_id=1815727237]
+layer = 2
+
+[node name="ColorRect" type="ColorRect" parent="." unique_id=1628514729]
+material = SubResource("ShaderMaterial_g8xu7")
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
