@@ -13,6 +13,10 @@ var exit_scene = "res://Scenes/main_menu.tscn"
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
+	distortion_slider.value = Global.saved_settings[0]
+	sounds_slider.value = Global.saved_settings[1]
+	distortion_slider.value = Global.saved_settings[2]
+	scanlines_slider.value = Global.saved_settings[3]
 	Global.change_music(settings_music)
 
 
@@ -23,11 +27,11 @@ func _process(_delta: float) -> void:
 
 # Function to put the new setings into action.
 func apply_preferences():
-	# Audio volumes
-	AudioServer.set_bus_volume_linear(MUSIC, music_slider.value)
-	AudioServer.set_bus_volume_linear(SOUNDS, sounds_slider.value)
-	# Shader parameters
-	Global.change_shader_params(distortion_slider.value, scanlines_slider.value)
+	var new_distortion = distortion_slider.value
+	var new_scanlines = scanlines_slider.value
+	var new_music = music_slider.value
+	var new_sounds = sounds_slider.value
+	Global.apply_preferences(new_distortion, new_scanlines, new_music, new_sounds)
 
 
 func _on_exit_button_pressed() -> void:

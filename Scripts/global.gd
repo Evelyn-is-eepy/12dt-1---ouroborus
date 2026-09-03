@@ -13,6 +13,8 @@ var levels_master: Dictionary = {
 	"level_7": false,
 	"level_8": false
 }
+var saved_settings: Array = []
+var settings_master: Array = [0.2, 0.1, 0.8, 0.7]
 var transition_layer: CanvasLayer
 var transition_material: Material
 var transition_duration: float = 0.5
@@ -59,12 +61,15 @@ func _ready() -> void:
 	transition_layer.visible = false
 	change_music(menu_music)
 	load_data()
+	# Apply saved settings
+	apply_preferences(saved_settings[0], saved_settings[1], saved_settings[2], saved_settings[3])
 	pass # Replace with function body.
 
 
 func save_data():
 	var file = FileAccess.open(save_path, FileAccess.WRITE)
 	file.store_var(levels_completed)
+	file.store_var(saved_settings)
 	file.close()
 
 
@@ -72,10 +77,12 @@ func load_data():
 	if FileAccess.file_exists(save_path):
 		var file = FileAccess.open(save_path, FileAccess.READ)
 		levels_completed = file.get_var()
+		saved_settings = file.get_var()
 		file.close()
 	else:
 		print("save file not found")
 		levels_completed = levels_master
+		saved_settings = settings_master
 		save_data()
 
 
@@ -148,6 +155,7 @@ func change_music(new_track: String):
 		music_player.play()
 		last_played_music = new_track
 
+
 # For registering inputs to mute audio
 func _process(_delta: float) -> void:
 	if Input.is_action_just_pressed("mute"):
@@ -155,12 +163,21 @@ func _process(_delta: float) -> void:
 		var main_bus_id = AudioServer.get_bus_index(audio_buses[0])
 		AudioServer.set_bus_mute(main_bus_id, not AudioServer.is_bus_mute(main_bus_id))
 
+
 func create_particle_burst(id: int, burst_position: Vector2):
 	var particle_burst = particle_burst_scene.instantiate()
 	particle_burst.position = burst_position
 	particle_burst.type_index = id
 	add_child(particle_burst)
 
-func change_shader_params(new_warp, new_scanlines):
+
+# Changes parameters of shaders and audio buses
+func apply_preferences(new_warp, new_scanlines, new_music, new_sounds):
+	AudioServer.set_bus_volume_linear(2, new_music)
+	AudioServer.set_bus_volume_linear(1, new_sounds)
 	crt_material.set_shader_parameter("warp_amount", new_warp)
 	crt_material.set_shader_parameter("scanline_darkness", new_scanlines)
+	saved_settings[0] = new_warp
+	saved_settings[1] = new_scanlines
+	saved_settings[2] = new_music
+	saved_settings[3] = new_sounds
