@@ -1,0 +1,19 @@
+[gd_scene format=3 uid="uid://ds1lx2poh063m"]
+
+[ext_resource type="Shader" uid="uid://b0qudhxi5w0av" path="res://Assets/Shaders/crt_shader.gdshader" id="2_5qhkh"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_g8xu7"]
+shader = ExtResource("2_5qhkh")
+shader_parameter/warp_amount = 0.386000018335
+
+[node name="CrtEffect" type="CanvasLayer" unique_id=1815727237]
+layer = 3
+
+[node name="ColorRect2" type="ColorRect" parent="." unique_id=2109712074]
+material = SubResource("ShaderMaterial_g8xu7")
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2

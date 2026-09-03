@@ -2,14 +2,14 @@
 
 [ext_resource type="Shader" uid="uid://dsk7nkgavfyrg" path="res://Assets/Shaders/pixel_shader.gdshader" id="1_kuxrq"]
 
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_g8xu7"]
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_rxtgf"]
 shader = ExtResource("1_kuxrq")
 
-[node name="EffectsLayer" type="CanvasLayer" unique_id=1815727237]
+[node name="PixelEffect" type="CanvasLayer" unique_id=1815727237]
 layer = 2
 
 [node name="ColorRect" type="ColorRect" parent="." unique_id=1628514729]
-material = SubResource("ShaderMaterial_g8xu7")
+material = SubResource("ShaderMaterial_rxtgf")
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
