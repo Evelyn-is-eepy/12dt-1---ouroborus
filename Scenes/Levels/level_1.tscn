@@ -10,7 +10,7 @@
 [ext_resource type="PackedScene" uid="uid://c3w4fu5i7k3cj" path="res://Scenes/apple.tscn" id="5_u5ghp"]
 [ext_resource type="PackedScene" uid="uid://dl3kyh6bihalf" path="res://Scenes/crystal.tscn" id="6_u5ghp"]
 [ext_resource type="FontFile" uid="uid://demygo22q26se" path="res://Assets/Fonts/Jersey10-Regular.ttf" id="6_xgxfi"]
-[ext_resource type="TileSet" uid="uid://dnwgj036125ch" path="res://Assets/terrain_tileset.tres" id="10_afv7b"]
+[ext_resource type="TileSet" uid="uid://dnwgj036125ch" path="res://Assets/Tilesets/terrain_tileset.tres" id="10_afv7b"]
 [ext_resource type="PackedScene" uid="uid://btnrclj6kx4kb" path="res://Scenes/length_counter.tscn" id="11_hwvp3"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_k5f4k"]

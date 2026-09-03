@@ -10,7 +10,7 @@
 [ext_resource type="PackedScene" uid="uid://dk1w3wbol1pyi" path="res://Scenes/button_wall.tscn" id="6_ouscj"]
 [ext_resource type="PackedScene" uid="uid://mgmaiqnx8fky" path="res://Scenes/switch.tscn" id="7_ls6f5"]
 [ext_resource type="PackedScene" uid="uid://btnrclj6kx4kb" path="res://Scenes/length_counter.tscn" id="9_4f6dp"]
-[ext_resource type="TileSet" uid="uid://dnwgj036125ch" path="res://Assets/terrain_tileset.tres" id="11_w4ad0"]
+[ext_resource type="TileSet" uid="uid://dnwgj036125ch" path="res://Assets/Tilesets/terrain_tileset.tres" id="11_w4ad0"]
 [ext_resource type="TileSet" uid="uid://is3fwxmuxevs" path="res://Assets/Tilesets/background.tres" id="12_w4ad0"]
 
 [node name="Node2D" type="Node2D" unique_id=743200906 node_paths=PackedStringArray("spawn_layer", "background_layer", "camera", "length_ui")]

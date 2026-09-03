@@ -11,7 +11,7 @@
 [ext_resource type="TileSet" uid="uid://h8v5owr3q6dx" path="res://Assets/Tilesets/object_spawns.tres" id="7_3osng"]
 [ext_resource type="Texture2D" uid="uid://bpiri6nkn63on" path="res://Assets/Ouroboros level tileset.png" id="8_eb4ip"]
 [ext_resource type="PackedScene" uid="uid://btnrclj6kx4kb" path="res://Scenes/length_counter.tscn" id="9_keyqw"]
-[ext_resource type="TileSet" uid="uid://dnwgj036125ch" path="res://Assets/terrain_tileset.tres" id="11_slbhm"]
+[ext_resource type="TileSet" uid="uid://dnwgj036125ch" path="res://Assets/Tilesets/terrain_tileset.tres" id="11_slbhm"]
 [ext_resource type="FontFile" uid="uid://demygo22q26se" path="res://Assets/Fonts/Jersey10-Regular.ttf" id="13_i5g5g"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_k5f4k"]

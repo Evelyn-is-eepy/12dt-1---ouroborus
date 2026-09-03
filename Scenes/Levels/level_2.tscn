@@ -9,7 +9,7 @@
 [ext_resource type="TileSet" uid="uid://h8v5owr3q6dx" path="res://Assets/Tilesets/object_spawns.tres" id="5_fphuk"]
 [ext_resource type="Texture2D" uid="uid://bpiri6nkn63on" path="res://Assets/Ouroboros level tileset.png" id="6_u40f0"]
 [ext_resource type="FontFile" uid="uid://demygo22q26se" path="res://Assets/Fonts/Jersey10-Regular.ttf" id="7_fphuk"]
-[ext_resource type="TileSet" uid="uid://dnwgj036125ch" path="res://Assets/terrain_tileset.tres" id="9_u40f0"]
+[ext_resource type="TileSet" uid="uid://dnwgj036125ch" path="res://Assets/Tilesets/terrain_tileset.tres" id="9_u40f0"]
 [ext_resource type="PackedScene" uid="uid://btnrclj6kx4kb" path="res://Scenes/length_counter.tscn" id="10_1jlnc"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_k5f4k"]

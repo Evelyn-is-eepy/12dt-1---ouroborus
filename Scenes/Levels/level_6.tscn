@@ -10,7 +10,7 @@
 [ext_resource type="Environment" uid="uid://c8qpv2wh6f7ts" path="res://Assets/world_environment.tres" id="8_sd7yl"]
 [ext_resource type="PackedScene" uid="uid://btnrclj6kx4kb" path="res://Scenes/length_counter.tscn" id="9_b4gvl"]
 [ext_resource type="TileSet" uid="uid://h8v5owr3q6dx" path="res://Assets/Tilesets/object_spawns.tres" id="10_rv145"]
-[ext_resource type="TileSet" uid="uid://dnwgj036125ch" path="res://Assets/terrain_tileset.tres" id="11_2gpgt"]
+[ext_resource type="TileSet" uid="uid://dnwgj036125ch" path="res://Assets/Tilesets/terrain_tileset.tres" id="11_2gpgt"]
 [ext_resource type="TileSet" uid="uid://is3fwxmuxevs" path="res://Assets/Tilesets/background.tres" id="12_troes"]
 
 [node name="level_6" type="Node2D" unique_id=743200906 node_paths=PackedStringArray("spawn_layer", "background_layer", "camera", "length_ui")]

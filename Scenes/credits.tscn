@@ -4,7 +4,7 @@
 [ext_resource type="Script" uid="uid://c7jdjjixl0x06" path="res://Scripts/credits.gd" id="2_1bamb"]
 [ext_resource type="FontFile" uid="uid://demygo22q26se" path="res://Assets/Fonts/Jersey10-Regular.ttf" id="2_ccovl"]
 [ext_resource type="Texture2D" uid="uid://fshox3bhrfxt" path="res://Assets/Big snake head.png" id="3_ccovl"]
-[ext_resource type="TileSet" uid="uid://dnwgj036125ch" path="res://Assets/terrain_tileset.tres" id="5_uah1q"]
+[ext_resource type="TileSet" uid="uid://dnwgj036125ch" path="res://Assets/Tilesets/terrain_tileset.tres" id="5_uah1q"]
 [ext_resource type="TileSet" uid="uid://is3fwxmuxevs" path="res://Assets/Tilesets/background.tres" id="6_7emq5"]
 
 [sub_resource type="Curve2D" id="Curve2D_gryuy"]
