@@ -48,10 +48,12 @@ var file_extensions = ['ogg', 'mp3', 'wav']
 var audio_buses = ["Master", "Sound Effects", "Music"]
 var particle_burst_scene: PackedScene = load("res://Scenes/particle_burst.tscn")
 var can_transition: bool = true
+var crt_material: Material
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	transition_layer = get_node("/root/TransitionLayer")
+	crt_material = get_node("/root/CrtEffect/ColorRect2").material
 	music_player = get_node("/root/MusicPlayer")
 	transition_material = transition_layer.get_node("ColorRect").material
 	transition_layer.visible = false
@@ -149,7 +151,7 @@ func change_music(new_track: String):
 # For registering inputs to mute audio
 func _process(_delta: float) -> void:
 	if Input.is_action_just_pressed("mute"):
-		# Sets Main bus volume to be suuuper low
+		# Mutes main bus
 		var main_bus_id = AudioServer.get_bus_index(audio_buses[0])
 		AudioServer.set_bus_mute(main_bus_id, not AudioServer.is_bus_mute(main_bus_id))
 
@@ -158,3 +160,7 @@ func create_particle_burst(id: int, burst_position: Vector2):
 	particle_burst.position = burst_position
 	particle_burst.type_index = id
 	add_child(particle_burst)
+
+func change_shader_params(new_warp, new_scanlines):
+	crt_material.set_shader_parameter("warp_amount", new_warp)
+	crt_material.set_shader_parameter("scanline_darkness", new_scanlines)

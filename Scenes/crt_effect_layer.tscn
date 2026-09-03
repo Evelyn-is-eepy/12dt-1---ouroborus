@@ -4,7 +4,8 @@
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_g8xu7"]
 shader = ExtResource("2_5qhkh")
-shader_parameter/warp_amount = 0.386000018335
+shader_parameter/warp_amount = 0.2000000095
+shader_parameter/scanline_darkness = 0.10000000475
 
 [node name="CrtEffect" type="CanvasLayer" unique_id=1815727237]
 layer = 3

@@ -34,3 +34,8 @@ func _on_button_3_pressed() -> void:
 func _on_button_mouse_entered() -> void:
 	Global.play_sound_effect(button_hover_sound)
 	pass # Replace with function body.
+
+
+func _on_button_4_pressed() -> void:
+	Global.transition_to_scene("res://Scenes/Settings.tscn")
+	pass # Replace with function body.

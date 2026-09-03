@@ -1,0 +1,20 @@
+[gd_scene format=3 uid="uid://7sj5vk7qbefq"]
+
+[ext_resource type="Shader" uid="uid://bk1eoi0oyp4xd" path="res://Assets/Shaders/abberation_shader.gdshader" id="1_yt6lw"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_qktlr"]
+shader = ExtResource("1_yt6lw")
+shader_parameter/displacement_x = 1.0
+shader_parameter/displacement_y = 1.0
+
+[node name="AbberationEffect" type="CanvasLayer" unique_id=1815727237]
+layer = 3
+
+[node name="ColorRect2" type="ColorRect" parent="." unique_id=2109712074]
+material = SubResource("ShaderMaterial_qktlr")
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2

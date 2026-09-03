@@ -1,0 +1,190 @@
+[gd_scene format=3 uid="uid://rfna5cpvqk3c"]
+
+[ext_resource type="Script" uid="uid://cqt46ogmyl4ut" path="res://Scripts/settings.gd" id="1_646k0"]
+[ext_resource type="FontFile" uid="uid://bb2d1tlblow6a" path="res://Assets/Fonts/Daydream.ttf" id="1_mjqtt"]
+[ext_resource type="FontFile" uid="uid://demygo22q26se" path="res://Assets/Fonts/Jersey10-Regular.ttf" id="2_ppjuv"]
+[ext_resource type="StyleBox" uid="uid://c4kgli2sllk04" path="res://Assets/Themes/scroller_bar.tres" id="3_646k0"]
+[ext_resource type="Theme" uid="uid://bttvneaybjt4" path="res://Assets/menu_box_theme.tres" id="3_ipgag"]
+[ext_resource type="StyleBox" uid="uid://bdkp0m4r10rau" path="res://Assets/menu_button_style.tres" id="4_646k0"]
+[ext_resource type="StyleBox" uid="uid://4hit5fr7tmln" path="res://Assets/Themes/scroller_grabber.tres" id="4_efosg"]
+[ext_resource type="StyleBox" uid="uid://luo0mq2otg5x" path="res://Assets/menu_button_hover_style.tres" id="5_efosg"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_4eoc7"]
+bg_color = Color(1, 1, 1, 1)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(0.3529412, 0.34117648, 0.58431375, 1)
+corner_radius_top_left = 6
+corner_radius_top_right = 6
+corner_radius_bottom_right = 6
+corner_radius_bottom_left = 6
+expand_margin_left = 6.0
+expand_margin_top = 3.0
+expand_margin_right = 3.0
+expand_margin_bottom = 3.0
+anti_aliasing = false
+
+[node name="Control" type="Control" unique_id=1238353011 node_paths=PackedStringArray("music_slider", "sounds_slider", "distortion_slider", "scanlines_slider")]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_646k0")
+music_slider = NodePath("VBoxContainer/HSplitContainer/VBoxContainer/HScrollBar")
+sounds_slider = NodePath("VBoxContainer/HSplitContainer2/VBoxContainer/HScrollBar")
+distortion_slider = NodePath("VBoxContainer/HSplitContainer3/VBoxContainer/HScrollBar")
+scanlines_slider = NodePath("VBoxContainer/HSplitContainer4/VBoxContainer/HScrollBar")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="." unique_id=1677161744]
+layout_mode = 0
+offset_left = 108.0
+offset_top = 17.0
+offset_right = 324.0
+offset_bottom = 207.0
+alignment = 1
+
+[node name="Label" type="Label" parent="VBoxContainer" unique_id=1517019759]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("1_mjqtt")
+text = "Settings"
+horizontal_alignment = 1
+
+[node name="HSplitContainer" type="HSplitContainer" parent="VBoxContainer" unique_id=1765724298]
+layout_mode = 2
+split_offsets = PackedInt32Array(39)
+split_offset = 39
+
+[node name="Label" type="Label" parent="VBoxContainer/HSplitContainer" unique_id=607846627]
+custom_minimum_size = Vector2(100, 0)
+layout_mode = 2
+theme_override_fonts/font = ExtResource("2_ppjuv")
+theme_override_font_sizes/font_size = 20
+text = "Music"
+
+[node name="VBoxContainer" type="VBoxContainer" parent="VBoxContainer/HSplitContainer" unique_id=582587431]
+layout_mode = 2
+alignment = 1
+
+[node name="HScrollBar" type="HScrollBar" parent="VBoxContainer/HSplitContainer/VBoxContainer" unique_id=865605455]
+custom_minimum_size = Vector2(100, 0)
+layout_mode = 2
+theme_override_styles/scroll = ExtResource("3_646k0")
+theme_override_styles/scroll_focus = ExtResource("3_646k0")
+theme_override_styles/grabber = ExtResource("4_efosg")
+theme_override_styles/grabber_highlight = ExtResource("4_efosg")
+theme_override_styles/grabber_pressed = SubResource("StyleBoxFlat_4eoc7")
+theme_override_constants/padding_top = 0
+theme_override_constants/padding_bottom = 0
+max_value = 1.0
+step = 0.1
+
+[node name="HSplitContainer2" type="HSplitContainer" parent="VBoxContainer" unique_id=1752674741]
+layout_mode = 2
+split_offsets = PackedInt32Array(39)
+split_offset = 39
+
+[node name="Label" type="Label" parent="VBoxContainer/HSplitContainer2" unique_id=1709429511]
+custom_minimum_size = Vector2(100, 0)
+layout_mode = 2
+theme_override_fonts/font = ExtResource("2_ppjuv")
+theme_override_font_sizes/font_size = 20
+text = "Sounds"
+
+[node name="VBoxContainer" type="VBoxContainer" parent="VBoxContainer/HSplitContainer2" unique_id=598657941]
+layout_mode = 2
+alignment = 1
+
+[node name="HScrollBar" type="HScrollBar" parent="VBoxContainer/HSplitContainer2/VBoxContainer" unique_id=56292807]
+custom_minimum_size = Vector2(100, 0)
+layout_mode = 2
+theme_override_styles/scroll = ExtResource("3_646k0")
+theme_override_styles/scroll_focus = ExtResource("3_646k0")
+theme_override_styles/grabber = ExtResource("4_efosg")
+theme_override_styles/grabber_highlight = ExtResource("4_efosg")
+theme_override_styles/grabber_pressed = SubResource("StyleBoxFlat_4eoc7")
+theme_override_constants/padding_top = 0
+theme_override_constants/padding_bottom = 0
+max_value = 1.0
+step = 0.1
+
+[node name="HSplitContainer3" type="HSplitContainer" parent="VBoxContainer" unique_id=1015063638]
+layout_mode = 2
+split_offsets = PackedInt32Array(39)
+split_offset = 39
+
+[node name="Label" type="Label" parent="VBoxContainer/HSplitContainer3" unique_id=628873886]
+custom_minimum_size = Vector2(100, 0)
+layout_mode = 2
+theme_override_fonts/font = ExtResource("2_ppjuv")
+theme_override_font_sizes/font_size = 20
+text = "CRT Distortion"
+
+[node name="VBoxContainer" type="VBoxContainer" parent="VBoxContainer/HSplitContainer3" unique_id=226943627]
+layout_mode = 2
+alignment = 1
+
+[node name="HScrollBar" type="HScrollBar" parent="VBoxContainer/HSplitContainer3/VBoxContainer" unique_id=2123179446]
+custom_minimum_size = Vector2(100, 0)
+layout_mode = 2
+theme_override_styles/scroll = ExtResource("3_646k0")
+theme_override_styles/scroll_focus = ExtResource("3_646k0")
+theme_override_styles/grabber = ExtResource("4_efosg")
+theme_override_styles/grabber_highlight = ExtResource("4_efosg")
+theme_override_styles/grabber_pressed = SubResource("StyleBoxFlat_4eoc7")
+theme_override_constants/padding_top = 0
+theme_override_constants/padding_bottom = 0
+max_value = 0.25
+step = 0.025
+
+[node name="HSplitContainer4" type="HSplitContainer" parent="VBoxContainer" unique_id=13542706]
+layout_mode = 2
+split_offsets = PackedInt32Array(39)
+split_offset = 39
+
+[node name="Label" type="Label" parent="VBoxContainer/HSplitContainer4" unique_id=1344153822]
+custom_minimum_size = Vector2(100, 0)
+layout_mode = 2
+theme_override_fonts/font = ExtResource("2_ppjuv")
+theme_override_font_sizes/font_size = 20
+text = "Scan Lines"
+
+[node name="VBoxContainer" type="VBoxContainer" parent="VBoxContainer/HSplitContainer4" unique_id=1355836802]
+layout_mode = 2
+alignment = 1
+
+[node name="HScrollBar" type="HScrollBar" parent="VBoxContainer/HSplitContainer4/VBoxContainer" unique_id=1839493803]
+custom_minimum_size = Vector2(100, 0)
+layout_mode = 2
+theme_override_styles/scroll = ExtResource("3_646k0")
+theme_override_styles/scroll_focus = ExtResource("3_646k0")
+theme_override_styles/grabber = ExtResource("4_efosg")
+theme_override_styles/grabber_highlight = ExtResource("4_efosg")
+theme_override_styles/grabber_pressed = SubResource("StyleBoxFlat_4eoc7")
+theme_override_constants/padding_top = 0
+theme_override_constants/padding_bottom = 0
+max_value = 1.0
+step = 0.1
+
+[node name="Button" type="Button" parent="VBoxContainer" unique_id=2102082741]
+layout_mode = 2
+theme = ExtResource("3_ipgag")
+theme_override_styles/normal = ExtResource("4_646k0")
+theme_override_styles/hover = ExtResource("5_efosg")
+text = "APPLY"
+
+[node name="Button2" type="Button" parent="VBoxContainer" unique_id=1969763482]
+layout_mode = 2
+theme = ExtResource("3_ipgag")
+theme_override_styles/normal = ExtResource("4_646k0")
+theme_override_styles/hover = ExtResource("5_efosg")
+text = "BACK"
+
+[connection signal="changed" from="VBoxContainer/HSplitContainer/VBoxContainer/HScrollBar" to="." method="_on_button_mouse_entered"]
+[connection signal="mouse_entered" from="VBoxContainer/Button" to="." method="_on_button_mouse_entered"]
+[connection signal="pressed" from="VBoxContainer/Button" to="." method="apply_preferences"]
+[connection signal="mouse_entered" from="VBoxContainer/Button2" to="." method="_on_button_mouse_entered"]
+[connection signal="pressed" from="VBoxContainer/Button2" to="." method="_on_exit_button_pressed"]
