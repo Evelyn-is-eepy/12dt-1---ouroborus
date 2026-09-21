@@ -20,6 +20,7 @@ const RESTART_WAIT: float = 1.5
 @export var length_ui: Control
 # File path of the main menu scene
 @export var exit_scene: String = "res://Scenes/level_select.tscn"
+@export var next_level: String
 @export var scene_path: String
 @export var level_music: String
 
@@ -116,7 +117,7 @@ func player_wins() -> void:
 	print('wohoo!') # Debug
 	await get_tree().create_timer(3).timeout
 	Global.levels_completed[self.name] = true
-	Global.transition_to_scene(exit_scene)
+	Global.transition_to_scene(next_level)
 
 
 func switch_button_walls() -> void:

@@ -27,6 +27,7 @@ button_wall_scene = ExtResource("6_b574l")
 switch_scene = ExtResource("7_k2mii")
 camera = NodePath("WorldEnvironment/Camera2D")
 length_ui = NodePath("WorldEnvironment/Camera2D/Control")
+next_level = "res://Scenes/Levels/level_7.tscn"
 scene_path = "res://Scenes/Levels/level_6.tscn"
 level_music = "test_theme01"
 
