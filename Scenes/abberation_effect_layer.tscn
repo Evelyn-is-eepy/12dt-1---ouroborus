@@ -4,8 +4,8 @@
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_qktlr"]
 shader = ExtResource("1_yt6lw")
-shader_parameter/displacement_x = 1.0
-shader_parameter/displacement_y = 1.0
+shader_parameter/displacement_x = 0.50000002375
+shader_parameter/displacement_y = 0.50000002375
 
 [node name="AbberationEffect" type="CanvasLayer" unique_id=1815727237]
 layer = 3

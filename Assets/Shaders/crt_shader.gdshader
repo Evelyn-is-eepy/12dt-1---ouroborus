@@ -5,7 +5,7 @@ uniform float warp_amount : hint_range(0.0, 0.5) = 0.05;
 uniform float scanline_darkness : hint_range(0.0, 0.5) = 0.25;
 
 void fragment() {
-	vec2 screen_pixels = vec2(432, 224);
+	vec2 screen_pixels = vec2(433, 225);
 	// Called for every pixel the material is visible on
 	// Distort uv
 	vec2 uv = SCREEN_UV;

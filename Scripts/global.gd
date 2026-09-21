@@ -2,7 +2,6 @@ extends Node
 
 enum ParticleTypes {CRYSTAL, APPLE, SWITCH}
 var save_path = "user://data.save"
-var levels_completed: Dictionary = {}
 var levels_master: Dictionary = {
 	"level_1": false,
 	"level_2": false,
@@ -13,8 +12,9 @@ var levels_master: Dictionary = {
 	"level_7": false,
 	"level_8": false
 }
-var saved_settings: Array = []
-var settings_master: Array = [0.2, 0.1, 0.8, 0.7]
+var levels_completed: Dictionary = levels_master
+var settings_master: Array = [0.2, 0.1, 0.8, 0.7, 1.0]
+var saved_settings: Array = settings_master
 var transition_layer: CanvasLayer
 var transition_material: Material
 var transition_duration: float = 0.5
@@ -51,18 +51,20 @@ var audio_buses = ["Master", "Sound Effects", "Music"]
 var particle_burst_scene: PackedScene = load("res://Scenes/particle_burst.tscn")
 var can_transition: bool = true
 var crt_material: Material
+var aberration_material: Material
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	transition_layer = get_node("/root/TransitionLayer")
 	crt_material = get_node("/root/CrtEffect/ColorRect2").material
+	aberration_material = get_node("/root/AbberationEffect/ColorRect2").material
 	music_player = get_node("/root/MusicPlayer")
 	transition_material = transition_layer.get_node("ColorRect").material
 	transition_layer.visible = false
 	change_music(menu_music)
 	load_data()
 	# Apply saved settings
-	apply_preferences(saved_settings[0], saved_settings[1], saved_settings[2], saved_settings[3])
+	apply_preferences(saved_settings[0], saved_settings[1], saved_settings[2], saved_settings[3], saved_settings[4])
 	pass # Replace with function body.
 
 
@@ -172,12 +174,15 @@ func create_particle_burst(id: int, burst_position: Vector2):
 
 
 # Changes parameters of shaders and audio buses
-func apply_preferences(new_warp, new_scanlines, new_music, new_sounds):
+func apply_preferences(new_warp, new_scanlines, new_music, new_sounds, new_abberation):
 	AudioServer.set_bus_volume_linear(2, new_music)
 	AudioServer.set_bus_volume_linear(1, new_sounds)
 	crt_material.set_shader_parameter("warp_amount", new_warp)
 	crt_material.set_shader_parameter("scanline_darkness", new_scanlines)
+	aberration_material.set_shader_parameter("displacement_x", new_abberation)
+	aberration_material.set_shader_parameter("displacement_y", new_abberation)
 	saved_settings[0] = new_warp
 	saved_settings[1] = new_scanlines
 	saved_settings[2] = new_music
 	saved_settings[3] = new_sounds
+	saved_settings[4] = new_sounds

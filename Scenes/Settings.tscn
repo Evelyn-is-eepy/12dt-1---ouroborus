@@ -26,7 +26,7 @@ expand_margin_right = 3.0
 expand_margin_bottom = 3.0
 anti_aliasing = false
 
-[node name="Control" type="Control" unique_id=1238353011 node_paths=PackedStringArray("music_slider", "sounds_slider", "distortion_slider", "scanlines_slider")]
+[node name="Control" type="Control" unique_id=1238353011 node_paths=PackedStringArray("music_slider", "sounds_slider", "distortion_slider", "scanlines_slider", "aberration_slider")]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -38,6 +38,7 @@ music_slider = NodePath("VBoxContainer/HSplitContainer/VBoxContainer/HScrollBar"
 sounds_slider = NodePath("VBoxContainer/HSplitContainer2/VBoxContainer/HScrollBar")
 distortion_slider = NodePath("VBoxContainer/HSplitContainer3/VBoxContainer/HScrollBar")
 scanlines_slider = NodePath("VBoxContainer/HSplitContainer4/VBoxContainer/HScrollBar")
+aberration_slider = NodePath("VBoxContainer/HSplitContainer5/VBoxContainer/HScrollBar")
 
 [node name="VBoxContainer" type="VBoxContainer" parent="." unique_id=1677161744]
 layout_mode = 0
@@ -168,6 +169,35 @@ theme_override_constants/padding_top = 0
 theme_override_constants/padding_bottom = 0
 max_value = 1.0
 step = 0.1
+
+[node name="HSplitContainer5" type="HSplitContainer" parent="VBoxContainer" unique_id=1360599463]
+layout_mode = 2
+split_offsets = PackedInt32Array(39)
+split_offset = 39
+
+[node name="Label" type="Label" parent="VBoxContainer/HSplitContainer5" unique_id=2006298063]
+custom_minimum_size = Vector2(100, 0)
+layout_mode = 2
+theme_override_fonts/font = ExtResource("2_ppjuv")
+theme_override_font_sizes/font_size = 20
+text = "Aberration"
+
+[node name="VBoxContainer" type="VBoxContainer" parent="VBoxContainer/HSplitContainer5" unique_id=1691711969]
+layout_mode = 2
+alignment = 1
+
+[node name="HScrollBar" type="HScrollBar" parent="VBoxContainer/HSplitContainer5/VBoxContainer" unique_id=202301716]
+custom_minimum_size = Vector2(100, 0)
+layout_mode = 2
+theme_override_styles/scroll = ExtResource("3_646k0")
+theme_override_styles/scroll_focus = ExtResource("3_646k0")
+theme_override_styles/grabber = ExtResource("4_efosg")
+theme_override_styles/grabber_highlight = ExtResource("4_efosg")
+theme_override_styles/grabber_pressed = SubResource("StyleBoxFlat_4eoc7")
+theme_override_constants/padding_top = 0
+theme_override_constants/padding_bottom = 0
+max_value = 2.0
+step = 0.25
 
 [node name="Button" type="Button" parent="VBoxContainer" unique_id=2102082741]
 layout_mode = 2

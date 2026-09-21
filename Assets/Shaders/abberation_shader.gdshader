@@ -1,8 +1,8 @@
 shader_type canvas_item;
 
 uniform sampler2D screen_texture : hint_screen_texture, filter_linear, repeat_disable;
-uniform float displacement_x : hint_range(0.0, 1.0);
-uniform float displacement_y : hint_range(0.0, 1.0);
+uniform float displacement_x : hint_range(0.0, 2.0);
+uniform float displacement_y : hint_range(0.0, 2.0);
 
 void fragment() {
 	// Called for every pixel the material is visible on.
