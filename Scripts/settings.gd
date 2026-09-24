@@ -18,6 +18,7 @@ func _ready() -> void:
 	scanlines_slider.value = Global.saved_settings[1]
 	music_slider.value = Global.saved_settings[2]
 	sounds_slider.value = Global.saved_settings[3]
+	aberration_slider.value = Global.saved_settings[4]
 	Global.change_music(settings_music)
 
 

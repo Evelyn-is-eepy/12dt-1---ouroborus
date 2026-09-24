@@ -14,12 +14,12 @@ texture = ExtResource("1_a0ijl")
 1:1/0/custom_data_3 = true
 3:0/0 = 0
 3:0/0/custom_data_4 = true
-2:1/0 = 0
-2:1/0/custom_data_5 = true
 3:1/0 = 0
 3:1/0/custom_data_6 = true
 0:2/0 = 0
 0:2/0/custom_data_7 = true
+2:1/0 = 0
+2:1/0/custom_data_5 = true
 
 [resource]
 custom_data_layer_0/name = "box"

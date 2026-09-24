@@ -12,6 +12,7 @@
 [ext_resource type="TileSet" uid="uid://h8v5owr3q6dx" path="res://Assets/Tilesets/object_spawns.tres" id="10_b7yer"]
 [ext_resource type="TileSet" uid="uid://dnwgj036125ch" path="res://Assets/Tilesets/terrain_tileset.tres" id="11_yhtsi"]
 [ext_resource type="TileSet" uid="uid://is3fwxmuxevs" path="res://Assets/Tilesets/background.tres" id="12_ijosb"]
+[ext_resource type="FontFile" uid="uid://demygo22q26se" path="res://Assets/Fonts/Jersey10-Regular.ttf" id="13_20kd1"]
 
 [node name="level_5" type="Node2D" unique_id=743200906 node_paths=PackedStringArray("spawn_layer", "background_layer", "camera", "length_ui")]
 script = ExtResource("1_3koi7")
@@ -63,3 +64,15 @@ offset_top = -1466.0
 offset_right = 1267.0
 offset_bottom = 1267.0
 color = Color(0.037730496, 0.0074130455, 0.081240915, 1)
+
+[node name="Label" type="Label" parent="." unique_id=938591848]
+offset_left = -46.0
+offset_top = 140.0
+offset_right = 202.0
+offset_bottom = 189.0
+theme_override_constants/line_spacing = -8
+theme_override_fonts/font = ExtResource("13_20kd1")
+theme_override_font_sizes/font_size = 20
+text = "Doors won't close if they're
+weighed down."
+horizontal_alignment = 1
