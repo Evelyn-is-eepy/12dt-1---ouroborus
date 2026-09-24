@@ -148,5 +148,6 @@ offset_bottom = 202.0
 theme_override_constants/line_spacing = -5
 theme_override_fonts/font = ExtResource("7_167vu")
 theme_override_font_sizes/font_size = 20
-text = "your length is limited :["
+text = "Apples help you grow!
+your length is limited..."
 horizontal_alignment = 1
