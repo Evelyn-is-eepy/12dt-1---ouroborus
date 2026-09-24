@@ -146,10 +146,12 @@ color = Color(0.037730496, 0.0074130455, 0.081240915, 1)
 
 [node name="Label" type="Label" parent="." unique_id=1170071516]
 offset_left = -35.0
-offset_top = 176.0
+offset_top = 167.0
 offset_right = 213.0
-offset_bottom = 225.0
+offset_bottom = 216.0
+theme_override_constants/line_spacing = -8
 theme_override_fonts/font = ExtResource("13_i5g5g")
 theme_override_font_sizes/font_size = 20
-text = "ooooh.... crystals..."
+text = "Crystals swap your head and tail!
+Buttons make doors move."
 horizontal_alignment = 1

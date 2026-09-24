@@ -142,10 +142,11 @@ color = Color(0.037730496, 0.0074130455, 0.081240915, 1)
 
 [node name="Label" type="Label" parent="." unique_id=327303167]
 offset_left = 12.0
-offset_top = 158.0
+offset_top = 153.0
 offset_right = 260.0
-offset_bottom = 207.0
+offset_bottom = 202.0
+theme_override_constants/line_spacing = -5
 theme_override_fonts/font = ExtResource("7_167vu")
 theme_override_font_sizes/font_size = 20
-text = "Apples let you grow! :]"
+text = "your length is limited :["
 horizontal_alignment = 1

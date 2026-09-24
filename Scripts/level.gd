@@ -105,6 +105,8 @@ func _ready() -> void:
 func _process(_delta: float) -> void:
 	# Checks if the player has pressed R to reset the level
 	if Input.is_action_just_pressed("restart"):
+		# Disable the low-pass filter (to stop it from becoming stuck on)
+		AudioServer.set_bus_effect_enabled(0, 0, false)
 		Global.transition_to_scene(scene_path)
 	# Checks if the player has pressed escape to exit the level
 	if Input.is_action_just_pressed("exit"):
