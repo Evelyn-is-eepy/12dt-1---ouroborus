@@ -39,7 +39,7 @@ var sound_paths: Dictionary = {
 }
 var music_paths: Dictionary = {
 	"test_theme02": "res://Assets/Audio/Theme test 02.mp3",
-	"test_theme01": "res://Assets/Audio/Theme test 01.ogg",
+	"test_theme01": "res://Assets/Audio/Theme test 01.mp3",
 	"credits theme": "res://Assets/Audio/credits_theme.mp3"
 }
 var menu_music = "test_theme02"
